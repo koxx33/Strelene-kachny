@@ -1,0 +1,21 @@
+STŘELENÉ KACHNY v0.10.13 – aplikace na plochu přes GitHub
+===========================================================
+
+PRVNÍ INSTALACE
+ 1. github.com → + → New repository → název "strelene-kachny" → Public → Create.
+ 2. "uploading an existing file" → nahraj VŠECHNY soubory z této složky
+    (index.html musí být hned nahoře, ne v podsložce) → Commit changes.
+ 3. Settings → Pages → Branch: main, /(root) → Save.
+ 4. Za chvíli: https://TVOJE-JMENO.github.io/strelene-kachny/
+ 5. Na telefonu v Chromu: ⋮ → „Přidat na plochu“ / „Instalovat aplikaci“.
+
+AKTUALIZACE (jen na tvé potvrzení)
+ - Hra se vždy spustí v nainstalované verzi, sama se nemění.
+ - Když na GitHubu nahraješ novou verzi, na úvodní obrazovce se objeví
+   „Nová verze … – Aktualizovat / Teď ne“.
+ - Tlačítko „⬇️ Verze“ na úvodní obrazovce: kontrolu nových verzí jde
+   úplně vypnout, nebo zkontrolovat ručně.
+
+NAHRÁNÍ NOVÉ VERZE NA GITHUB
+ Nahraj (přepiš) jen dva soubory: index.html a version.json.
+ Ostatní soubory (sw.js, ikony, manifest) zůstávají.
