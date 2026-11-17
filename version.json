@@ -1,9 +1,14 @@
 {
- "version": "0.11.0",
- "notes": [
-  "Úvodní animace – kachna, nápis a PRÁSK! Klepnutím vstoupíš do hry a zapneš zvuk.",
-  "Nové menu: jméno, soupeři a barva v okně ✏️, ostatní volby jako ikony (i Zvuk).",
-  "Živý rybník za menu i hrou – plující kachny, mraky, rákosí, občas zaměřovač.",
-  "U nové verze uvidíš, co je nového, a můžeš ji přeskočit."
- ]
+  "version": "0.12.0",
+  "notes": [
+    "Rybník v komiksovém stylu: kachny, mraky, rákosí i obloha nad poli mají černé obrysy a rastr jako akční karty",
+    "Opraveno: kachny na kartách rybníka mizely (odplouvaly spolu s kachnami v pozadí)",
+    "Zaměřená kachna se bojí: vyděšené oči, kapka potu, třese se a cvaká zobákem",
+    "Kachny kvákají s pohyblivým zobákem a komiksovou bublinou, každý hráč má jiný hlas",
+    "Ťukni na kachnu na rybníce a kvákne na tebe",
+    "Kachna, nad kterou zmizí zaměřovač, si úlevně zakváká „UF, KVÁK!“",
+    "Zásah: komiksové PRÁSK! nebo BUM! s peřím a zatřesením rybníka",
+    "Kachní únik je nakreslený keř, schovaná kachna vykukuje a šeptá „psst“",
+    "Naposledy zahraná karta je zmenšená komiksová karta"
+  ]
 }

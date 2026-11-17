@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.11.0</title>
-<meta name="version" content="0.11.0">
+<title>Střelené kachny v0.12.0</title>
+<meta name="version" content="0.12.0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -48,7 +48,7 @@ h1{font-family:'Bangers','Fredoka',sans-serif;font-weight:400;font-size:clamp(22
 .card .cover{position:absolute;inset:0;background:repeating-linear-gradient(100deg,rgba(21,128,61,.75) 0 6px,rgba(74,222,128,.7) 6px 11px);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;font-size:10px;font-weight:700;text-shadow:0 1px 2px #000}
 .card .cover b{font-size:22px}
 .waves{width:80%;opacity:.9}
-.boom::after{content:'💥';position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);font-size:40px;animation:pop .8s ease-out forwards;pointer-events:none}
+.boom::after{content:'PRÁSK!';position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);font:26px Bangers,Impact,sans-serif;color:#ff3d7f;-webkit-text-stroke:1.2px #111;background:radial-gradient(circle,#ffe14d 0 58%,transparent 60%);padding:14px;z-index:4;animation:pop .8s ease-out forwards;pointer-events:none}
 @keyframes pop{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}70%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
 .info{display:flex;justify-content:space-between;font-size:12px;color:#134e4a;margin:6px 4px 0}
 .status{background:#fff;border-radius:14px;padding:10px 12px;margin:10px 0;font-weight:500;min-height:44px;box-shadow:0 2px 0 rgba(0,0,0,.12)}
@@ -552,10 +552,10 @@ html.installed .togrow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @keyframes a-sleep{50%{transform:translateY(1px) scaleY(.96)}}
 html.noanim .an{animation:none!important}
 /* volitelně: kachny na rybníce se kolébají, mraky plují */
-.card svg.scene .pd,.card svg.scene .pcl{transform-box:fill-box}
-html.pondanim .card svg.scene .pd{animation:p-bob 2.2s ease-in-out infinite;transform-origin:50% 100%}
-html.pondanim .col:nth-child(2n) .card svg.scene .pd{animation-delay:-.8s}
-html.pondanim .col:nth-child(3n) .card svg.scene .pd{animation-delay:-1.5s}
+.card svg.scene .pdk,.card svg.scene .pcl{transform-box:fill-box}
+html.pondanim .card svg.scene .pdk{animation:p-bob 2.2s ease-in-out infinite;transform-origin:50% 100%}
+html.pondanim .col:nth-child(2n) .card svg.scene .pdk{animation-delay:-.8s}
+html.pondanim .col:nth-child(3n) .card svg.scene .pdk{animation-delay:-1.5s}
 @keyframes p-bob{50%{transform:translateY(-1.2px) rotate(-3deg)}}
 html.pondanim .card svg.scene .pcl{animation:p-cl 11s ease-in-out infinite alternate}
 html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
@@ -647,12 +647,42 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 .mtile .tl{font-size:clamp(11px,3.3vw,18px)!important}
 @media (max-width:380px){.mtile{padding-left:0;padding-right:0}}
 @media (orientation:landscape){.mtile .tl{font-size:clamp(11px,3.4dvh,16px)!important}}
+
+/* ===== v0.12.0 – komiksový rybník, zobáky, strach ===== */
+.card{border:0!important;background:none!important;box-shadow:3px 3px 0 #111!important;border-radius:7px!important;overflow:visible!important}
+.card svg.scene{border-radius:7px}
+.card .lbl{top:3px;font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.4px;font-size:clamp(10px,2.6vw,13px);color:#fff;text-shadow:1.2px 1.2px 0 #111,-1px -1px 0 #111,1px -1px 0 #111,-1px 1px 0 #111}
+.covtag{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);white-space:nowrap;font:clamp(9px,2.3vw,12px) Bangers,Impact,sans-serif;letter-spacing:.3px;background:#fff;border:1.5px solid #111;border-radius:5px;padding:0 4px;box-shadow:1.5px 1.5px 0 #111;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.aimcell{border:2.5px solid #111!important;box-shadow:2px 2px 0 #111!important;background-color:#5ab8f5}
+.aimcell{position:relative;overflow:hidden;background:#5ab8f5!important;padding:0}
+.aimcell svg.sky{position:absolute;inset:0;width:100%;height:100%;max-height:none!important;display:block}
+
+.aimcell .xh{transform-box:fill-box;transform-origin:center}
+html.pondanim .aimcell .scl{animation:p-cl 11s ease-in-out infinite alternate;transform-box:fill-box}
+.lb,.ub{transform-box:fill-box}
+.lb{transform-origin:100% 0%}.ub{transform-origin:100% 100%}
+.col.q .lb{animation:qL .17s ease-in-out 2}.col.q .ub{animation:qU .17s ease-in-out 2}
+@keyframes qL{50%{transform:rotate(-24deg)}}@keyframes qU{50%{transform:rotate(9deg)}}
+.col.ch .lb{animation:cL .09s linear infinite}
+@keyframes cL{50%{transform:rotate(-14deg)}}
+.card .pdk.scared{animation:kshk .14s linear infinite!important;transform-box:fill-box}
+@keyframes kshk{25%{transform:translateX(-.6px)}75%{transform:translateX(.6px)}}
+html.noanim .card .pdk.scared{animation:none!important}
+.card .bub{opacity:0;transition:opacity .15s}
+.col.q .bub,.col.ch .bub,.col.uf .bub{opacity:1}
+.col.q .lbl,.col.ch .lbl,.col.uf .lbl{opacity:0;transition:opacity .1s}
+.card .psst{opacity:0;animation:psst 7s ease-in-out infinite}
+@keyframes psst{0%,4%{opacity:0}6%,16%{opacity:1}18%,100%{opacity:0}}
+.card .bush{transform-box:fill-box;transform-origin:50% 100%;animation:a-sway 2s ease-in-out infinite alternate}
+html.noanim .card .bush,html.noanim .card .psst{animation:none}
+html.noanim .card .psst{opacity:1}
+#pileLast svg{filter:drop-shadow(2px 2px 0 #111)}
 </style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.11.0</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.0</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -678,7 +708,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.11.0</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.0</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -690,7 +720,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.11.0</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.0</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -715,7 +745,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.11.0</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.12.0</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <div class="actions center"><button class="btn" id="bUpdCheck">🔄 Zkontrolovat teď</button><button class="btn pri" id="bUpdClose">Zavřít</button></div>
@@ -748,7 +778,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.11.0</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.0</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -767,7 +797,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 </div>
 
 <script>
-const VERSION='0.11.0';
+const VERSION='0.12.0';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -813,16 +843,23 @@ function duckG(col){return `<g stroke="#1f2937" stroke-width="1.6" stroke-linejo
 <circle cx="19.6" cy="14.6" r="2.5" fill="#111" stroke="none"/><circle cx="18.8" cy="13.6" r=".9" fill="#fff" stroke="none"/>
 </g>`}
 function duckSVG(col){return `<svg class="duck" viewBox="-4 0 68 56">${duckG(col)}</svg>`}
-function sceneSVG(col){return `<svg class="scene" viewBox="0 0 60 80" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fb0ef"/><stop offset="1" stop-color="#dff3ff"/></linearGradient>
-<linearGradient id="gGr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc06a"/><stop offset="1" stop-color="#2e7d32"/></linearGradient></defs>
-<rect width="60" height="50" fill="url(#gSky)"/>
-<g fill="#fff" class="pcl"><ellipse cx="13" cy="11" rx="8" ry="3.5"/><ellipse cx="17" cy="9" rx="5" ry="3.5"/><ellipse cx="45" cy="18" rx="9" ry="3.5"/><ellipse cx="42" cy="16" rx="5" ry="3"/></g>
-<rect y="38" width="60" height="12" fill="#cfd8cc"/>
-<g stroke="#a9b8a5" stroke-width="1">${[3,7,12,16,22,27,33,38,44,49,54,58].map((x,i)=>`<path d="M${x} 50 L${x+(i%2?1:-1)} ${36+(i*7)%6}"/>`).join('')}</g>
-<rect y="48" width="60" height="32" fill="url(#gGr)"/>
-${col?`<g class="pd"><g transform="translate(2,31) scale(.86)">${duckG(col)}</g></g>`:`<g stroke="#bfe3a9" stroke-width="1" fill="none" opacity=".7"><path d="M8 62 q6-3 12 0"/><path d="M34 70 q6-3 12 0"/></g>`}
-</svg>`}
+function sceneSVG(col,o={}){ // v0.12.0: komiksová karta rybníka
+ const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
+ const hid=o.hid!=null?`<g class="peek"><g transform="translate(30,26) scale(.5)">${duckGC(o.hid)}</g></g><g class="psst"><path d="M44 22 h14 v8 h-9 l-3 4 v-4 h-2z" fill="#fff" stroke="${I}" stroke-width="1.2"/><text x="51" y="28.4" text-anchor="middle" style="font:9px Bangers,Impact,sans-serif" fill="${I}">psst</text></g>`:'';
+ const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(3,31) scale(.84)">${duckGC(col,o.scared?'scared':'')}</g></g>`
+  :`<g stroke="#bff0ff" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M8 62 q6-3 12 0"/><path d="M34 70 q6-3 12 0"/><path d="M40 58 q4-2 8 0"/></g>`;
+ const bush=o.cover?`<g class="bush"><g stroke="${I}" stroke-width="1.8" fill="#3fa34d"><ellipse cx="16" cy="70" rx="17" ry="12"/><ellipse cx="44" cy="70" rx="18" ry="13"/><ellipse cx="30" cy="62" rx="15" ry="11"/></g>
+<g stroke="${I}" stroke-width="2" fill="none" stroke-linecap="round"><path d="M8 66q2-12-1-22M52 64q-1-12 3-20M38 58q2-9 6-14"/></g>
+<g stroke="${I}" stroke-width="1.2" fill="#7a4a22"><rect x="4" y="38" width="5" height="12" rx="2.5"/><rect x="53" y="40" width="5" height="12" rx="2.5"/></g>
+<g fill="#a7f3a0"><ellipse cx="24" cy="66" rx="4" ry="2" transform="rotate(-20 24 66)"/><ellipse cx="46" cy="72" rx="4" ry="2" transform="rotate(25 46 72)"/></g></g>`:'';
+ return `<svg class="scene" viewBox="0 0 60 80" preserveAspectRatio="xMidYMid slice">
+<defs><pattern id="htk" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.16)"/></pattern></defs>
+<rect width="60" height="50" fill="#5ab8f5"/><g class="pcl">${cl(14,10,.8)}${cl(46,17,.9)}</g>
+<rect y="37" width="60" height="12" fill="#e8e2d0" stroke="${I}" stroke-width="1.2"/><g stroke="${I}" stroke-width="1">${[6,14,22,30,38,46,54].map(x=>`<path d="M${x} 37v12"/>`).join('')}</g>
+<rect y="48" width="60" height="32" fill="#5fbf4f" stroke="${I}" stroke-width="1.4"/><g stroke="#1f6e2a" stroke-width="1.2" fill="none" stroke-linecap="round"><path d="M6 74l2-4 2 4M48 77l2-4 2 4"/></g>
+${hid}${duck}${bush}
+<g class="bub"><path d="M14 3 h44 v14 h-28 l-6 6 v-6 h-10z" fill="#fff" stroke="${I}" stroke-width="1.4"/><text class="bt" x="36" y="13.6" text-anchor="middle" style="font:11px Bangers,Impact,sans-serif" fill="${I}">KVÁK!</text></g>
+<rect width="60" height="80" fill="url(#htk)"/><rect x="1.5" y="1.5" width="57" height="77" rx="6" fill="none" stroke="${I}" stroke-width="3"/></svg>`}
 
 /* ---------- ilustrace akčních karet (vlastní kresby) ---------- */
 const AY='#facc15',AB='#3b82f6',AG='#22c55e',AP='#ec4899',AO='#f97316';
@@ -875,17 +912,18 @@ const CROSS=`<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy=
 /* ===== komiksové přepracování kreseb v0.10 ===== */
 const INK='#111';
 const HT=`<pattern id="ht" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.16)"/></pattern>`;
-function duckGC(col){return `<g stroke="${INK}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+function duckGC(col,mood){const scared=mood==='scared';return `<g stroke="${INK}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
 <path d="M50 30 Q63 20 61 34 Q59 41 50 41 Z" fill="${col}"/>
 <ellipse cx="34" cy="38" rx="22" ry="14" fill="${col}"/>
 <path d="M16 42 Q34 54 54 42 Q46 52 30 51 Q20 49 16 42Z" fill="rgba(0,0,0,.22)" stroke="none"/>
 <path d="M27 35 Q39 25 51 33 Q44 45 30 41 Z" fill="${col}" style="filter:brightness(.82)"/>
 <circle cx="20" cy="18" r="12" fill="${col}"/>
 <path d="M13 9 Q18 6 24 8" stroke="#fff" stroke-width="2" fill="none" opacity=".8"/>
-<path d="M10 15 Q0 12 -3 18 Q4 21 11 20 Z" fill="#fbbf24"/>
-<path d="M11 21 Q2 23 0 26 Q7 28 12 24 Z" fill="#f59e0b"/>
-<ellipse cx="21" cy="13.5" rx="5" ry="6" fill="#fff" stroke-width="1.8"/>
-<circle cx="19.6" cy="14.6" r="2.7" fill="${INK}" stroke="none"/><circle cx="18.7" cy="13.5" r="1" fill="#fff" stroke="none"/>
+<g class="lb"><path d="M11 21 Q2 23 0 26 Q7 28 12 24 Z" fill="#f59e0b"/></g>
+<g class="ub"><path d="M10 15 Q0 12 -3 18 Q4 21 11 20 Z" fill="#fbbf24"/></g>
+${scared?`<ellipse cx="21" cy="12.5" rx="6.2" ry="7.4" fill="#fff" stroke-width="1.8"/><circle cx="20" cy="13" r="1.6" fill="${INK}" stroke="none"/><path d="M14 3 Q20 0 27 4" stroke-width="2" fill="none"/><path d="M33 4 q-4 6 0 8 q4-2 0-8z" fill="#7dd3fc" stroke-width="1.4"/>`
+:`<ellipse cx="21" cy="13.5" rx="5" ry="6" fill="#fff" stroke-width="1.8"/>
+<circle cx="19.6" cy="14.6" r="2.7" fill="${INK}" stroke="none"/><circle cx="18.7" cy="13.5" r="1" fill="#fff" stroke="none"/>`}
 </g>`}
 function rays(cx,cy,w,h){let s='';for(let i=0;i<18;i++){const a=i*Math.PI/9,b=a+.09*Math.PI;const R=w*1.5;
  s+=`<polygon points="${cx},${cy} ${(cx+R*Math.cos(a)).toFixed(1)},${(cy+R*Math.sin(a)).toFixed(1)} ${(cx+R*Math.cos(b)).toFixed(1)},${(cy+R*Math.sin(b)).toFixed(1)}" fill="rgba(255,255,255,.28)"/>`}return s}
@@ -1028,7 +1066,8 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // vzdálené kvákání, někdy víckrát za sebou
+function ambDuck(){ // v0.12.0: občas kvákne kachna přímo na rybníce (otevře zobák)
+ if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
 function ambSplash(){ // šplouchnutí
@@ -1114,7 +1153,7 @@ function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function saveGame(){if(!S||S.over)return;lsSet(SKEY,JSON.stringify({S:{...S,fx:null},cfg,t:Date.now(),v:VERSION}))}
 function loadSaved(){try{const o=JSON.parse(lsGet(SKEY)||'null');return o&&o.S&&o.S.players?o:null}catch(e){return null}}
-function stopGame(){clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();lastPos=null;prevAim=null;clearTimeout(fxTimer);ambStop();resetUI();S=null;lastDetail='';$('detail').innerHTML=''}
+function stopGame(){prevAimSids=null;clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();lastPos=null;prevAim=null;clearTimeout(fxTimer);ambStop();resetUI();S=null;lastDetail='';$('detail').innerHTML=''}
 function showMenu(){musPlay('calm');$('over').classList.add('hide');$('quit').classList.add('hide');$('start').classList.remove('hide');renderMenu()}
 function goHome(){if(S&&!S.over)saveGame();stopGame();showMenu()}
 function resumeGame(){const o=loadSaved();if(!o)return;ac();stopGame();S=o.S;S.fx=null;if(o.cfg)cfg=o.cfg;musPlay(gameTrack());
@@ -1139,7 +1178,7 @@ try{Object.assign(FX,JSON.parse(lsGet(FXKEY)||'{}'))}catch(e){}
 function saveFX(){lsSet(FXKEY,JSON.stringify(FX))}
 function applyFX(){const h=document.documentElement;h.classList.toggle('noanim',!FX.anim);h.classList.toggle('pondanim',!!FX.pond)}
 applyFX();
-let SID=0,lastPos=null,prevAim=null,oppTimer=null,drawFrom=null,FLY=null;
+let SID=0,lastPos=null,prevAim=null,oppTimer=null,drawFrom=null,FLY=null,prevAimSids=null;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const vis=el=>el&&el.offsetParent!==null;
 
@@ -1172,13 +1211,14 @@ function pondAnimate(before){
   else el.animate([{transform:'translateX(70%) scale(.85)',opacity:0},{transform:'none',opacity:1}],{duration:480,delay:120+(k++)*60,easing:'cubic-bezier(.3,.7,.3,1)',fill:'backwards'})});
  Object.keys(before).forEach(sid=>{if(sid[0]==='_'||now.has(sid))return;const o=before[sid],g=ghostOf(o);
   if(fx.kid&&fx.kid.map(String).includes(sid)){
-   const b=document.createElement('div');b.textContent='💥';b.style.cssText='position:absolute;left:50%;top:55%;font-size:'+Math.round(o.r.width*.8)+'px;transform:translate(-50%,-50%);z-index:3';g.appendChild(b);
+   const b=document.createElement('div');b.innerHTML=bangSVG();b.style.cssText='position:absolute;left:50%;top:50%;width:'+Math.round(o.r.width*1.5)+'px;transform:translate(-50%,-50%);z-index:3';g.appendChild(b);
+   const bd=$('board');if(bd)bd.animate([{transform:'none'},{transform:'translate(-3px,1px)'},{transform:'translate(3px,-1px)'},{transform:'translate(-2px,0)'},{transform:'none'}],{duration:260});
    b.animate([{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(1.4)',opacity:1,offset:.45},{transform:'translate(-50%,-50%) scale(1.6)',opacity:0}],{duration:700,fill:'forwards'});
    g.animate([{transform:'none',opacity:1},{transform:'translateX(-4px) rotate(-4deg)',offset:.15},{transform:'translateX(4px) rotate(4deg)',offset:.3},{transform:'none',opacity:1,offset:.45},{transform:'translateY(-45%) rotate(-25deg) scale(.6)',opacity:0}],{duration:900,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())}
   else if(fx.into&&String(fx.into.from)===sid){const t=$('board').querySelector(`[data-sid="${fx.into.to}"] .card`);const n=t?t.getBoundingClientRect():o.r;
    g.animate([{transform:'none',opacity:1},{transform:`translate(${n.left-o.r.left}px,${n.top-o.r.top}px) scale(.5)`,opacity:0}],{duration:550,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())}
   else g.animate([{transform:'none',opacity:1},{transform:'translateX(-110%)',opacity:0}],{duration:450,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())});
- cols.forEach((el,i)=>{if(aimNow[i]&&!(pa&&pa[i])){const x=el.querySelector('.aimcell svg');if(x)x.animate([{transform:'scale(2.4) rotate(-90deg)',opacity:0},{transform:'none',opacity:1}],{duration:420,easing:'cubic-bezier(.3,1.4,.5,1)'})}})}
+ cols.forEach((el,i)=>{if(aimNow[i]&&!(pa&&pa[i])){const x=el.querySelector('.aimcell .xh');if(x)x.animate([{transform:'scale(2.4) rotate(-90deg)',opacity:0},{transform:'none',opacity:1}],{duration:420,easing:'cubic-bezier(.3,1.4,.5,1)'})}})}
 
 /* --- líznutí karet do ruky --- */
 function handDrawAnim(){if(drawFrom==null)return;const from=drawFrom;drawFrom=null;if(!FX.anim)return;
@@ -1258,7 +1298,7 @@ function bindExtraPanel(){const sp=$('soundPanel');
  $('fxPond').onchange=e=>{FX.pond=e.target.checked;saveFX();applyFX()}}
 
 /* ---------- herní logika ---------- */
-function newGame(){drawFrom=0;lastPos=null;prevAim=null;clearTimeout(oppTimer);oppHide();setTimeout(()=>musPlay(gameTrack(true)),50);
+function newGame(){prevAimSids=null;drawFrom=0;lastPos=null;prevAim=null;clearTimeout(oppTimer);oppHide();setTimeout(()=>musPlay(gameTrack(true)),50);
  const n=cfg.opp+1,players=[{name:cfg.name.trim()||'Ty',c:cfg.color,human:true}];
  const others=COLS.map((_,i)=>i).filter(i=>i!==cfg.color);
  for(let i=0;i<cfg.opp;i++)players.push({name:BOTS[i],c:others[i],human:false});
@@ -1429,7 +1469,7 @@ $('detail').onclick=e=>{const b=e.target.closest('button[data-d]');if(b){if(!b.d
  if(e.target.classList.contains('sheet-bg')||e.target.classList.contains('sheet'))detailAct('close')};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.detail!=null)detailAct('close')});
 function tapCol(i){
- if(!myTurn()||ui.card==null)return;
+ if(!myTurn()||ui.card==null){const s=S&&S.row[i];if(s&&s.k.t==='d'&&s.cv==null){ac();duckSay(i,'KVÁK!','sfx')}return}
  if(ui.perm){
   sfx('click');if(ui.pick==null)ui.pick=i;else{const a=ui.pick;[ui.perm[a],ui.perm[i]]=[ui.perm[i],ui.perm[a]];ui.pick=null}
   render();return;
@@ -1454,7 +1494,7 @@ function render(){
  $('players').innerHTML=S.players.map((pl,q)=>{const a=aliveCount(S,q);
   return `<div class="chip ${q===S.turn&&!S.over?'turn':''} ${a===0?'out':''}"><span class="dot">${duckSVG(COLS[pl.c].h)}</span><span><b>${pl.name}</b> 🦆${a}${S.dead[q]?' · ✝'+S.dead[q]:''}</span></div>`}).join('');
  $('piles').innerHTML=`<div class="pile">${backSVG('duck')}<span>kachny ${S.deck.length}</span></div><div class="pile">${backSVG('act')}<span>akce ${S.adeck.length}</span></div>`+
-  (S.discard.length?`<div class="pile" id="pileLast" title="Náhled poslední karty"><svg viewBox="0 0 50 70"><rect x="1" y="1" width="48" height="68" rx="6" fill="#fffdf6" stroke="#2f855a" stroke-width="2.5"/><g transform="translate(4,14) scale(.42)">${artInner(S.discard[S.discard.length-1])}</g><text x="25" y="11" text-anchor="middle" style="font-family:Fredoka,sans-serif;font-weight:700" font-size="6.5" fill="#1f2937">${CARDS[S.discard[S.discard.length-1]].n}</text></svg><span>naposledy</span></div>`:'');
+  (S.discard.length?`<div class="pile" id="pileLast" title="Náhled poslední karty">${miniCard(S.discard[S.discard.length-1])}<span>naposledy</span></div>`:'');
  const before=pondSnap();S.row.forEach(x=>{if(!x.sid)x.sid=++SID});
  const rowView=ui.perm?ui.perm.map(k=>S.row[k]):S.row;
  const targets=new Set(candidates().map(m=>m.sel[ui.sel.length]).filter(x=>x!=null));
@@ -1464,13 +1504,12 @@ function render(){
   if(ui.perm){cls+=ui.pick===i?' picked':' target'}
   else{if(targets.has(i))cls+=' target';if(ui.sel.includes(i))cls+=' picked'}
   if(kills.includes(i)&&!(FX.anim&&S.fx&&S.fx.kid&&S.fx.kid.length))cls+=' boom';
-  let inner;
-  if(s.k.t==='d')inner=sceneSVG(ch(s.k.c))+`<div class="lbl">${pn(s.k.c)}</div>`;else inner=sceneSVG(null)+`<div class="lbl">voda</div>`;
-  if(s.h!=null)inner+=`<div class="hid" title="schovaná kachna">${duckSVG(ch(s.h))}</div>`;
-  if(s.cv!=null)inner+=`<div class="cover"><b>🌿</b>únik<br>(${pn(s.cv)})</div>`;
-  return `<div class="${cls}" data-i="${i}" data-sid="${s.sid}"><div class="aimcell">${S.aim[i]?CROSS:''}</div><div class="card">${inner}</div></div>`}).join('');
+  const isD=s.k.t==='d',scared=isD&&S.aim[i]&&s.cv==null;
+  let inner=sceneSVG(isD?ch(s.k.c):null,{scared,hid:s.h!=null?ch(s.h):null,cover:s.cv!=null})+`<div class="lbl">${isD?pn(s.k.c):'voda'}</div>`;
+  if(s.cv!=null)inner+=`<div class="covtag" title="Kachní únik: ${pn(s.cv)}">únik</div>`;
+  return `<div class="${cls}" data-i="${i}" data-sid="${s.sid}"><div class="aimcell">${skySVG(i,S.aim[i])}</div><div class="card">${inner}</div></div>`}).join('');
  document.querySelectorAll('.col').forEach(el=>el.onclick=()=>tapCol(+el.dataset.i));
- pondAnimate(before);
+ pondAnimate(before);reliefCheck();
  // stav
  let st='',sub='';
  if(S.over)st='Konec hry.';
@@ -1696,6 +1735,42 @@ function splashShow(){const sp=document.createElement('div');sp.id='ksplash';
  document.body.appendChild(sp);document.body.classList.add('ksplashing');let done=false;
  const go=()=>{if(done)return;done=true;try{ac();sfx('click');quackAt(.05)}catch(e){}sp.classList.add('out');document.body.classList.remove('ksplashing');setTimeout(()=>sp.remove(),520)};
  sp.addEventListener('click',go);setTimeout(()=>sp.classList.add('ready'),2600)}
+
+/* ===================== v0.12.0 – komiksový rybník a hlasy kachen ===================== */
+function crossSVG(){return `<svg viewBox="0 0 40 40" width="32" height="32">${X(20,20,11)}</svg>`}
+function skySVG(i,aimed){const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
+ const C=[[[18,11,.75],[66,25,.62]],[[64,10,.7],[22,26,.6]],[[42,13,.9]]][i%3].map(a=>cl(...a)).join('');
+ return `<svg class="sky" viewBox="0 0 84 36" preserveAspectRatio="xMidYMid slice"><defs><pattern id="hts" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.14)"/></pattern></defs>
+<rect width="84" height="36" fill="#5ab8f5"/><g class="scl">${C}</g><rect width="84" height="36" fill="url(#hts)"/>${aimed?`<g class="xh">${X(42,18,10)}</g>`:''}</svg>`}
+function miniCard(t){const c=CARDS[t];return `<svg viewBox="0 0 50 70"><defs><pattern id="htm" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".5" fill="rgba(0,0,0,.15)"/></pattern></defs>
+<rect x="2" y="2" width="46" height="66" rx="5" fill="#fff" stroke="#111" stroke-width="2.6"/>
+<text x="25" y="12.5" text-anchor="middle"${c.n.length>7?' textLength="40" lengthAdjust="spacingAndGlyphs"':''} style="font:9.5px Bangers,Impact,sans-serif" fill="#ffe14d" stroke="#111" stroke-width="1.3" paint-order="stroke">${c.n.toUpperCase()}</text>
+<svg x="5" y="16" width="40" height="28" viewBox="0 0 100 70" preserveAspectRatio="xMidYMid slice">${artInner(t)}</svg><rect x="5" y="16" width="40" height="28" rx="2" fill="none" stroke="#111" stroke-width="1.6"/>
+<rect x="5" y="47" width="40" height="17" rx="3" fill="#fffdf6" stroke="#111" stroke-width="1.3"/><rect x="5" y="47" width="40" height="17" rx="3" fill="url(#htm)"/><path d="M9 52h32M9 57h26" stroke="#94a3b8" stroke-width="1.6"/></svg>`}
+function bangSVG(){const w=Math.random()<.2?'BUM!':'PRÁSK!';let p=[];for(let i=0;i<22;i++){const a=i*Math.PI/11,r=i%2?17:28;p.push((40+r*Math.cos(a)).toFixed(1)+','+(40+r*.72*Math.sin(a)).toFixed(1))}
+ const fe=[[10,60,-30],[70,56,25],[62,72,-50],[14,20,40]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="6" ry="2.3" transform="rotate(${r} ${x} ${y})" fill="#fff" stroke="#111" stroke-width="1"/>`).join('');
+ return `<svg viewBox="0 0 80 80" style="width:100%;display:block;overflow:visible"><g>${fe}</g><polygon points="${p.join(' ')}" fill="#ffe14d" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="40" y="46" text-anchor="middle" transform="rotate(-8 40 40)" style="font:${w.length>4?17:20}px Bangers,Impact,sans-serif" fill="#ff3d7f" stroke="#111" stroke-width="1.8" paint-order="stroke">${w}</text></svg>`}
+/* hlas kachny podle hráče, aby se daly poznat i po zvuku */
+const VOICE=[1,.86,1.14,.93,1.07,.8];
+function pondDucks(){const out=[];if(!S||!vis($('board')))return out;S.row.forEach((s,i)=>{if(s.k.t==='d'&&s.cv==null)out.push(i)});return out}
+function colEl(i){return $('board')&&$('board').querySelector(`.col[data-i="${i}"]`)}
+function duckAnim(i,cls,word,ms){const el=colEl(i);if(!el||!FX.anim&&cls!=='q')return;const t=el.querySelector('.bt');if(t){t.textContent=word;if(word.length>6){t.setAttribute('textLength','40');t.setAttribute('lengthAdjust','spacingAndGlyphs')}else t.removeAttribute('textLength')}
+ el.classList.remove('q','ch','uf');void el.offsetWidth;el.classList.add(cls);if(cls==='uf')el.classList.add('q');clearTimeout(el._qt);el._qt=setTimeout(()=>el.classList.remove('q','ch','uf'),ms)}
+function duckSay(i,word,chan){const s=S&&S.row[i];if(!s||s.k.t!=='d')return;const ch_=chan||'sfx';if(!chOn(ch_))return;const c=ac();if(!c)return;
+ const p=VOICE[s.k.c%VOICE.length],dest=panTo(c,(i/5)*1.4-.7,ch_),n=/KVÁK KVÁK|UF/.test(word)?2:1,v=ch_==='ducks'?.35:.8;
+ for(let k=0;k<n;k++)quackAt(k*.36,p*(k?1.04:1),v,dest);duckAnim(i,word.startsWith('UF')?'uf':'q',word,n*360+120)}
+function clackAt(at,v,dest){noise(.025,v,at,2600+Math.random()*700,'bandpass',4,null,dest);tone(1400,.02,'triangle',v*.25,at,null,dest)}
+function chatter(i){const s=S&&S.row[i];if(!s||!chOn('sfx'))return;const c=ac();if(!c)return;const d=panTo(c,(i/5)*1.4-.7,'sfx'),n=6+(Math.random()*5|0);
+ for(let k=0;k<n;k++)clackAt(k*.085,.35,d);duckAnim(i,'ch','CVAK CVAK',n*85+150)}
+/* vyděšené kachny pod zaměřovačem občas zacvakají zobákem */
+setInterval(()=>{if(!S||S.over||document.hidden||!$('start').classList.contains('hide')||Math.random()>.28)return;
+ const ix=[];S.row.forEach((s,i)=>{if(s.k.t==='d'&&s.cv==null&&S.aim[i])ix.push(i)});if(ix.length&&vis($('board')))chatter(ix[Math.random()*ix.length|0])},1200);
+/* úleva: kachna, nad kterou zmizel zaměřovač a přežila */
+function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if(s.k.t==='d'&&S.aim[i])now.add(s.sid)});
+ const prev=prevAimSids;prevAimSids=now;if(!prev)return;
+ for(const sid of prev){if(now.has(sid))continue;const i=S.row.findIndex(s=>s.sid===sid&&s.k.t==='d');if(i>=0){setTimeout(()=>{const j=S&&S.row.findIndex(s=>s.sid===sid);if(j>=0)duckSay(j,'UF, KVÁK!','sfx')},650);break}}}
+
 sceneInit();sceneMode();cfgChip();sndIc();
 if(!/[?&]nosplash/.test(location.search))splashShow();
 </script>
