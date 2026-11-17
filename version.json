@@ -1,10 +1,6 @@
 {
-  "version": "0.12.1",
+  "version": "0.12.3",
   "notes": [
-    "Kachny na rybníce teď plavou ve vodě – spodek těla je pod hladinou a kolem jsou vlnky",
-    "Pod plotem z rákosí je úzký travnatý břeh a pod ním voda místo trávy",
-    "Světlejší obloha na kartách kachen i nad poli se zaměřovači",
-    "Kachny jsou o kousek menší a zobák už nečouhá na okraj karty",
-    "Z verze 0.12.0: komiksový rybník, vyděšené zaměřené kachny, kvákání se zobákem, PRÁSK! při zásahu"
+    "Opraven seznam verzí: po verzi 0.10 rovnou následuje 0.11.0"
   ]
 }

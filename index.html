@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.12.1</title>
-<meta name="version" content="0.12.1">
+<title>Střelené kachny v0.12.3</title>
+<meta name="version" content="0.12.3">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -677,12 +677,22 @@ html.noanim .card .pdk.scared{animation:none!important}
 html.noanim .card .bush,html.noanim .card .psst{animation:none}
 html.noanim .card .psst{opacity:1}
 #pileLast svg{filter:drop-shadow(2px 2px 0 #111)}
+
+/* ===== v0.12.3 – historie verzí ===== */
+#updov .panel{display:flex;flex-direction:column;max-height:92dvh}
+.histh{text-align:left;margin:6px 0 4px!important}
+.hist{flex:1 1 auto;min-height:80px;max-height:46dvh;overflow:auto;text-align:left;background:#fff;border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;padding:6px 10px}
+.hv{padding:6px 0;border-bottom:1.5px dashed rgba(0,0,0,.2)}
+.hv:last-child{border-bottom:0}
+.hv b{font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.5px;font-size:19px}
+.hv .now{display:inline-block;font:13px Bangers,Impact,sans-serif;letter-spacing:.4px;background:#ffe14d;border:2px solid #111;border-radius:6px;padding:0 5px;margin-left:6px;transform:rotate(-3deg)}
+.hv ul{margin:2px 0 0;padding-left:18px;font-size:13.5px;line-height:1.35}
 </style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.1</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.3</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -708,7 +718,7 @@ html.noanim .card .psst{opacity:1}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.1</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.3</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -720,7 +730,7 @@ html.noanim .card .psst{opacity:1}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.1</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.3 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -745,9 +755,11 @@ html.noanim .card .psst{opacity:1}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.12.1</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.12.3</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
+  <h3 class="histh">📜 Historie verzí</h3>
+  <div class="hist" id="histList"></div>
   <div class="actions center"><button class="btn" id="bUpdCheck">🔄 Zkontrolovat teď</button><button class="btn pri" id="bUpdClose">Zavřít</button></div>
   <p style="font-size:12.5px;opacity:.75;margin-top:10px">Bez tvého potvrzení se hra nikdy sama nezmění. Nová verze se nainstaluje jen tlačítkem „Aktualizovat“.</p>
  </div>
@@ -778,7 +790,7 @@ html.noanim .card .psst{opacity:1}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.1</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.3</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -797,7 +809,7 @@ html.noanim .card .psst{opacity:1}
 </div>
 
 <script>
-const VERSION='0.12.1';
+const VERSION='0.12.3';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -930,15 +942,16 @@ ${scared?`<ellipse cx="21" cy="12.5" rx="6.2" ry="7.4" fill="#fff" stroke-width=
 function rays(cx,cy,w,h){let s='';for(let i=0;i<18;i++){const a=i*Math.PI/9,b=a+.09*Math.PI;const R=w*1.5;
  s+=`<polygon points="${cx},${cy} ${(cx+R*Math.cos(a)).toFixed(1)},${(cy+R*Math.sin(a)).toFixed(1)} ${(cx+R*Math.cos(b)).toFixed(1)},${(cy+R*Math.sin(b)).toFixed(1)}" fill="rgba(255,255,255,.28)"/>`}return s}
 function cloud(x,y,s){return `<g transform="translate(${x},${y}) scale(${s})" fill="#fff" stroke="${INK}" stroke-width="${1.3/s}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`}
-function artBg(){return `<defs><linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fa9f0"/><stop offset="1" stop-color="#bfe6ff"/></linearGradient>
+function artBg(){return `<defs><linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ad0fb"/><stop offset="1" stop-color="#dcf2ff"/></linearGradient>
 <linearGradient id="aGr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74cf5f"/><stop offset="1" stop-color="#2f9a3a"/></linearGradient>
 <clipPath id="aSc"><rect width="100" height="40"/></clipPath>${HT}</defs>
 <rect width="100" height="48" fill="url(#aSky)"/><g clip-path="url(#aSc)">${rays(50,40,100,40)}</g>
 ${cloud(18,10,.9)}${cloud(78,13,1.05)}
 <rect y="35" width="100" height="13" fill="#e8e2d0" stroke="${INK}" stroke-width="1.2"/>
 <g stroke="${INK}" stroke-width="1">${[6,14,22,30,38,46,54,62,70,78,86,94].map(x=>`<path d="M${x} 35v13"/>`).join('')}</g>
-<rect y="46" width="100" height="24" fill="url(#aGr)" stroke="${INK}" stroke-width="1.4"/>
-<g stroke="#1f6e2a" stroke-width="1.2" fill="none" stroke-linecap="round"><path d="M8 58l2-4 2 4M84 62l2-4 2 4M46 66l2-4 2 4"/></g>
+<rect y="46" width="100" height="5" fill="#7fd36a" stroke="${INK}" stroke-width="1.2"/>
+<rect y="50" width="100" height="20" fill="#4fb3d9" stroke="${INK}" stroke-width="1.2"/>
+<g stroke="#c9f0ff" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M5 58 q5-2.5 10 0M80 61 q5-2.5 10 0M42 66 q5-2.5 10 0M20 67 q4-2 8 0"/></g>
 <rect width="100" height="70" fill="url(#ht)"/>`}
 function X(x,y,r){const p=`<circle cx="${x}" cy="${y}" r="${r}"/><circle cx="${x}" cy="${y}" r="${r*.35}"/><path d="M${x} ${y-r-5}v${r*.8}M${x} ${y+r+5}v${-r*.8}M${x-r-5} ${y}h${r*.8}M${x+r+5} ${y}h${-r*.8}"/>`;
  return `<g fill="none" stroke-linecap="round"><g stroke="${INK}" stroke-width="5">${p}</g><g stroke="#ff2a2a" stroke-width="2.6">${p}</g></g>`}
@@ -1068,7 +1081,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.12.1: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.12.3: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1619,7 +1632,7 @@ async function checkUpdate(manual){
 function renderUpd(){const w=$('updWrap');if(!w)return;
  w.innerHTML=updNew&&updSkip!==updNew?`<div class="updbar">✨ Nová verze <b>${updNew}</b>${updNotes.length?`<ul class="updnotes">${updNotes.map(n=>`<li>${n}</li>`).join('')}</ul>`:''}<button class="btn sm ok" id="bUpdGo">Aktualizovat</button><button class="btn sm" id="bUpdNo">Teď ne</button><button class="btn sm sk" id="bUpdSk">Přeskočit</button></div>`:'';
  if($('bUpdGo')){$('bUpdGo').onclick=doUpdate;$('bUpdNo').onclick=()=>{updSkip=updNew;renderUpd()};$('bUpdSk').onclick=()=>{updSkip=updNew;lsSet('kachny_skip_v1',updNew);renderUpd()}}
- const vb=$('bUpd');if(vb){vb.classList.toggle('new',!!updNew);vb.textContent='⬇️ Verze '+VERSION+(updNew?' · NOVÁ!':'')}}
+ const vb=$('bUpd');if(vb){vb.classList.toggle('new',!!updNew);vb.textContent='⬇️ Verze '+VERSION+(updNew?' · NOVÁ!':' · novinky')}}
 async function doUpdate(){if(S&&!S.over)saveGame();$('updWrap').innerHTML='<div class="updbar">⏳ Stahuji novou verzi…</div>';
  try{const c=await caches.open('kachny-app');
   for(const f of APP_FILES){const r=await fetch(f+'?t='+Date.now(),{cache:'no-store'});if(r.ok){await c.put(new Request(f),r.clone());if(f==='./index.html')await c.put(new Request('./'),r.clone())}}
@@ -1772,6 +1785,28 @@ setInterval(()=>{if(!S||S.over||document.hidden||!$('start').classList.contains(
 function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if(s.k.t==='d'&&S.aim[i])now.add(s.sid)});
  const prev=prevAimSids;prevAimSids=now;if(!prev)return;
  for(const sid of prev){if(now.has(sid))continue;const i=S.row.findIndex(s=>s.sid===sid&&s.k.t==='d');if(i>=0){setTimeout(()=>{const j=S&&S.row.findIndex(s=>s.sid===sid);if(j>=0)duckSay(j,'UF, KVÁK!','sfx')},650);break}}}
+
+
+/* ===================== v0.12.3 – historie verzí ===================== */
+const CHANGELOG=[
+ ['0.12.3',['Opraven seznam verzí: po verzi 0.10 rovnou následuje 0.11.0']],
+ ['0.12.2',['Zelená tráva zmizela i z obrázků na akčních kartách – místo ní je voda a světlejší obloha','V okně Aktualizace (tlačítko „Verze“ dole v menu) je historie všech verzí']],
+ ['0.12.1',['Kachny na rybníce plavou ve vodě – spodek těla je pod hladinou','Pod plotem z rákosí je úzký břeh a pod ním voda','Světlejší obloha na kartách i nad poli','Kachny jsou menší a zobák nečouhá na okraj karty']],
+ ['0.12.0',['Rybník v komiksovém stylu s černými obrysy a rastrem','Opraveno: kachny na kartách rybníka mizely','Zaměřená kachna se bojí, třese se a cvaká zobákem','Kachny kvákají s pohyblivým zobákem a bublinou, každý hráč má jiný hlas','Ťuknutím na kachnu kvákne, po odvráceném nebezpečí si úlevně zakváká','Zásah: komiksové PRÁSK! nebo BUM! s peřím','Kachní únik je keř, schovaná kachna vykukuje a šeptá „psst“','Naposledy zahraná karta je zmenšená komiksová karta']],
+ ['0.11.0',['Úvodní animace s PRÁSK!','Živý rybník v pozadí menu i hry','Nové menu s dlaždicemi: nastavení hry v okně ✏️, Zvuk i v menu','Okno aktualizace se seznamem změn a tlačítkem Přeskočit','Komiksový vzhled celé hry a akční karty ve tvaru opravdové karty','Hudba ve hře (Polka, Banjo, Honička, Rybník) a animace karet a tahů','Ukládání rozehrané hry a tlačítko Pokračovat','Pravidla po stránkách s listováním','Rozložení na výšku i na šířku a zámek otáčení displeje','Instalace jako aplikace a aktualizace z GitHubu','Záznam hry 📜']],
+ ['0.10',['Tlačítko pro celou obrazovku']],
+ ['0.9',['Voda zní jako klidný rybník: čvachtání a bublinky']],
+ ['0.8',['Kachny se cákají a koupou']],
+ ['0.7',['Panel zvuku s přepínači a posuvníky hlasitosti']],
+ ['0.6',['Zvuky přírody na pozadí: kachny, ptáci, hmyz, voda']],
+ ['0.5',['Obloha s mráčky nad poli se zaměřovači']],
+ ['0.4',['Zvukové efekty: výstřel, kvák, zaměření, fanfára']],
+ ['0.3',['Vlastní obrázky na všech 16 akčních kartách','Balíčky s rubem a naposledy zahraná karta']],
+ ['0.2',['Kreslená grafika: kachny, nebe s mráčky, komiksové nadpisy']],
+ ['0.1',['První verze hry s číslem verze: všech 16 akčních karet a počítačoví soupeři']]];
+function renderHistory(){const h=$('histList');if(!h)return;
+ h.innerHTML=CHANGELOG.map(([v,n])=>`<div class="hv"><b>v${v}</b>${v===VERSION?'<span class="now">TEĎ MÁŠ</span>':''}<ul>${n.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}
+renderHistory();
 
 sceneInit();sceneMode();cfgChip();sndIc();
 if(!/[?&]nosplash/.test(location.search))splashShow();
