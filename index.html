@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.12.3</title>
-<meta name="version" content="0.12.3">
+<title>Střelené kachny v0.12.4</title>
+<meta name="version" content="0.12.4">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,31 +15,27 @@
 html,body{margin:0;padding:0}
 body{font-family:'Fredoka',system-ui,sans-serif;color:#1e293b;min-height:100vh;
  background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 30%,#a7d8c9 31%,#6fb7a8 100%);}
-.wrap{max-width:760px;margin:0 auto;padding:10px 10px 30px}
+
 header{display:flex;align-items:center;justify-content:space-between;gap:8px}
 h1{font-family:'Bangers','Fredoka',sans-serif;font-weight:400;font-size:clamp(22px,6vw,30px);margin:0;letter-spacing:1px;color:#facc15;-webkit-text-stroke:1.1px #1f2937;text-shadow:2px 3px 0 #1f2937}
-.btn{font:inherit;font-weight:600;border:0;border-radius:12px;padding:9px 14px;cursor:pointer;background:#fff;color:#1e293b;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+
 .btn:active{transform:translateY(1px)}
-.btn.pri{background:#ef4444;color:#fff}
-.btn.ok{background:#16a34a;color:#fff}
-.btn.sm{padding:6px 10px;font-size:13px}
+
 .players{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.8);border-radius:20px;padding:4px 10px 4px 4px;font-size:13px;border:2px solid transparent}
-.chip.turn{border-color:#ef4444;background:#fff}
+
 .chip.out{opacity:.45;text-decoration:line-through}
-.dot{width:30px;height:24px;display:flex;align-items:center}.dot svg{width:100%}
-.pond{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.1));border-radius:16px;padding:8px 6px 10px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
+.dot{width:30px;height:24px;display:flex;align-items:center}
+
 .front{font-size:12px;color:#0f5132;margin:0 4px 4px;display:flex;justify-content:space-between}
 .board{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
 .col{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:10px;padding:3px;position:relative;cursor:pointer}
-.col.target{background:rgba(239,68,68,.18);outline:3px dashed #ef4444}
+
 .col.picked{background:rgba(239,68,68,.28);outline:3px solid #b91c1c}
 .aimcell{height:44px;width:100%;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid rgba(255,255,255,.8);box-shadow:0 2px 4px rgba(0,0,0,.12);
  background:radial-gradient(ellipse 10px 4.5px at 28% 38%,#fff 92%,transparent),radial-gradient(ellipse 6px 4.5px at 36% 28%,#fff 92%,transparent),
   radial-gradient(ellipse 11px 4.5px at 74% 70%,#fff 92%,transparent),radial-gradient(ellipse 6px 4px at 68% 61%,#fff 92%,transparent),linear-gradient(#4fb0ef,#c9ebff)}
-.col:nth-child(even) .aimcell{background:radial-gradient(ellipse 11px 4.5px at 70% 34%,#fff 92%,transparent),radial-gradient(ellipse 6px 4.5px at 63% 25%,#fff 92%,transparent),
-  radial-gradient(ellipse 9px 4px at 26% 72%,#fff 92%,transparent),radial-gradient(ellipse 5px 3.5px at 32% 64%,#fff 92%,transparent),linear-gradient(#4fb0ef,#c9ebff)}
-.col:nth-child(3n) .aimcell{background:radial-gradient(ellipse 13px 5px at 50% 46%,#fff 92%,transparent),radial-gradient(ellipse 7px 5px at 43% 36%,#fff 92%,transparent),radial-gradient(ellipse 6px 4px at 58% 38%,#fff 92%,transparent),linear-gradient(#4fb0ef,#c9ebff)}
+
 .card{width:100%;aspect-ratio:3/4;border-radius:10px;position:relative;display:block;padding:0;
  background:linear-gradient(180deg,#7dd3fc,#0ea5e9);border:2px solid rgba(255,255,255,.75);box-shadow:0 3px 6px rgba(0,0,0,.18);overflow:hidden}
 .card svg.scene{width:100%;height:100%;display:block}
@@ -47,21 +43,13 @@ h1{font-family:'Bangers','Fredoka',sans-serif;font-weight:400;font-size:clamp(22
 .card .hid{position:absolute;top:16px;right:3px;width:42%;background:rgba(255,255,255,.55);border-radius:6px;padding:1px}
 .card .cover{position:absolute;inset:0;background:repeating-linear-gradient(100deg,rgba(21,128,61,.75) 0 6px,rgba(74,222,128,.7) 6px 11px);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;font-size:10px;font-weight:700;text-shadow:0 1px 2px #000}
 .card .cover b{font-size:22px}
-.waves{width:80%;opacity:.9}
+
 .boom::after{content:'PRÁSK!';position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);font:26px Bangers,Impact,sans-serif;color:#ff3d7f;-webkit-text-stroke:1.2px #111;background:radial-gradient(circle,#ffe14d 0 58%,transparent 60%);padding:14px;z-index:4;animation:pop .8s ease-out forwards;pointer-events:none}
 @keyframes pop{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}70%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
-.info{display:flex;justify-content:space-between;font-size:12px;color:#134e4a;margin:6px 4px 0}
+
 .status{background:#fff;border-radius:14px;padding:10px 12px;margin:10px 0;font-weight:500;min-height:44px;box-shadow:0 2px 0 rgba(0,0,0,.12)}
 .status small{display:block;color:#64748b;font-weight:400;margin-top:3px}
-.hand{display:flex;gap:8px}
-.hcard{flex:1;min-width:0;aspect-ratio:5/7;display:flex;flex-direction:column;background:#fffdf6;border-radius:12px;padding:5px 5px 7px;border:3px solid #2f855a;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:transform .15s;
- background-image:radial-gradient(circle at 1px 1px,rgba(47,133,90,.12) 1px,transparent 1.5px);background-size:8px 8px}
-.hcard .t{font-family:'Bangers','Fredoka',sans-serif;font-size:clamp(14px,4.3vw,19px);line-height:1.05;letter-spacing:.6px;text-align:center;color:#facc15;-webkit-text-stroke:.9px #1f2937;text-shadow:1px 2px 0 #1f2937;margin:2px 0 5px;min-height:20px}
-.hcard .art{width:100%;display:block;border-radius:8px;border:1.5px solid #1f2937;background:#d6efff}
-.hcard .d{font-size:clamp(10px,2.9vw,11.5px);color:#334155;line-height:1.25;text-align:center;margin-top:6px;flex:1;display:flex;align-items:center;justify-content:center}
-.hcard.sel{border-color:#ef4444;transform:translateY(-6px)}
-.hcard.dim{opacity:.45}
-.hcard.wait{filter:grayscale(.4)}
+
 .actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .log{margin-top:12px;background:rgba(255,255,255,.65);border-radius:14px;padding:8px 12px;font-size:13px;max-height:170px;overflow:auto}
 .log div{padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06)}
@@ -69,19 +57,18 @@ h1{font-family:'Bangers','Fredoka',sans-serif;font-weight:400;font-size:clamp(22
 .overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:14px;z-index:10}
 .overlay.hide{display:none}
 .panel{background:#fff;border-radius:18px;padding:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
-.panel h2{margin:0 0 6px}
-.panel h3{margin:14px 0 4px;font-size:16px}
+
 .panel p,.panel li{font-size:14px;line-height:1.4}
 .row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
 .opt{font:inherit;border:2px solid #cbd5e1;background:#fff;border-radius:10px;padding:7px 13px;cursor:pointer;font-weight:600}
-.opt.on{border-color:#ef4444;background:#fee2e2}
+
 .sw{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #cbd5e1;cursor:pointer}
-.sw.on{box-shadow:0 0 0 3px #ef4444}
+
 input[type=text]{font:inherit;padding:8px 10px;border-radius:10px;border:2px solid #cbd5e1;width:100%}
 .cardlist{display:grid;grid-template-columns:1fr;gap:4px;font-size:13.5px}
 .cardlist div{background:#f8fafc;border-radius:8px;padding:5px 8px}
 .big{font-size:44px;text-align:center}
-.sndwrap{position:relative}
+
 html:fullscreen,html:-webkit-full-screen{overflow:auto;background:#bae6fd}
 #bFull{font-size:16px}
 .spanel{position:absolute;right:-84px;top:calc(100% + 8px);z-index:20;width:min(340px,92vw);background:#fff;border-radius:16px;padding:10px 12px;
@@ -100,18 +87,18 @@ html:fullscreen,html:-webkit-full-screen{overflow:auto;background:#bae6fd}
 .sw2 input{opacity:0;width:0;height:0}
 .sw2 span{position:absolute;inset:0;background:#cbd5e1;border-radius:20px;transition:.2s;cursor:pointer}
 .sw2 span::before{content:'';position:absolute;left:2px;top:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
-.sw2 input:checked+span{background:#16a34a}
+
 .sw2 input:checked+span::before{transform:translateX(16px)}
 .sp-foot{display:flex;justify-content:space-between;margin-top:8px}
 .piles{display:flex;gap:14px;align-items:flex-end;margin:10px 6px 0}
 .pile{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#134e4a;font-weight:600;gap:2px}
-.pile svg{width:44px;height:62px;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2))}
+
 .cardlist .mini{display:flex;gap:8px;align-items:center}
 .cardlist .mini svg{width:64px;flex:none;border-radius:6px;border:1px solid #1f2937}
-.ver{font-family:'Fredoka',sans-serif;-webkit-text-stroke:0;text-shadow:none;letter-spacing:0;font-size:12px;font-weight:600;color:#fff;background:#0f766e;border-radius:8px;padding:2px 7px;vertical-align:middle}
+
 html{background:#5faa98}
 /* =====================================================
-   v0.10.17 – komiksový vzhled celé hry
+   komiksový vzhled celé hry
    ===================================================== */
 :root{--ink:#111;--halft:radial-gradient(rgba(0,0,0,.13) 1px,transparent 1.5px) 0 0/6px 6px;--cream:#fff4d6}
 body{color:#111;background:var(--halft),linear-gradient(180deg,#8fd3ff 0%,#d6f0ff 30%,#a7d8c9 31%,#5faa98 100%);background-attachment:fixed}
@@ -131,12 +118,12 @@ h1{font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:clamp(24px,7v
 .chip b{font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:17px;letter-spacing:.5px}
 .chip.turn{background:#ffe14d;border-color:#111;outline:3px solid #ff3d7f;outline-offset:1px}
 .chip.out{opacity:.5}
-/* rybník – karty podle v0.10, jen komiksový okraj */
+/* rybník – karty s komiksovým okrajem */
 .pond{background:rgba(255,255,255,.3);border:3px solid #111;border-radius:14px;box-shadow:4px 4px 0 #111;padding:6px 5px 8px}
 .front{font-family:Bangers,Impact,sans-serif;letter-spacing:.5px;font-size:15px;color:#0f3d33}
 .col.target{background:rgba(255,61,127,.2);outline:3px dashed #ff3d7f}
 .col.picked{background:rgba(255,61,127,.32);outline:3px solid #111}
-.piles{margin:8px 4px 0}
+
 .pile{font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.5px;font-size:14px;color:#111}
 .pile svg{filter:drop-shadow(2px 2px 0 #111)}
 .pile span{background:#fff;border:2px solid #111;border-radius:6px;padding:0 5px;box-shadow:1.5px 1.5px 0 #111}
@@ -180,11 +167,9 @@ input[type=text]{font:600 18px Fredoka,sans-serif;border:2.5px solid #111;border
 .opt{font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:21px;min-width:46px;height:40px;border:2.5px solid #111;border-radius:8px;background:#fff;box-shadow:2px 2px 0 #111;padding:0 10px}
 .opt.on{background:#ff3d7f;color:#fff;border-color:#111;text-shadow:1px 1px 0 #111;transform:translateY(-2px);box-shadow:3px 4px 0 #111}
 .sw{width:48px;height:42px;border:2.5px solid #111;border-radius:8px;background:#fff;box-shadow:2px 2px 0 #111;display:flex;align-items:center;justify-content:center}
-.sw svg{width:38px}
+
 .sw.on{background:#ffe14d;box-shadow:2px 2px 0 #111;outline:3px solid #ff3d7f;outline-offset:2px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
-.row2 .btn{font-size:21px;padding:9px 4px}
-.foot{text-align:center;font-size:12.5px;margin:14px 0 0;background:#fff;border:2px solid #111;border-radius:8px;padding:3px 6px}
+
 .quitscr{background:var(--halft),linear-gradient(180deg,#8fd3ff 0%,#d6f0ff 30%,#a7d8c9 31%,#5faa98 100%)}
 /* ===== komiksové akční karty 63×88 ===== */
 .hand{display:flex;gap:8px;justify-content:center;padding:6px 2px 10px}
@@ -212,17 +197,16 @@ input[type=text]{font:600 18px Fredoka,sans-serif;border:2.5px solid #111;border
 .dctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .dctrl .btn{font-size:21px;padding:8px 16px}
 
-/* ===== v0.10.17 – celá obrazovka, hra na jeden displej ===== */
+/* ===== celá obrazovka, hra na jeden displej ===== */
 html:fullscreen,html:-webkit-full-screen{background:#5faa98}
 .wrap{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:6px 8px 8px;max-width:min(760px,calc(100dvh*.64))}
 .wrap>header,.wrap>.players,.wrap>.pond,.wrap>.status,.wrap>.actions{flex:0 0 auto}
 .players{margin:6px 0}
 .pond{padding:4px 5px 6px}
 .front{margin:0 3px 3px;font-size:14px}
-.aimcell{height:clamp(26px,4.5dvh,44px)}
+
 .piles{margin:5px 4px 0;gap:10px}
-.pile svg{width:30px;height:42px}
-.pile span{font-size:13px}
+
 .status{margin:12px 0 4px;padding:5px 10px;font-size:15px}
 .status small{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hand{flex:1 1 0;min-height:0;align-items:center;padding:4px 2px 6px}
@@ -233,61 +217,54 @@ html:fullscreen,html:-webkit-full-screen{background:#5faa98}
 .tog{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-weight:600;font-size:15px;background:var(--cream);border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;padding:6px}
 .tog input{width:20px;height:20px;accent-color:#ff3d7f}
 
-/* ===== v0.10.17 – opravy ===== */
-header{flex-wrap:nowrap}
+/* ===== opravy ===== */
+
 .gtitle{white-space:nowrap;font-size:clamp(17px,5.2vw,30px);position:relative;padding-bottom:4px;flex:1 1 auto;min-width:0;letter-spacing:.5px}
 .gtitle .ver{position:absolute;right:-6px;bottom:-12px;font-size:11px;padding:0 4px;margin:0}
 header>div{flex:0 0 auto;gap:5px!important}
 header .btn.sm{width:clamp(32px,9vw,40px);height:clamp(32px,9vw,38px);padding:0;display:flex;align-items:center;justify-content:center;font-size:18px}
-#bFull svg{display:block}
-.fsic{display:inline-flex;vertical-align:middle}.fsic svg{width:18px;height:18px}
+
+.fsic{display:inline-flex;vertical-align:middle}
 /* panel zvuku: vždy celý na obrazovce */
 .sndwrap{position:static}
 .spanel{position:fixed;left:50%;right:auto;top:52px;transform:translateX(-50%);width:min(360px,94vw);max-height:calc(100dvh - 64px);overflow:auto;z-index:40}
 .spanel::before{display:none}
 header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 .sp-row{grid-template-columns:40px 1fr 88px 44px}
-.sp-row.sub{grid-template-columns:40px 1fr 74px 44px}
-.sw{width:clamp(40px,12vw,48px)}.row{gap:5px}
+
+.row{gap:5px}
 @media (max-width:400px){header .btn.sm{font-size:15px}header .btn.sm svg{width:16px;height:16px}}
 
-/* ===== v0.10.17 – na výšku i na šířku ===== */
-.togrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.togrow .tog{margin:0!important;font-family:Fredoka,sans-serif;font-size:14px;cursor:pointer;color:#111}
+/* ===== na výšku i na šířku ===== */
+
 @media (orientation:landscape){
  /* hra: vlevo rybník, vpravo hráči, stav a ruka */
  .wrap{max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;column-gap:12px;row-gap:4px;padding:5px 10px 6px!important}
  .wrap>header{grid-column:1;grid-row:1;margin:0}
  .wrap>.players{grid-column:2;grid-row:1;margin:0!important;align-self:center;gap:4px}
- .wrap>.players .chip{padding:0 6px 0 2px;font-size:12.5px}
- .wrap>.players .chip b{font-size:15px}
- .wrap>.players .dot{width:22px;height:18px}
+
  .wrap>.pond{grid-column:1;grid-row:2/5;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-height:0;overflow:hidden}
  .wrap>.pond .piles{margin-top:8px}
- .wrap>.status{grid-column:2;grid-row:2;margin:10px 0 0!important}
+
  .wrap>.hand{grid-column:2;grid-row:3;min-height:0}
  .wrap>.actions{grid-column:2;grid-row:4;margin:0}
- .aimcell{height:clamp(22px,7dvh,40px)}
- .gtitle{font-size:clamp(18px,3.2vw,30px)}
+
  /* úvod: vlevo název, vpravo nastavení */
  .mwrap{max-width:900px;display:grid;grid-template-columns:1fr 1.15fr;column-gap:18px;align-items:center;min-height:100dvh;padding:6px 14px}
  .mwrap>.hero{grid-column:1;grid-row:1/8;margin:0}
  .mwrap>*:not(.hero){grid-column:2}
- .mwrap .btn.big{font-size:19px;padding:6px}
+
  .mwrap .box{padding:5px 9px;margin:0 0 7px}
  .mwrap .box h3{font-size:16px;margin:2px 0}
  .mwrap .opt{height:30px}.mwrap .sw{height:32px}
- .mwrap .row2{margin-top:7px}.mwrap .row2 .btn{font-size:18px;padding:5px 4px}
- .mwrap .togrow{margin-top:7px}.mwrap .togrow .tog{padding:4px}
+
  .mwrap .svinfo{margin-bottom:7px}
- .mwrap .foot{display:none}
- #heroDuck svg{width:min(110px,22dvh)}
- .htitle{font-size:clamp(44px,14dvh,80px)}
+
  /* detail karty */
  .cb.big{width:min(40vw,250px,calc((100dvh - 130px)*63/88))}
 }
 
-/* ===== v0.10.17 – vše na jednu obrazovku ===== */
+/* ===== vše na jednu obrazovku ===== */
 /* úvod: kompaktní nastavení (jméno a soupeři vedle sebe) */
 .mwrap{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;gap:clamp(6px,1.2dvh,12px);padding:clamp(6px,1.5dvh,14px) 12px}
 .mwrap>*{margin:0!important}
@@ -304,11 +281,9 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 #heroDuck svg{width:clamp(56px,11dvh,100px)}
 .htitle{font-size:clamp(40px,8.5dvh,66px)}
 .hsub{font-size:clamp(14px,2.4dvh,20px);margin-top:clamp(4px,1dvh,10px)}
-.hero{margin:0!important}
+
 .mwrap .btn.big{font-size:clamp(18px,3dvh,24px);padding:clamp(5px,1.2dvh,10px)}
-.row2,.togrow{margin:0!important}
-.row2 .btn{font-size:clamp(16px,2.6dvh,21px);padding:clamp(4px,1dvh,9px) 4px}
-.togrow .tog{padding:clamp(3px,.8dvh,6px)}
+
 .foot{font-size:12px!important;padding:2px 6px!important}
 /* krátký záznam posledních tahů */
 .minilog{font-size:12.5px;line-height:1.3;background:var(--halft),var(--cream);border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;padding:3px 8px;margin:6px 0 0;flex:0 0 auto}
@@ -317,21 +292,20 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 /* hráči na šířku v jedné řadě */
 @media (orientation:landscape){
 .players{flex-wrap:nowrap!important}
-.players .chip{flex:1 1 0;min-width:0;justify-content:center}
+
 .players .chip>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
 @media (orientation:landscape){
  .mwrap{display:grid;grid-template-columns:1fr 1.25fr;align-content:center;row-gap:clamp(4px,1.2dvh,9px);column-gap:18px}
  .mwrap>.hero{grid-row:1/8;align-self:center}
  .htitle{font-size:clamp(40px,15dvh,80px)}
  #heroDuck svg{width:clamp(56px,20dvh,110px)}
- .mwrap>.foot{display:none}
+
  .mwrap .svinfo{font-size:12px;padding:1px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .box{padding:4px 9px}
  /* hra */
- .wrap>.pond{grid-row:2/4!important;justify-content:space-evenly!important}
+
  .wrap>.minilog{grid-column:1;grid-row:4;margin:4px 0 0}
- .wrap>.actions{grid-row:4}
- .wrap>.players .chip{font-size:12px}
+
  .spanel{top:6px!important;max-height:calc(100dvh - 12px)!important;width:min(560px,94vw)!important}
  .sp-row{padding:2px 0!important}
 }
@@ -340,7 +314,7 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 .sp-row.sub{padding-left:0!important;grid-template-columns:40px 1fr 88px 44px!important}
 .sp-row.sub .sp-n{padding-left:16px}
 
-/* ===== v0.10.17 ===== */
+/* ===== detail karty a hromádka „naposledy“ ===== */
 .actions.center{justify-content:center}
 #pileLast{cursor:pointer}
 #pileLast:active svg{transform:translate(1px,1px)}
@@ -353,7 +327,7 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 .rmode{display:flex;gap:5px}
 .rmode .btn.sm{font-size:14px;padding:3px 8px;white-space:nowrap}
 .rhead h2{white-space:nowrap;font-size:clamp(24px,7vw,34px)!important}
-.rhead{flex-wrap:nowrap}
+
 .rmode .btn.on{background:#ff3d7f;color:#fff;text-shadow:1px 1px 0 #111}
 #rules .panel{display:flex;flex-direction:column;max-height:92dvh;overflow:hidden}
 .rulebody{flex:1 1 auto;min-height:0;overflow:auto;margin-top:6px}
@@ -366,15 +340,7 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 @media (orientation:landscape){
  #rules{padding:6px}
  #rules .panel{max-width:min(560px,94vw);max-height:96dvh;padding:8px 14px}
- #rules .rhead h2{font-size:26px!important}
- #rules .rpt{margin:2px 0 4px!important;font-size:18px}
- #rules .cardlist{gap:3px}
- #rules .cardlist .mini{padding:3px 8px;font-size:12.5px}
- #rules .cardlist .mini svg{width:52px}
- #rules .rfoot{margin:5px 0 0}
- #rules .rfoot .btn{padding:3px 12px;font-size:17px}
- #rules .actions.center{margin-top:5px}
- #rules .actions.center .btn{padding:3px 16px;font-size:17px}
+
  /* ---- hra na šířku: jmenovky vlevo, tlačítka vpravo, název pod nimi ---- */
  .wrap{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)!important;grid-template-rows:auto auto minmax(0,1fr) auto auto!important}
  .wrap>header{display:contents}
@@ -388,42 +354,40 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
  .wrap>.minilog{grid-column:1!important;grid-row:5!important}
  .wrap>.actions{grid-column:2!important;grid-row:5!important}
  .wrap>.pond{justify-content:space-evenly!important}
- .pond .aimcell{height:clamp(26px,8dvh,44px)!important}
+
  .pond .card .lbl{font-size:12px}
- .pond .pile svg{width:clamp(36px,11dvh,64px)!important;height:clamp(50px,15.5dvh,90px)!important}
+
 }
 
-/* ===== v0.10.17 ===== */
+/* ===== balíčky pod rybníkem ===== */
 /* tři karty pod rybníkem doprostřed a větší */
-.piles{justify-content:center!important}
-.pile svg{width:clamp(40px,7dvh,64px);height:clamp(56px,9.8dvh,90px)}
-.pile span{font-size:clamp(12px,1.7dvh,15px)}
+
 @media (orientation:portrait){
  /* okno „Tvůj tah“ dolů pod karty v ruce, rybník větší */
  .wrap>.pond{order:3;flex:0 0 auto!important}
  .wrap>.pond .board{gap:6px}
  .pond .aimcell{height:auto!important;aspect-ratio:2.4/1}
- .wrap>.pond{overflow:visible!important}
+
  .wrap>.hand{order:5;flex:1 1 0!important;min-height:0;align-items:center}
- .hand .cb{position:relative}
+
  .hand .cb:nth-child(1){transform:rotate(-5deg) translateY(8px)}.hand .cb:nth-child(3){transform:rotate(5deg) translateY(8px)}
  .hand .cb.sel{transform:translateY(-10px)!important}
  .wrap>.status{order:6;margin:12px 0 0!important}
- .wrap>.minilog{order:7}
+
  .wrap>.actions{order:8}
- .aimcell{height:clamp(30px,6dvh,56px)!important}
+
 }
 
-/* ===== v0.10.17 ===== */
+/* ===== balíčky pod rybníkem – velikost jako karty kachen ===== */
 /* balíčky pod rybníkem = stejně velké jako karty kachen, uprostřed */
 .pond .piles{display:flex;justify-content:center!important;gap:5px!important;width:100%}
 .pond .pile{flex:0 0 calc((100% - 25px)/6);min-width:0;gap:3px}
 .pond .pile svg{width:100%!important;height:auto!important;aspect-ratio:3/4}
 .pond .pile span{font-size:clamp(10px,1.5dvh,14px)!important;padding:0 4px!important;white-space:nowrap}
-.aimcell{overflow:hidden}.aimcell svg{height:80%;width:auto;max-height:36px}
+
 @media (orientation:portrait){
  /* obloha nad poli nižší, jako na šířku */
- .aimcell{height:auto!important;aspect-ratio:2.1/1}
+
  /* „hra začíná…“ (poslední tahy) hned pod rybník */
  .wrap>.minilog{order:4;margin:8px 0 2px}
 }
@@ -454,7 +418,7 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
 @keyframes flipP{from{transform:rotateY(80deg);opacity:.2}to{transform:none;opacity:1}}
 #rules.paged .panel,#rules.paged .rulebody,#rules.paged .rulebody *{touch-action:pan-y;user-select:none;-webkit-user-select:none}
 
-/* ===== v0.10.17 – pravidla: pevné okno, obsah vycentrovaný, větší karty ===== */
+/* ===== pravidla: pevné okno, obsah vycentrovaný, větší karty ===== */
 #rules.paged .panel{height:min(88dvh,640px);max-height:none}
 #rules.paged .rulebody{display:flex;flex-direction:column;overflow:auto}
 #rules.paged .rulebody>.rpt{margin-bottom:auto!important;flex:0 0 auto}
@@ -470,11 +434,11 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
  #rules.paged .cardlist .mini svg{width:clamp(44px,15.5dvh,80px)}
 }
 
-/* ===== v0.10.17 – jmenovky na šířku až k tlačítkům ===== */
+/* ===== jmenovky na šířku až k tlačítkům ===== */
 @media (orientation:landscape){
  .wrap>.players{grid-column:1/3!important;margin-right:calc(5*clamp(32px,9vw,40px) + 4*5px + 12px)!important;gap:5px!important}
  .wrap>.players .chip{flex:1 1 auto!important;min-width:0;justify-content:flex-start;padding:0 7px 0 3px!important}
- .wrap>.players .chip>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
  .wrap>.players .chip{gap:2px!important;font-size:12px!important}
  .wrap>.players .chip b{font-size:clamp(12px,3.4dvh,15px);letter-spacing:0}
  .wrap>.players .dot{flex:0 0 auto;width:20px!important;height:16px!important}
@@ -485,39 +449,35 @@ header .spanel .btn.sm{width:auto;height:auto;padding:4px 14px;font-size:17px}
  .wrap>.players:has(.chip:nth-child(5)){gap:3px!important}
 }
 
-/* ===== v0.10.17 – jmenovky na šířku stejně vysoké jako tlačítka ===== */
+/* ===== jmenovky na šířku stejně vysoké jako tlačítka ===== */
 @media (orientation:landscape){
- .wrap>.players{align-self:center}
+
  .wrap>.players .chip,.wrap>.players:has(.chip:nth-child(5)) .chip{min-height:clamp(30px,8.5dvh,38px);padding:0 9px 0 4px!important;font-size:clamp(12px,1.6vw,15px)!important}
- .wrap>.players .chip b{font-size:clamp(13px,1.75vw,16px)}
+
  .wrap>.players:not(:has(.chip:nth-child(5))) .chip b{font-size:clamp(14px,2.1vw,20px)}
  .wrap>.players .dot,.wrap>.players:has(.chip:nth-child(5)) .dot{width:clamp(18px,2.4vw,24px)!important;height:auto!important}
 }
 
-/* ===== v0.10.17 – aktualizace ===== */
-.togrow{grid-template-columns:1fr 1fr 1fr!important}
-.togrow .tog{font-size:13px;padding:4px 3px;gap:4px;justify-content:center;white-space:nowrap}
+/* ===== aktualizace ===== */
+
 .updbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;background:#ffe14d;border:3px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;padding:5px 8px;font-weight:600;font-size:14px}
 .updbar .btn.sm{font-size:15px;padding:2px 10px}
 #updWrap:empty{display:none}
 
-/* ===== v0.10.17 – spodní tlačítka úvodu se vejdou i na úzký telefon ===== */
+/* ===== spodní tlačítka úvodu se vejdou i na úzký telefon ===== */
 html,body,.overlay.menu,.mwrap{overflow-x:hidden;max-width:100%}
 .mwrap{width:100%}
-.togrow{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
-.togrow .tog{min-width:0;white-space:normal!important;text-align:center;line-height:1.1;font-size:clamp(10.5px,3.2vw,14px)!important;padding:5px 3px!important;gap:3px!important;overflow:hidden}
-.togrow .tog input{width:16px;height:16px;flex:0 0 auto;margin:0}
-.togrow .fsic svg{width:15px;height:15px}
+
 .box,.row,#colRow,#oppRow{min-width:0;max-width:100%}
 #colRow{flex-wrap:nowrap;gap:clamp(3px,1.2vw,6px)}
 #colRow .sw{flex:1 1 0;min-width:0;width:auto}
 #colRow .sw svg{width:100%;max-width:38px}
 
-/* ===== v0.10.17 – přepínač celé obrazovky ===== */
-#togFS{cursor:pointer;color:#111}
+/* ===== přepínač celé obrazovky ===== */
+
 #togFS.on{background:#1fc7b6}
-html.installed .togrow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-/* ===== v0.10.17 – animace a hudba ===== */
+
+/* ===== animace a hudba ===== */
 .an{transform-box:fill-box;transform-origin:center}
 .a-cl{animation:a-cl 9s ease-in-out infinite alternate}
 @keyframes a-cl{to{transform:translateX(9px)}}
@@ -563,7 +523,7 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
 /* létající karty a tah soupeře */
 .ghost{position:fixed;z-index:60;pointer-events:none;margin:0!important}
 .oppbig{position:fixed;left:50%;top:52%;width:min(52vw,220px,calc((100dvh - 140px)*63/88));transform:translate(-50%,-50%);z-index:70;pointer-events:none}
-.oppbig .cb{width:100%}
+
 .opptag{position:fixed;left:50%;transform:translateX(-50%);z-index:71;pointer-events:none;margin:0!important;white-space:nowrap}
 /* panel: hudba a efekty */
 .sp-sec{font-family:Bangers,Impact,sans-serif;font-size:18px;letter-spacing:.5px;margin:10px 0 4px}
@@ -572,8 +532,7 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
 .sp-opts .btn.on{background:#ff3d7f;color:#fff;text-shadow:1px 1px 0 #111}
 .sp-row2{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;font-weight:600}
 
-
-/* ===== v0.11.0 – úvod, menu, živý rybník ===== */
+/* ===== úvod, menu, živý rybník ===== */
 #kscene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transition:filter .8s}
 #kscene svg{position:absolute;inset:0;width:100%;height:100%}
 body{background:#5ab8f5!important}
@@ -629,16 +588,16 @@ body.ksplashing .overlay.menu{opacity:0}
 .mtile .ti{font-size:clamp(22px,3.6dvh,34px);line-height:1;display:flex}.mtile .ti svg{width:clamp(22px,3.4dvh,32px);height:clamp(22px,3.4dvh,32px)}
 .mtile .tl{font-family:Bangers,sans-serif;font-size:clamp(13px,2dvh,18px);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .mtile.on{background:#1fc7b6}.mtile.off{background:#d6d3cc}
-.mtile.dk{background:#3b2a24;color:#fff}.mtile.dk .tl{color:#fff}
+.mtile.dk{background:#3b2a24;color:#fff}
 .mtile:active,.mcfg:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
 #togFS.on{background:#1fc7b6}
 .vbtn{font:inherit;font-weight:700;background:#fff;border:2px solid #111;border-radius:8px;padding:1px 6px;box-shadow:2px 2px 0 #111;cursor:pointer;color:#111}
 .vbtn.new{background:#ff3d7f;color:#fff}
 .mwrap .foot{background:var(--halft),var(--cream);border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;text-align:center}
 .mwrap .hero{filter:drop-shadow(0 0 14px rgba(255,255,255,.6))}
-#cfgov .box{display:grid}
+
 #sndov .spanel.inov{position:static!important;display:block;box-shadow:none;border:0;background:none;width:auto;max-width:none;transform:none}
-#sndov .spanel.inov::before{display:none}
+
 .updnotes{margin:4px 0 2px;padding-left:20px;text-align:left;font-size:13.5px;font-weight:500;width:100%}
 .updbar .btn.sm.sk{opacity:.85}
 @media (orientation:landscape){.mwrap>.foot{display:block!important;font-size:11px!important}}
@@ -648,7 +607,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 @media (max-width:380px){.mtile{padding-left:0;padding-right:0}}
 @media (orientation:landscape){.mtile .tl{font-size:clamp(11px,3.4dvh,16px)!important}}
 
-/* ===== v0.12.0 – komiksový rybník, zobáky, strach ===== */
+/* ===== komiksový rybník, zobáky, strach ===== */
 .card{border:0!important;background:none!important;box-shadow:3px 3px 0 #111!important;border-radius:7px!important;overflow:visible!important}
 .card svg.scene{border-radius:7px}
 .card .lbl{top:3px;font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.4px;font-size:clamp(10px,2.6vw,13px);color:#fff;text-shadow:1.2px 1.2px 0 #111,-1px -1px 0 #111,1px -1px 0 #111,-1px 1px 0 #111}
@@ -676,9 +635,8 @@ html.noanim .card .pdk.scared{animation:none!important}
 .card .bush{transform-box:fill-box;transform-origin:50% 100%;animation:a-sway 2s ease-in-out infinite alternate}
 html.noanim .card .bush,html.noanim .card .psst{animation:none}
 html.noanim .card .psst{opacity:1}
-#pileLast svg{filter:drop-shadow(2px 2px 0 #111)}
 
-/* ===== v0.12.3 – historie verzí ===== */
+/* ===== historie verzí ===== */
 #updov .panel{display:flex;flex-direction:column;max-height:92dvh}
 .histh{text-align:left;margin:6px 0 4px!important}
 .hist{flex:1 1 auto;min-height:80px;max-height:46dvh;overflow:auto;text-align:left;background:#fff;border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;padding:6px 10px}
@@ -692,7 +650,7 @@ html.noanim .card .psst{opacity:1}
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.3</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.4</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -718,7 +676,7 @@ html.noanim .card .psst{opacity:1}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.3</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.4</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -730,7 +688,7 @@ html.noanim .card .psst{opacity:1}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.3 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.4 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -755,7 +713,7 @@ html.noanim .card .psst{opacity:1}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.12.3</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.12.4</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <h3 class="histh">📜 Historie verzí</h3>
@@ -790,7 +748,7 @@ html.noanim .card .psst{opacity:1}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.3</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.4</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -809,7 +767,7 @@ html.noanim .card .psst{opacity:1}
 </div>
 
 <script>
-const VERSION='0.12.3';
+const VERSION='0.12.4';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -855,7 +813,7 @@ function duckG(col){return `<g stroke="#1f2937" stroke-width="1.6" stroke-linejo
 <circle cx="19.6" cy="14.6" r="2.5" fill="#111" stroke="none"/><circle cx="18.8" cy="13.6" r=".9" fill="#fff" stroke="none"/>
 </g>`}
 function duckSVG(col){return `<svg class="duck" viewBox="-4 0 68 56">${duckG(col)}</svg>`}
-function sceneSVG(col,o={}){ // v0.12.0: komiksová karta rybníka
+function sceneSVG(col,o={}){ // komiksová karta rybníka
  const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
  const hid=o.hid!=null?`<g class="peek"><g transform="translate(31,40) scale(.46)">${duckGC(o.hid)}</g></g><g class="psst"><path d="M44 22 h14 v8 h-9 l-3 4 v-4 h-2z" fill="#fff" stroke="${I}" stroke-width="1.2"/><text x="51" y="28.4" text-anchor="middle" style="font:9px Bangers,Impact,sans-serif" fill="${I}">psst</text></g>`:'';
  const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(9,33) scale(.72)">${duckGC(col,o.scared?'scared':'')}</g></g>`
@@ -877,22 +835,6 @@ ${hid}${duck}${front}${bush}
 
 /* ---------- ilustrace akčních karet (vlastní kresby) ---------- */
 const AY='#facc15',AB='#3b82f6',AG='#22c55e',AP='#ec4899',AO='#f97316';
-function D(x,y,sc,col,flip){return flip?`<g transform="translate(${x+68*sc},${y}) scale(${-sc},${sc})">${duckG(col)}</g>`:`<g transform="translate(${x},${y}) scale(${sc})">${duckG(col)}</g>`}
-function X(x,y,r){return `<g stroke="#dc2626" stroke-width="2.6" fill="none"><circle cx="${x}" cy="${y}" r="${r}"/><circle cx="${x}" cy="${y}" r="${r*.35}"/><path d="M${x} ${y-r-5}v${r*.8}M${x} ${y+r+5}v${-r*.8}M${x-r-5} ${y}h${r*.8}M${x+r+5} ${y}h${-r*.8}"/></g>`}
-function boom(x,y,r){let p=[];for(let i=0;i<16;i++){const a=i*Math.PI/8,rr=i%2?r*.5:r;p.push((x+rr*Math.cos(a)).toFixed(1)+','+(y+rr*Math.sin(a)).toFixed(1))}
- let q=[];for(let i=0;i<16;i++){const a=i*Math.PI/8+.2,rr=i%2?r*.28:r*.6;q.push((x+rr*Math.cos(a)).toFixed(1)+','+(y+rr*Math.sin(a)).toFixed(1))}
- return `<polygon points="${p.join(' ')}" fill="#fb923c" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/><polygon points="${q.join(' ')}" fill="#fde047"/>`}
-function arr(x1,y1,x2,y2,c='#dc2626'){const a=Math.atan2(y2-y1,x2-x1),h=6;
- return `<g stroke="${c}" stroke-width="3.2" stroke-linecap="round" fill="${c}"><path d="M${x1} ${y1}L${x2} ${y2}"/><path stroke-width="1" d="M${x2+2*Math.cos(a)} ${y2+2*Math.sin(a)}L${x2-h*Math.cos(a-.5)} ${y2-h*Math.sin(a-.5)}L${x2-h*Math.cos(a+.5)} ${y2-h*Math.sin(a+.5)}Z"/></g>`}
-function curve(x1,x2,y,up,c='#7c3aed'){const m=(x1+x2)/2,cy=up?y-16:y+16,a=Math.atan2(y-cy,x2-m),h=5;
- return `<path d="M${x1} ${y}Q${m} ${cy} ${x2} ${y}" stroke="${c}" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M${x2} ${y}l${-h*Math.cos(a-.6)} ${-h*Math.sin(a-.6)}M${x2} ${y}l${-h*Math.cos(a+.6)} ${-h*Math.sin(a+.6)}" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>`}
-const _speed0=(x,y)=>`<g stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".9"><path d="M${x} ${y}h14M${x+4} ${y+7}h16M${x} ${y+14}h12"/></g>`;
-const _txt0=(x,y,t,sz=12,c='#1f2937')=>`<text x="${x}" y="${y}" style="font-family:Bangers,Fredoka,sans-serif" font-size="${sz}" fill="${c}" stroke="#fff" stroke-width=".6" paint-order="stroke">${t}</text>`;
-function artBg(){return `<defs><linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fb0ef"/><stop offset="1" stop-color="#dff3ff"/></linearGradient>
-<linearGradient id="aGr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc06a"/><stop offset="1" stop-color="#2e7d32"/></linearGradient></defs>
-<rect width="100" height="48" fill="url(#aSky)"/><g fill="#fff"><ellipse cx="18" cy="10" rx="10" ry="4"/><ellipse cx="23" cy="7.5" rx="6" ry="4"/><ellipse cx="78" cy="14" rx="11" ry="4"/><ellipse cx="74" cy="11.5" rx="6" ry="3.5"/></g>
-<rect y="36" width="100" height="12" fill="#cfd8cc"/><g stroke="#a9b8a5" stroke-width="1">${[4,11,19,26,34,43,51,60,68,77,85,94].map((x,i)=>`<path d="M${x} 48 L${x+(i%2?1:-1)} ${34+(i*5)%6}"/>`).join('')}</g>
-<rect y="46" width="100" height="24" fill="url(#aGr)"/>`}
 const ART={
  aim:()=>D(30,22,.6,AB)+X(48,36,13),
  fire:()=>D(26,24,.6,AY)+boom(56,34,17)+`<g fill="#fff" stroke="#1f2937" stroke-width=".8"><ellipse cx="80" cy="18" rx="4" ry="1.6" transform="rotate(-30 80 18)"/><ellipse cx="86" cy="30" rx="4" ry="1.6" transform="rotate(20 86 30)"/><ellipse cx="74" cy="10" rx="3.5" ry="1.4" transform="rotate(50 74 10)"/></g>`,
@@ -922,8 +864,7 @@ function backSVG(kind){
  ${duckBack?`<g transform="translate(12,26) scale(.36)">${duckG('#facc15')}</g>`:X(24,34,8)}</g>`;
  return `<svg viewBox="0 0 52 72"><defs><clipPath id="cb${kind}"><rect x="1" y="1" width="46" height="66" rx="6"/></clipPath></defs>${one(4,4)}${one(0,0)}</svg>`}
 
-const CROSS=`<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy="20" r="14" fill="rgba(255,255,255,.5)" stroke="#dc2626" stroke-width="3"/><circle cx="20" cy="20" r="5" fill="none" stroke="#dc2626" stroke-width="2.5"/><path d="M20 1v11M20 28v11M1 20h11M28 20h11" stroke="#dc2626" stroke-width="3"/></svg>`;
-/* ===== komiksové přepracování kreseb v0.10 ===== */
+/* ===== komiksové kresby (kachna, mraky, zaměřovač, výbuch, šipky) ===== */
 const INK='#111';
 const HT=`<pattern id="ht" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.16)"/></pattern>`;
 function duckGC(col,mood){const scared=mood==='scared';return `<g stroke="${INK}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
@@ -1081,7 +1022,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.12.3: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.12.4: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1187,7 +1128,7 @@ function aliveCountOf(g,q){let a=0;g.row.forEach(s=>{if(s.k.t==='d'&&s.k.c===q)a
 window.addEventListener('pagehide',()=>saveGame());
 document.addEventListener('visibilitychange',()=>{if(document.hidden)saveGame()});
 
-/* ===================== v0.10.17 – animace a hudba ===================== */
+/* ===================== animace a hudba ===================== */
 const FXKEY='kachny_fx_v1';const FX={anim:true,pond:false,track:'mix'};
 try{Object.assign(FX,JSON.parse(lsGet(FXKEY)||'{}'))}catch(e){}
 function saveFX(){lsSet(FXKEY,JSON.stringify(FX))}
@@ -1431,7 +1372,7 @@ function finishTurn(p){
  while(S.hands[p].length<3){const c=drawAction();if(!c)break;S.hands[p].push(c)}
  const alive=S.players.map((_,q)=>q).filter(q=>aliveCount(S,q)>0);
  if(alive.length<=1){S.over=true;lsDel(SKEY);render();showOver(alive[0]);return}
- S.turn=(p+1)%S.players.length;beginTurn();
+ S.turn=(p+1)%S.players.length;saveGame();beginTurn();
 }
 function showOver(w){musStop();MUS.want=null;
  const me=w===0;setTimeout(()=>sfx(me?'win':'lose'),700);$('overIcon').textContent=w==null?'🪦':me?'🏆':'🦆';
@@ -1555,7 +1496,7 @@ function render(){
  $('log').innerHTML=S.log.slice(0,30).map(l=>`<div>${l}</div>`).join('');
  if($('pileLast'))$('pileLast').onclick=()=>{sfx('click');ui.detail='last';render()};
  $('minilog').innerHTML=S.log.slice(1,4).map(l=>`<div>${l}</div>`).join('');
- fitCards();saveGame();
+ fitCards();
  if(S.fx&&S.fx.kill.length){clearTimeout(fxTimer);fxTimer=setTimeout(()=>{if(S){S.fx=null;render()}},850)}
 }
 
@@ -1588,7 +1529,7 @@ $('bFull').onclick=async()=>{
  updateFullBtn()};
 document.addEventListener('fullscreenchange',()=>{updateFullBtn();setTimeout(fitCards,150)});document.addEventListener('webkitfullscreenchange',()=>{updateFullBtn();setTimeout(fitCards,150)});
 /* ---------- automaticky na celou obrazovku (při prvním klepnutí) ---------- */
-/* v0.10.17: nainstalovaná aplikace běží přes celou obrazovku sama; v prohlížeči jen ručně tlačítkem */
+/* nainstalovaná aplikace běží přes celou obrazovku sama; v prohlížeči jen ručně tlačítkem */
 const INSTALLED=matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 let autoFS=false;
 function enterFS(){try{const el=document.documentElement;const r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el,{navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}catch(e){}}
@@ -1599,7 +1540,7 @@ document.addEventListener('fullscreenchange',updFSBtn);document.addEventListener
 if(INSTALLED||!fsOk){$('togFS').style.display='none';$('bFull').style.display='none';document.documentElement.classList.add('installed')}
 updFSBtn();
 
-/* ---------- otáčení displeje (v0.10.17) ---------- */
+/* ---------- otáčení displeje ---------- */
 const ORKEY='kachny_orient_v1';const ORS=['auto','portrait','landscape'];
 const ORL={auto:['🔄','Otáčení'],portrait:['📱','Na výšku'],landscape:['📲','Na šířku']};
 let orient=lsGet(ORKEY)||'auto';if(!ORS.includes(orient))orient='auto';
@@ -1616,7 +1557,7 @@ window.addEventListener('resize',()=>{if(RPAGES&&!$('rules').classList.contains(
 if(screen.orientation&&screen.orientation.addEventListener)screen.orientation.addEventListener('change',reflow);
 
 
-/* ---------- aktualizace jen na potvrzení (v0.10.17) ---------- */
+/* ---------- aktualizace jen na potvrzení ---------- */
 const UKEY='kachny_upd_v1';let updOn=lsGet(UKEY)!=='0',updNew=null,updSkip=lsGet('kachny_skip_v1'),updNotes=[];
 const APP_FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'];
 const isApp=()=>'serviceWorker' in navigator&&!!navigator.serviceWorker.controller&&/^https?:$/.test(location.protocol);
@@ -1653,7 +1594,7 @@ $('bQuit').onclick=quitGame;
 $('bUnquit').onclick=showMenu;
 $('heroDuck').innerHTML=`<svg viewBox="-6 -2 72 60">${duckGC('#facc15')}</svg>`;
 $('iName').value=cfg.name;
-/* ---------- pravidla: po stránkách nebo vše najednou (v0.10.17) ---------- */
+/* ---------- pravidla: po stránkách nebo vše najednou ---------- */
 let RCARDS=[],RBASE=null,RPER=0;
 function pagesFor(){const per=4;RPER=per;const out=[];RBASE.forEach(p=>{if(!p.isCards)return out.push(p);const n=Math.ceil(RCARDS.length/per);for(let i=0;i<n;i++)out.push({t:'Akční karty '+(i+1)+'/'+n,cards:RCARDS.slice(i*per,i*per+per)})});return out}
 const RCL=document.getElementById('cardlist');const RKEY='kachny_rules_v1';let rMode=lsGet(RKEY)||'pages',rPage=0,RPAGES=null;
@@ -1710,7 +1651,7 @@ renderSetup();renderMenu();
 /* aplikace na plochu: offline režim (funguje jen z webu přes https) */
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 
-/* ===================== v0.11.0 – úvod, menu a živý rybník ===================== */
+/* ===================== úvod, menu a živý rybník ===================== */
 function cfgChip(){const c=COLS[cfg.color]||COLS[0];$('bCfg').innerHTML=`<span>👤 <b>${(cfg.name||'Ty').replace(/</g,'&lt;')}</b></span><span>🎯 <b>${cfg.opp}</b> ${cfg.opp<5?'soupeři':'soupeřů'}</span><span class="cdk">${duckSVG(c.h)}</span><span class="ed">✏️</span>`}
 {const _rs=renderSetup;renderSetup=function(){_rs();cfgChip()}}
 $('bCfg').onclick=()=>{sfx('click');renderSetup();$('cfgov').classList.remove('hide')};
@@ -1751,8 +1692,7 @@ function splashShow(){const sp=document.createElement('div');sp.id='ksplash';
  const go=()=>{if(done)return;done=true;try{ac();sfx('click');quackAt(.05)}catch(e){}sp.classList.add('out');document.body.classList.remove('ksplashing');setTimeout(()=>sp.remove(),520)};
  sp.addEventListener('click',go);setTimeout(()=>sp.classList.add('ready'),2600)}
 
-/* ===================== v0.12.0 – komiksový rybník a hlasy kachen ===================== */
-function crossSVG(){return `<svg viewBox="0 0 40 40" width="32" height="32">${X(20,20,11)}</svg>`}
+/* ===================== komiksový rybník a hlasy kachen ===================== */
 function skySVG(i,aimed){const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
  const C=[[[18,11,.75],[66,25,.62]],[[64,10,.7],[22,26,.6]],[[42,13,.9]]][i%3].map(a=>cl(...a)).join('');
  return `<svg class="sky" viewBox="0 0 84 36" preserveAspectRatio="xMidYMid slice"><defs><pattern id="hts" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".55" fill="rgba(0,0,0,.09)"/></pattern></defs>
@@ -1787,8 +1727,9 @@ function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if
  for(const sid of prev){if(now.has(sid))continue;const i=S.row.findIndex(s=>s.sid===sid&&s.k.t==='d');if(i>=0){setTimeout(()=>{const j=S&&S.row.findIndex(s=>s.sid===sid);if(j>=0)duckSay(j,'UF, KVÁK!','sfx')},650);break}}}
 
 
-/* ===================== v0.12.3 – historie verzí ===================== */
+/* ===================== historie verzí ===================== */
 const CHANGELOG=[
+ ['0.12.4',['Úklid kódu: smazané nepoužívané a přebité styly a staré kreslicí funkce – hra vypadá i hraje stejně','Rozehraná hra se ukládá po každém tahu, ne při každém překreslení obrazovky','Automatický test: hra otevřená s ?test=200 sama odehraje 200 her počítačů a ukáže výsledek']],
  ['0.12.3',['Opraven seznam verzí: po verzi 0.10 rovnou následuje 0.11.0']],
  ['0.12.2',['Zelená tráva zmizela i z obrázků na akčních kartách – místo ní je voda a světlejší obloha','V okně Aktualizace (tlačítko „Verze“ dole v menu) je historie všech verzí']],
  ['0.12.1',['Kachny na rybníce plavou ve vodě – spodek těla je pod hladinou','Pod plotem z rákosí je úzký břeh a pod ním voda','Světlejší obloha na kartách i nad poli','Kachny jsou menší a zobák nečouhá na okraj karty']],
@@ -1808,7 +1749,31 @@ function renderHistory(){const h=$('histList');if(!h)return;
  h.innerHTML=CHANGELOG.map(([v,n])=>`<div class="hv"><b>v${v}</b>${v===VERSION?'<span class="now">TEĎ MÁŠ</span>':''}<ul>${n.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}
 renderHistory();
 
+
+/* ===================== automatický test (otevři hru s ?test=200) ===================== */
+function runSelfTest(n){
+ const t0=performance.now(),errs=[],anim=FX.anim,mOn=SET.master.on,r0=render,s0=saveGame;FX.anim=false;SET.master.on=false;render=()=>{};saveGame=()=>{};let ok=0,turns=0;
+ for(let g=0;g<n;g++){
+  try{cfg.opp=1+g%5;newGame();clearTimeout(botTimer);clearTimeout(oppTimer);S.players.forEach(p=>p.human=false);
+   let k=0;
+   while(!S.over&&k<4000){clearTimeout(botTimer);botPlay();k++;turns++;
+    if(S.row.length!==6)throw Error('řada nemá 6 karet');
+    S.players.forEach((_,q)=>{if(aliveCount(S,q)+S.dead[q]!==5)throw Error('nesedí počet kachen hráče '+q)});
+    if(S.hands.some(h=>h.length>3))throw Error('víc než 3 karty v ruce')}
+   if(!S.over)throw Error('hra neskončila');ok++;
+  }catch(e){errs.push('hra '+(g+1)+': '+e.message)}
+ }
+ render=r0;saveGame=s0;clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();stopGame();lsDel(SKEY);FX.anim=anim;SET.master.on=mOn;showMenu();
+ const sec=((performance.now()-t0)/1000).toFixed(1);
+ const box=document.createElement('div');box.id='selftest';
+ box.style.cssText='position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:999;background:#fff;border:3px solid #111;border-radius:12px;box-shadow:4px 4px 0 #111;padding:10px 14px;font:600 15px Fredoka,sans-serif;max-width:92vw';
+ box.innerHTML=(errs.length?'❌ ':'✅ ')+`Test v${VERSION}: ${ok}/${n} her dohráno, ${turns} tahů, ${sec} s`+(errs.length?'<br>'+errs.slice(0,5).join('<br>'):'')+'<br><small>klepnutím zavřeš</small>';
+ box.onclick=()=>box.remove();document.body.appendChild(box);
+ console.log(box.innerText);return {ok,n,errs,turns};
+}
+
 sceneInit();sceneMode();cfgChip();sndIc();
+{const n=+new URLSearchParams(location.search).get('test');if(n>0)setTimeout(()=>runSelfTest(Math.min(n,2000)),300)}
 if(!/[?&]nosplash/.test(location.search))splashShow();
 </script>
 </body>

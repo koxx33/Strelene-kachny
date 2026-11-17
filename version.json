@@ -1,6 +1,8 @@
 {
-  "version": "0.12.3",
+  "version": "0.12.4",
   "notes": [
-    "Opraven seznam verzí: po verzi 0.10 rovnou následuje 0.11.0"
+    "Úklid kódu: smazané nepoužívané a přebité styly a staré kreslicí funkce – hra vypadá i hraje stejně",
+    "Rozehraná hra se ukládá po každém tahu, ne při každém překreslení obrazovky",
+    "Automatický test: hra otevřená s ?test=200 sama odehraje 200 her počítačů a ukáže výsledek"
   ]
 }
