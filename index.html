@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.10.17</title>
-<meta name="version" content="0.10.17">
+<title>Střelené kachny v0.11.0</title>
+<meta name="version" content="0.11.0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -572,12 +572,87 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
 .sp-opts .btn.on{background:#ff3d7f;color:#fff;text-shadow:1px 1px 0 #111}
 .sp-row2{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;font-weight:600}
 
+
+/* ===== v0.11.0 – úvod, menu, živý rybník ===== */
+#kscene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transition:filter .8s}
+#kscene svg{position:absolute;inset:0;width:100%;height:100%}
+body{background:#5ab8f5!important}
+body>.wrap{position:relative;z-index:1}
+body.ks-game #kscene{filter:saturate(.75) brightness(.97)}
+.overlay.menu{background:transparent!important}
+.ks-rays{transform-origin:330px 120px;animation:ksSpin 50s linear infinite}
+@keyframes ksSpin{to{transform:rotate(360deg)}}
+.ks-cl{animation:ksCl 80s linear infinite}.ks-cl.c2{animation-duration:110s;animation-delay:-50s}.ks-cl.c3{animation-duration:95s;animation-delay:-20s}
+@keyframes ksCl{from{transform:translateX(-200px)}to{transform:translateX(460px)}}
+.ks-bird{animation:ksBird 26s linear infinite}
+@keyframes ksBird{0%{transform:translate(-40px,260px)}50%{transform:translate(200px,210px)}100%{transform:translate(440px,280px)}}
+.ks-wave{animation:ksWave 4s ease-in-out infinite alternate}
+@keyframes ksWave{to{transform:translateX(18px)}}
+.pd{animation:ksSwim 34s linear infinite}
+.pd.p2{animation-duration:42s}.pd.p3{animation-duration:38s}.pd.p4{animation-duration:46s}
+@keyframes ksSwim{from{transform:translateX(440px)}to{transform:translateX(-120px)}}
+.pdb{animation:a-bob 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.ks-xh{animation:ksXh 14s ease-in-out infinite;opacity:0}
+@keyframes ksXh{0%,55%{transform:translate(320px,600px);opacity:0}62%{opacity:.9}75%{transform:translate(170px,640px);opacity:.9}82%{transform:translate(185px,630px) scale(.85);opacity:.9}90%,100%{transform:translate(185px,630px);opacity:0}}
+.ks-reed{animation:ksReed 5s ease-in-out infinite alternate;transform-origin:200px 800px}
+@keyframes ksReed{to{transform:skewX(-2deg)}}
+@media (prefers-reduced-motion:reduce){#kscene *{animation:none!important}}
+/* splash */
+body.ksplashing .overlay.menu{opacity:0}
+.overlay.menu{transition:opacity .5s}
+#ksplash{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.35),rgba(30,90,140,.25));transition:opacity .5s,transform .5s;font-family:Bangers,Impact,sans-serif;overflow:hidden}
+#ksplash.out{opacity:0;transform:scale(1.15)}
+.ksp-logo{position:relative;text-align:center;margin-top:-14vh}
+.ksp-duck svg{width:min(30vw,140px);animation:kspDuck .6s cubic-bezier(.3,1.7,.5,1) .1s both;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.35))}
+@keyframes kspDuck{0%{transform:translateY(-60vh) rotate(-30deg)}100%{transform:none}}
+.ksp-h{font-size:min(15vw,84px);line-height:.95;color:#ffe14d;-webkit-text-stroke:3px #111;text-shadow:5px 5px 0 #111;white-space:nowrap;transform:rotate(-3deg)}
+.ksp-h.k2{color:#ff3d7f}
+.ksp-h span{display:inline-block;animation:kspDrop .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes kspDrop{0%{transform:translateY(-70vh) rotate(-25deg)}100%{transform:none}}
+.ksp-x{position:absolute;left:50%;top:58%;width:min(34vw,170px);margin-left:calc(min(34vw,170px)/-2);animation:kspX 1.1s ease-in-out 1.4s both}
+@keyframes kspX{0%{transform:translate(70vw,30vh) scale(1.6);opacity:0}60%{transform:translate(4vw,-2vh);opacity:1}85%{transform:scale(.85)}100%{transform:scale(1);opacity:0}}
+.ksp-bang{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-8deg);font-size:min(16vw,80px);color:#fff;-webkit-text-stroke:3px #111;text-shadow:4px 4px 0 #e11d48;background:radial-gradient(circle,#ffe14d 0 55%,transparent 56%);padding:6vw;animation:kspBang .7s ease-out 2.3s both;pointer-events:none}
+@keyframes kspBang{0%{transform:translate(-50%,-50%) scale(.2) rotate(-20deg);opacity:0}30%{transform:translate(-50%,-50%) scale(1.15) rotate(-8deg);opacity:1}100%{transform:translate(-50%,-60%) scale(1) rotate(-8deg);opacity:0}}
+.ksp-sub{display:inline-block;margin-top:14px;font-size:min(7vw,32px);letter-spacing:3px;background:#fff;border:3px solid #111;box-shadow:4px 4px 0 #111;padding:2px 14px;transform:rotate(2deg);animation:kspSub .5s ease-out 1.25s both}
+@keyframes kspSub{0%{transform:translateX(-120vw) rotate(2deg)}100%{transform:rotate(2deg)}}
+.ksp-tap{position:absolute;bottom:15vh;font-size:min(7vw,34px);color:#fff;-webkit-text-stroke:1.5px #111;text-shadow:3px 3px 0 #111;letter-spacing:2px;opacity:0;transition:opacity .4s}
+#ksplash.ready .ksp-tap{opacity:1;animation:kspBlink 1.1s ease-in-out infinite}
+@keyframes kspBlink{50%{transform:scale(1.08)}}
+.ksp-ver{position:absolute;bottom:4vh;font-family:Fredoka,sans-serif;font-size:14px;color:#0f3b52;opacity:.75}
+/* menu */
+.mcfg{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;width:100%;font-family:Fredoka,sans-serif;font-size:clamp(14px,2.2dvh,18px);font-weight:600;background:var(--halft),var(--cream);border:2.5px solid #111;border-radius:12px;box-shadow:3px 3px 0 #111;padding:clamp(4px,.9dvh,9px) 10px;cursor:pointer;color:#111}
+.mcfg b{font-family:Bangers,sans-serif;font-weight:400;letter-spacing:.5px;font-size:1.15em}
+.mcfg .cdk svg{width:clamp(28px,4.5dvh,38px);display:block}
+.mcfg .ed{margin-left:auto}
+.mtiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:clamp(5px,1.2vw,8px)}
+.mtile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--halft),var(--cream);border:2.5px solid #111;border-radius:12px;box-shadow:3px 3px 0 #111;padding:clamp(4px,1dvh,10px) 2px;cursor:pointer;color:#111;min-width:0}
+.mtile .ti{font-size:clamp(22px,3.6dvh,34px);line-height:1;display:flex}.mtile .ti svg{width:clamp(22px,3.4dvh,32px);height:clamp(22px,3.4dvh,32px)}
+.mtile .tl{font-family:Bangers,sans-serif;font-size:clamp(13px,2dvh,18px);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.mtile.on{background:#1fc7b6}.mtile.off{background:#d6d3cc}
+.mtile.dk{background:#3b2a24;color:#fff}.mtile.dk .tl{color:#fff}
+.mtile:active,.mcfg:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+#togFS.on{background:#1fc7b6}
+.vbtn{font:inherit;font-weight:700;background:#fff;border:2px solid #111;border-radius:8px;padding:1px 6px;box-shadow:2px 2px 0 #111;cursor:pointer;color:#111}
+.vbtn.new{background:#ff3d7f;color:#fff}
+.mwrap .foot{background:var(--halft),var(--cream);border:2.5px solid #111;border-radius:10px;box-shadow:3px 3px 0 #111;text-align:center}
+.mwrap .hero{filter:drop-shadow(0 0 14px rgba(255,255,255,.6))}
+#cfgov .box{display:grid}
+#sndov .spanel.inov{position:static!important;display:block;box-shadow:none;border:0;background:none;width:auto;max-width:none;transform:none}
+#sndov .spanel.inov::before{display:none}
+.updnotes{margin:4px 0 2px;padding-left:20px;text-align:left;font-size:13.5px;font-weight:500;width:100%}
+.updbar .btn.sm.sk{opacity:.85}
+@media (orientation:landscape){.mwrap>.foot{display:block!important;font-size:11px!important}}
+body:not(.ks-game)>.wrap{visibility:hidden}
+#sndov .spanel.inov #spClose{display:none}
+.mtile .tl{font-size:clamp(11px,3.3vw,18px)!important}
+@media (max-width:380px){.mtile{padding-left:0;padding-right:0}}
+@media (orientation:landscape){.mtile .tl{font-size:clamp(11px,3.4dvh,16px)!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.10.17</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.11.0</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -603,9 +678,25 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.10.17</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.11.0</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
+  <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
+  <button class="mcfg" id="bCfg" type="button"></button>
+  <div class="mtiles">
+   <button class="mtile" id="bRules2" type="button"><span class="ti">📖</span><span class="tl">Pravidla</span></button>
+   <button class="mtile" id="bSnd2" type="button"><span class="ti" id="snd2Ic">🔊</span><span class="tl">Zvuk</span></button>
+   <button class="mtile" id="togFS" type="button"><span class="ti fsic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></span><span class="tl" id="fsLbl">Na celou</span></button>
+   <button class="mtile" id="bOrient" type="button"></button>
+   <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
+  </div>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.11.0</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+ </div>
+</div>
+
+<div class="overlay hide" id="cfgov">
+ <div class="panel">
+  <h2>🦆 Nastavení hry</h2>
   <div class="box">
    <h3>Tvoje jméno</h3>
    <input type="text" id="iName" placeholder="Ty" maxlength="14">
@@ -614,21 +705,17 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
    <h3>Barva tvých kachen</h3>
    <div class="row" id="colRow"></div>
   </div>
-  <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
-  <div class="row2"><button class="btn" id="bRules2">📖 Pravidla</button><button class="btn dk" id="bQuit">🚪 Konec</button></div>
-  <div class="togrow">
-  <button class="tog" id="togFS" type="button"><span class="fsic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></span> <span id="fsLbl">Celá obr.: vyp</span></button>
-  <button class="tog" id="bOrient" type="button"></button>
-  <button class="tog" id="bUpd" type="button">⬇️ Verze 0.10.17</button>
-  </div>
-  <p class="foot">Verze 0.10.17 · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <div class="actions center"><button class="btn pri" id="bCfgClose">Hotovo</button></div>
  </div>
+</div>
+<div class="overlay hide" id="sndov">
+ <div class="panel"><h2>🔊 Zvuk a hudba</h2><div id="sndHost"></div><div class="actions center"><button class="btn pri" id="bSndClose">Hotovo</button></div></div>
 </div>
 
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.10.17</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.11.0</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <div class="actions center"><button class="btn" id="bUpdCheck">🔄 Zkontrolovat teď</button><button class="btn pri" id="bUpdClose">Zavřít</button></div>
@@ -661,7 +748,7 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.10.17</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.11.0</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -680,7 +767,7 @@ html.pondanim .col:nth-child(2n) .card svg.scene .pcl{animation-delay:-5s}
 </div>
 
 <script>
-const VERSION='0.10.17';
+const VERSION='0.11.0';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -1427,7 +1514,7 @@ function renderSetup(){
 }
 $('cardlist').innerHTML=Object.entries(CARDS).map(([k,c])=>`<div class="mini">${cardArt(k)}<span><b>${c.n}</b> (${c.c}×) – ${c.d}</span></div>`).join('');
 try{const o=loadSaved();if(o&&o.cfg)cfg={...cfg,...o.cfg}}catch(e){}
-$('iName').oninput=e=>cfg.name=e.target.value;
+$('iName').oninput=e=>{cfg.name=e.target.value;cfgChip()};
 $('bStart').onclick=()=>{ac();newGame();quackAt(.1);ambStart()};
 $('bSound').onclick=e=>{e.stopPropagation();ac();$('soundPanel').classList.toggle('hide')};
 $('soundPanel').onclick=e=>e.stopPropagation();
@@ -1452,7 +1539,7 @@ const INSTALLED=matchMedia('(display-mode: fullscreen)').matches||matchMedia('(d
 let autoFS=false;
 function enterFS(){try{const el=document.documentElement;const r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el,{navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}catch(e){}}
 document.addEventListener('click',e=>{if(fsOk&&autoFS&&!fsEl()&&!(e.target.closest&&e.target.closest('#bFull,#bQuit,#togFS,input')))enterFS()},true);
-function updFSBtn(){const on=!!fsEl();$('fsLbl').textContent='Celá obr.: '+(on?'zap':'vyp');$('togFS').classList.toggle('on',on)}
+function updFSBtn(){const on=!!fsEl();$('fsLbl').textContent=on?'Zmenšit':'Na celou';$('togFS').classList.toggle('on',on)}
 $('togFS').onclick=()=>{sfx('click');if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else enterFS()};
 document.addEventListener('fullscreenchange',updFSBtn);document.addEventListener('webkitfullscreenchange',updFSBtn);
 if(INSTALLED||!fsOk){$('togFS').style.display='none';$('bFull').style.display='none';document.documentElement.classList.add('installed')}
@@ -1460,11 +1547,11 @@ updFSBtn();
 
 /* ---------- otáčení displeje (v0.10.17) ---------- */
 const ORKEY='kachny_orient_v1';const ORS=['auto','portrait','landscape'];
-const ORL={auto:'🔄 Otáčení: auto',portrait:'📱 Jen na výšku',landscape:'📱 Jen na šířku'};
+const ORL={auto:['🔄','Otáčení'],portrait:['📱','Na výšku'],landscape:['📲','Na šířku']};
 let orient=lsGet(ORKEY)||'auto';if(!ORS.includes(orient))orient='auto';
 function applyOrient(){const so=screen.orientation;if(!so)return;
  try{if(orient==='auto'){so.unlock&&so.unlock()}else if((fsEl()||INSTALLED)&&so.lock){so.lock(orient).catch(()=>{})}}catch(e){}}
-function updOrientBtn(){$('bOrient').textContent=ORL[orient]}
+function updOrientBtn(){const o=ORL[orient];$('bOrient').innerHTML=`<span class="ti">${o[0]}</span><span class="tl">${o[1]}</span>`}
 $('bOrient').onclick=()=>{orient=ORS[(ORS.indexOf(orient)+1)%3];lsSet(ORKEY,orient);updOrientBtn();
  if(orient!=='auto'&&fsOk&&!fsEl()&&!INSTALLED)enterFS();setTimeout(applyOrient,300);applyOrient()};
 updOrientBtn();
@@ -1476,7 +1563,7 @@ if(screen.orientation&&screen.orientation.addEventListener)screen.orientation.ad
 
 
 /* ---------- aktualizace jen na potvrzení (v0.10.17) ---------- */
-const UKEY='kachny_upd_v1';let updOn=lsGet(UKEY)!=='0',updNew=null,updSkip=null;
+const UKEY='kachny_upd_v1';let updOn=lsGet(UKEY)!=='0',updNew=null,updSkip=lsGet('kachny_skip_v1'),updNotes=[];
 const APP_FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'];
 const isApp=()=>'serviceWorker' in navigator&&!!navigator.serviceWorker.controller&&/^https?:$/.test(location.protocol);
 const newer=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d>0}return false};
@@ -1484,13 +1571,14 @@ async function checkUpdate(manual){
  if(!isApp()){if(manual)$('updMsg').textContent='Aktualizace fungují v aplikaci nainstalované z GitHubu.';return}
  if(manual)$('updMsg').textContent='Hledám novou verzi…';
  try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const j=await r.json();
-  if(j&&j.version&&newer(j.version,VERSION)){updNew=j.version;if(manual){updSkip=null;$('updMsg').textContent='Je dostupná verze '+j.version+'.'}}
+  if(j&&j.version&&newer(j.version,VERSION)){updNew=j.version;updNotes=j.notes||[];if(manual){updSkip=null;$('updMsg').textContent='Je dostupná verze '+j.version+'.'}}
   else{updNew=null;if(manual)$('updMsg').textContent='Máš nejnovější verzi.'}}
  catch(e){if(manual)$('updMsg').textContent='Bez internetu nelze zkontrolovat.'}
  renderUpd()}
 function renderUpd(){const w=$('updWrap');if(!w)return;
- w.innerHTML=updNew&&updSkip!==updNew?`<div class="updbar">✨ Nová verze <b>${updNew}</b> <button class="btn sm ok" id="bUpdGo">Aktualizovat</button><button class="btn sm" id="bUpdNo">Teď ne</button></div>`:'';
- if($('bUpdGo')){$('bUpdGo').onclick=doUpdate;$('bUpdNo').onclick=()=>{updSkip=updNew;renderUpd()}}}
+ w.innerHTML=updNew&&updSkip!==updNew?`<div class="updbar">✨ Nová verze <b>${updNew}</b>${updNotes.length?`<ul class="updnotes">${updNotes.map(n=>`<li>${n}</li>`).join('')}</ul>`:''}<button class="btn sm ok" id="bUpdGo">Aktualizovat</button><button class="btn sm" id="bUpdNo">Teď ne</button><button class="btn sm sk" id="bUpdSk">Přeskočit</button></div>`:'';
+ if($('bUpdGo')){$('bUpdGo').onclick=doUpdate;$('bUpdNo').onclick=()=>{updSkip=updNew;renderUpd()};$('bUpdSk').onclick=()=>{updSkip=updNew;lsSet('kachny_skip_v1',updNew);renderUpd()}}
+ const vb=$('bUpd');if(vb){vb.classList.toggle('new',!!updNew);vb.textContent='⬇️ Verze '+VERSION+(updNew?' · NOVÁ!':'')}}
 async function doUpdate(){if(S&&!S.over)saveGame();$('updWrap').innerHTML='<div class="updbar">⏳ Stahuji novou verzi…</div>';
  try{const c=await caches.open('kachny-app');
   for(const f of APP_FILES){const r=await fetch(f+'?t='+Date.now(),{cache:'no-store'});if(r.ok){await c.put(new Request(f),r.clone());if(f==='./index.html')await c.put(new Request('./'),r.clone())}}
@@ -1567,6 +1655,49 @@ $('bCloseRules').onclick=()=>$('rules').classList.add('hide');
 renderSetup();renderMenu();
 /* aplikace na plochu: offline režim (funguje jen z webu přes https) */
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+
+/* ===================== v0.11.0 – úvod, menu a živý rybník ===================== */
+function cfgChip(){const c=COLS[cfg.color]||COLS[0];$('bCfg').innerHTML=`<span>👤 <b>${(cfg.name||'Ty').replace(/</g,'&lt;')}</b></span><span>🎯 <b>${cfg.opp}</b> ${cfg.opp<5?'soupeři':'soupeřů'}</span><span class="cdk">${duckSVG(c.h)}</span><span class="ed">✏️</span>`}
+{const _rs=renderSetup;renderSetup=function(){_rs();cfgChip()}}
+$('bCfg').onclick=()=>{sfx('click');renderSetup();$('cfgov').classList.remove('hide')};
+$('bCfgClose').onclick=()=>{sfx('click');$('cfgov').classList.add('hide');cfgChip()};
+$('cfgov').addEventListener('click',e=>{if(e.target.id==='cfgov'){$('cfgov').classList.add('hide');cfgChip()}});
+/* zvuk z menu: přesune stejný panel do okna a pak zpět do hlavičky */
+function sndIc(){const i=$('snd2Ic');if(i)i.textContent=chOn('master')?'🔊':'🔇';$('bSnd2').classList.toggle('off',!chOn('master'))}
+$('bSnd2').onclick=e=>{e.stopPropagation();ac();sfx('click');const sp=$('soundPanel');$('sndHost').appendChild(sp);sp.classList.remove('hide');sp.classList.add('inov');$('sndov').classList.remove('hide')};
+function sndBack(){const sp=$('soundPanel');sp.classList.remove('inov');sp.classList.add('hide');document.querySelector('.sndwrap').appendChild(sp);$('sndov').classList.add('hide');sndIc()}
+$('bSndClose').onclick=sndBack;$('sndHost').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#spClose'))setTimeout(sndBack,0)});$('sndov').addEventListener('click',e=>{if(e.target.id==='sndov')sndBack()});
+/* živá scéna za vším */
+function pondScene(wide){const dk=(c,x,y,sc,cls,dl)=>`<g class="pd ${cls}" style="animation-delay:${dl}s"><g transform="translate(${x},${y}) scale(${sc})"><g class="pdb">${duckGC(c)}</g></g></g>`;
+ const defs=`<defs><linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ab8f5"/><stop offset=".5" stop-color="#bfe6ff"/><stop offset=".62" stop-color="#e9f7ff"/></linearGradient>
+<linearGradient id="kWat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fb3c9"/><stop offset="1" stop-color="#1f6f8b"/></linearGradient>
+<pattern id="kDot" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#000" opacity=".12"/></pattern></defs>`;
+ const inner=`<g class="ks-sun"><g class="ks-rays" fill="#fff6b0" opacity=".55">${Array.from({length:12},(_,i)=>`<path d="M330 120 L${330+190*Math.cos(i*Math.PI/6-.12)} ${120+190*Math.sin(i*Math.PI/6-.12)} L${330+190*Math.cos(i*Math.PI/6+.12)} ${120+190*Math.sin(i*Math.PI/6+.12)}Z"/>`).join('')}</g>
+<circle cx="330" cy="120" r="46" fill="#ffd93b" stroke="#111" stroke-width="4"/></g>
+<g class="ks-cl c1">${cloudP(40,170,1)}</g><g class="ks-cl c2">${cloudP(220,250,.75)}</g><g class="ks-cl c3">${cloudP(-60,330,.6)}</g>
+<g class="ks-bird"><path d="M0 0 q7-7 14 0 q7-7 14 0" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/></g>
+<path d="M0 470 Q70 420 140 455 T280 445 T400 450 V520 H0Z" fill="#6cc070" stroke="#111" stroke-width="3"/>
+<g fill="#2f8f4e" stroke="#111" stroke-width="3">${[20,55,95,300,338,372].map((x,i)=>`<path d="M${x} 470 q-16-6-14-26 q-10-18 4-32 q2-20 20-22 q18 2 20 22 q14 14 4 32 q2 20-14 26z"/><rect x="${x+8}" y="468" width="8" height="14" fill="#7a4a22"/>`).join('')}</g>
+<path d="M0 500 Q200 478 400 500 V520 H0Z" fill="#9adb7c" stroke="#111" stroke-width="3"/>
+<rect x="-1" y="512" width="402" height="300" fill="url(#kWat)"/><path d="M-1 512H401" stroke="#111" stroke-width="3"/>
+<g class="ks-wave" fill="none" stroke="#bff0ff" stroke-width="3" stroke-linecap="round" opacity=".7">${[560,610,665,720,770].map((y,i)=>`<path d="M${-40+(i%2)*30} ${y} q15-8 30 0 q15 8 30 0 M${130+(i%3)*20} ${y+12} q15-8 30 0 q15 8 30 0 M${290-(i%2)*25} ${y+4} q15-8 30 0"/>`).join('')}</g>
+${dk('#facc15',0,520,.9,'p1',0)}${dk('#3b82f6',0,600,1.1,'p2',-9)}${dk('#ec4899',0,690,1.3,'p3',-17)}${dk('#22c55e',0,560,.8,'p4',-25)}
+<g class="ks-xh"><circle r="20" fill="none" stroke="#e11d48" stroke-width="4"/><circle r="5" fill="#e11d48"/><path d="M0-30V-12M0 12V30M-30 0H-12M12 0H30" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/></g>
+<g fill="#3f8f3a" stroke="#111" stroke-width="3" class="ks-reed">${[8,26,44,350,368,386].map((x,i)=>`<path d="M${x} 800 q${i%2?6:-6}-90 ${i%2?-4:4}-${150+i%3*30} q6 70 6 ${150+i%3*30}z"/><rect x="${x-3+(i%2?-4:4)}" y="${800-150-i%3*30-2}" width="9" height="34" rx="4" fill="#7a4a22"/>`).join('')}</g>
+`;
+ const W=wide?800:400;return `<svg viewBox="${wide?'0 250 800 560':'0 0 400 800'}" preserveAspectRatio="${wide?'xMidYMid':'xMidYMax'} slice" xmlns="http://www.w3.org/2000/svg">${defs}<rect width="${W}" height="800" fill="url(#kSky)"/>${inner}${wide?`<g transform="translate(400,0)">${inner.replace('class="ks-sun"','class="ks-sun" style="display:none"')}</g>`:''}<rect width="${W}" height="800" fill="url(#kDot)"/></svg>`;}
+function cloudP(x,y,s){return `<path transform="translate(${x},${y}) scale(${s})" d="M0 40 q0-22 24-22 q8-22 34-18 q20-16 42 4 q26-4 28 22 q20 2 18 14z" fill="#fff" stroke="#111" stroke-width="3.5"/>`}
+function sceneInit(){if(document.getElementById('kscene'))return;const d=document.createElement('div');d.id='kscene';const mq=matchMedia('(orientation:landscape)');const put=()=>{d.innerHTML=pondScene(mq.matches)};put();try{mq.addEventListener('change',put)}catch(e){mq.addListener&&mq.addListener(put)}document.body.insertBefore(d,document.body.firstChild)}
+function sceneMode(){const m=!$('start').classList.contains('hide');document.body.classList.toggle('ks-game',!m)}
+new MutationObserver(sceneMode).observe($('start'),{attributes:true,attributeFilter:['class']});
+function splashShow(){const sp=document.createElement('div');sp.id='ksplash';
+ const L=(t,o)=>[...t].map((c,i)=>`<span style="animation-delay:${(o+i*.07).toFixed(2)}s">${c===' '?'&nbsp;':c}</span>`).join('');
+ sp.innerHTML=`<div class="ksp-logo"><div class="ksp-duck"><svg viewBox="-6 -2 72 60">${duckGC('#facc15')}</svg></div><div class="ksp-h">${L('STŘELENÉ',.3)}</div><div class="ksp-h k2">${L('KACHNY',.85)}</div><div class="ksp-x"><svg viewBox="-34 -34 68 68"><circle r="22" fill="none" stroke="#e11d48" stroke-width="5"/><circle r="5" fill="#e11d48"/><path d="M0-32V-12M0 12V32M-32 0H-12M12 0H32" stroke="#e11d48" stroke-width="5" stroke-linecap="round"/></svg></div><div class="ksp-bang">PRÁSK!</div><div class="ksp-sub">KARETNÍ HRA</div></div><div class="ksp-tap">KLEPNI PRO VSTUP</div><div class="ksp-ver">fanouškovská verze ${VERSION}</div>`;
+ document.body.appendChild(sp);document.body.classList.add('ksplashing');let done=false;
+ const go=()=>{if(done)return;done=true;try{ac();sfx('click');quackAt(.05)}catch(e){}sp.classList.add('out');document.body.classList.remove('ksplashing');setTimeout(()=>sp.remove(),520)};
+ sp.addEventListener('click',go);setTimeout(()=>sp.classList.add('ready'),2600)}
+sceneInit();sceneMode();cfgChip();sndIc();
+if(!/[?&]nosplash/.test(location.search))splashShow();
 </script>
 </body>
 </html>

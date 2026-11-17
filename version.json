@@ -1,1 +1,9 @@
-{"version":"0.10.17"}
+{
+ "version": "0.11.0",
+ "notes": [
+  "Úvodní animace – kachna, nápis a PRÁSK! Klepnutím vstoupíš do hry a zapneš zvuk.",
+  "Nové menu: jméno, soupeři a barva v okně ✏️, ostatní volby jako ikony (i Zvuk).",
+  "Živý rybník za menu i hrou – plující kachny, mraky, rákosí, občas zaměřovač.",
+  "U nové verze uvidíš, co je nového, a můžeš ji přeskočit."
+ ]
+}
