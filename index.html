@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.12.0</title>
-<meta name="version" content="0.12.0">
+<title>Střelené kachny v0.12.1</title>
+<meta name="version" content="0.12.1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -654,7 +654,7 @@ body:not(.ks-game)>.wrap{visibility:hidden}
 .card .lbl{top:3px;font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.4px;font-size:clamp(10px,2.6vw,13px);color:#fff;text-shadow:1.2px 1.2px 0 #111,-1px -1px 0 #111,1px -1px 0 #111,-1px 1px 0 #111}
 .covtag{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);white-space:nowrap;font:clamp(9px,2.3vw,12px) Bangers,Impact,sans-serif;letter-spacing:.3px;background:#fff;border:1.5px solid #111;border-radius:5px;padding:0 4px;box-shadow:1.5px 1.5px 0 #111;max-width:94%;overflow:hidden;text-overflow:ellipsis}
 .aimcell{border:2.5px solid #111!important;box-shadow:2px 2px 0 #111!important;background-color:#5ab8f5}
-.aimcell{position:relative;overflow:hidden;background:#5ab8f5!important;padding:0}
+.aimcell{position:relative;overflow:hidden;background:#a8defc!important;padding:0}
 .aimcell svg.sky{position:absolute;inset:0;width:100%;height:100%;max-height:none!important;display:block}
 
 .aimcell .xh{transform-box:fill-box;transform-origin:center}
@@ -682,7 +682,7 @@ html.noanim .card .psst{opacity:1}
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.0</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.1</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -708,7 +708,7 @@ html.noanim .card .psst{opacity:1}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.0</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.1</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -720,7 +720,7 @@ html.noanim .card .psst{opacity:1}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.0</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.1</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -745,7 +745,7 @@ html.noanim .card .psst{opacity:1}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.12.0</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.12.1</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <div class="actions center"><button class="btn" id="bUpdCheck">🔄 Zkontrolovat teď</button><button class="btn pri" id="bUpdClose">Zavřít</button></div>
@@ -778,7 +778,7 @@ html.noanim .card .psst{opacity:1}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.0</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.1</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -797,7 +797,7 @@ html.noanim .card .psst{opacity:1}
 </div>
 
 <script>
-const VERSION='0.12.0';
+const VERSION='0.12.1';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -845,19 +845,21 @@ function duckG(col){return `<g stroke="#1f2937" stroke-width="1.6" stroke-linejo
 function duckSVG(col){return `<svg class="duck" viewBox="-4 0 68 56">${duckG(col)}</svg>`}
 function sceneSVG(col,o={}){ // v0.12.0: komiksová karta rybníka
  const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
- const hid=o.hid!=null?`<g class="peek"><g transform="translate(30,26) scale(.5)">${duckGC(o.hid)}</g></g><g class="psst"><path d="M44 22 h14 v8 h-9 l-3 4 v-4 h-2z" fill="#fff" stroke="${I}" stroke-width="1.2"/><text x="51" y="28.4" text-anchor="middle" style="font:9px Bangers,Impact,sans-serif" fill="${I}">psst</text></g>`:'';
- const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(3,31) scale(.84)">${duckGC(col,o.scared?'scared':'')}</g></g>`
-  :`<g stroke="#bff0ff" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M8 62 q6-3 12 0"/><path d="M34 70 q6-3 12 0"/><path d="M40 58 q4-2 8 0"/></g>`;
+ const hid=o.hid!=null?`<g class="peek"><g transform="translate(31,40) scale(.46)">${duckGC(o.hid)}</g></g><g class="psst"><path d="M44 22 h14 v8 h-9 l-3 4 v-4 h-2z" fill="#fff" stroke="${I}" stroke-width="1.2"/><text x="51" y="28.4" text-anchor="middle" style="font:9px Bangers,Impact,sans-serif" fill="${I}">psst</text></g>`:'';
+ const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(9,33) scale(.72)">${duckGC(col,o.scared?'scared':'')}</g></g>`
+  :`<g stroke="#c9f0ff" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M10 64 q6-3 12 0"/><path d="M34 70 q6-3 12 0"/></g>`;
+ const front=`<path d="M0 65 q7.5-2.6 15 0 t15 0 t15 0 t15 0 V80 H0Z" fill="#4fb3d9" stroke="${I}" stroke-width="1.2"/><g stroke="#c9f0ff" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M7 72 q5-2 10 0M36 75 q5-2 10 0"/></g>`;
  const bush=o.cover?`<g class="bush"><g stroke="${I}" stroke-width="1.8" fill="#3fa34d"><ellipse cx="16" cy="70" rx="17" ry="12"/><ellipse cx="44" cy="70" rx="18" ry="13"/><ellipse cx="30" cy="62" rx="15" ry="11"/></g>
 <g stroke="${I}" stroke-width="2" fill="none" stroke-linecap="round"><path d="M8 66q2-12-1-22M52 64q-1-12 3-20M38 58q2-9 6-14"/></g>
 <g stroke="${I}" stroke-width="1.2" fill="#7a4a22"><rect x="4" y="38" width="5" height="12" rx="2.5"/><rect x="53" y="40" width="5" height="12" rx="2.5"/></g>
 <g fill="#a7f3a0"><ellipse cx="24" cy="66" rx="4" ry="2" transform="rotate(-20 24 66)"/><ellipse cx="46" cy="72" rx="4" ry="2" transform="rotate(25 46 72)"/></g></g>`:'';
  return `<svg class="scene" viewBox="0 0 60 80" preserveAspectRatio="xMidYMid slice">
-<defs><pattern id="htk" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.16)"/></pattern></defs>
-<rect width="60" height="50" fill="#5ab8f5"/><g class="pcl">${cl(14,10,.8)}${cl(46,17,.9)}</g>
+<defs><pattern id="htk" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".55" fill="rgba(0,0,0,.10)"/></pattern></defs>
+<rect width="60" height="50" fill="#a8defc"/><g class="pcl">${cl(14,10,.8)}${cl(46,17,.9)}</g>
 <rect y="37" width="60" height="12" fill="#e8e2d0" stroke="${I}" stroke-width="1.2"/><g stroke="${I}" stroke-width="1">${[6,14,22,30,38,46,54].map(x=>`<path d="M${x} 37v12"/>`).join('')}</g>
-<rect y="48" width="60" height="32" fill="#5fbf4f" stroke="${I}" stroke-width="1.4"/><g stroke="#1f6e2a" stroke-width="1.2" fill="none" stroke-linecap="round"><path d="M6 74l2-4 2 4M48 77l2-4 2 4"/></g>
-${hid}${duck}${bush}
+<rect y="47" width="60" height="6" fill="#7fd36a" stroke="${I}" stroke-width="1.2"/><g stroke="#2f7d32" stroke-width="1" fill="none" stroke-linecap="round"><path d="M5 50l1.5-3 1.5 3M30 50l1.5-3 1.5 3M52 50l1.5-3 1.5 3"/></g>
+<rect y="52" width="60" height="28" fill="#4fb3d9" stroke="${I}" stroke-width="1.2"/><g stroke="#c9f0ff" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M4 57 q4-2 8 0M44 58 q4-2 8 0"/></g>
+${hid}${duck}${front}${bush}
 <g class="bub"><path d="M14 3 h44 v14 h-28 l-6 6 v-6 h-10z" fill="#fff" stroke="${I}" stroke-width="1.4"/><text class="bt" x="36" y="13.6" text-anchor="middle" style="font:11px Bangers,Impact,sans-serif" fill="${I}">KVÁK!</text></g>
 <rect width="60" height="80" fill="url(#htk)"/><rect x="1.5" y="1.5" width="57" height="77" rx="6" fill="none" stroke="${I}" stroke-width="3"/></svg>`}
 
@@ -1066,7 +1068,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.12.0: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.12.1: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1740,8 +1742,8 @@ function splashShow(){const sp=document.createElement('div');sp.id='ksplash';
 function crossSVG(){return `<svg viewBox="0 0 40 40" width="32" height="32">${X(20,20,11)}</svg>`}
 function skySVG(i,aimed){const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
  const C=[[[18,11,.75],[66,25,.62]],[[64,10,.7],[22,26,.6]],[[42,13,.9]]][i%3].map(a=>cl(...a)).join('');
- return `<svg class="sky" viewBox="0 0 84 36" preserveAspectRatio="xMidYMid slice"><defs><pattern id="hts" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".6" fill="rgba(0,0,0,.14)"/></pattern></defs>
-<rect width="84" height="36" fill="#5ab8f5"/><g class="scl">${C}</g><rect width="84" height="36" fill="url(#hts)"/>${aimed?`<g class="xh">${X(42,18,10)}</g>`:''}</svg>`}
+ return `<svg class="sky" viewBox="0 0 84 36" preserveAspectRatio="xMidYMid slice"><defs><pattern id="hts" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="1.6" cy="1.6" r=".55" fill="rgba(0,0,0,.09)"/></pattern></defs>
+<rect width="84" height="36" fill="#a8defc"/><g class="scl">${C}</g><rect width="84" height="36" fill="url(#hts)"/>${aimed?`<g class="xh">${X(42,18,10)}</g>`:''}</svg>`}
 function miniCard(t){const c=CARDS[t];return `<svg viewBox="0 0 50 70"><defs><pattern id="htm" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".5" fill="rgba(0,0,0,.15)"/></pattern></defs>
 <rect x="2" y="2" width="46" height="66" rx="5" fill="#fff" stroke="#111" stroke-width="2.6"/>
 <text x="25" y="12.5" text-anchor="middle"${c.n.length>7?' textLength="40" lengthAdjust="spacingAndGlyphs"':''} style="font:9.5px Bangers,Impact,sans-serif" fill="#ffe14d" stroke="#111" stroke-width="1.3" paint-order="stroke">${c.n.toUpperCase()}</text>
