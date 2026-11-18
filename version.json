@@ -1,8 +1,11 @@
 {
-  "version": "0.12.4",
+  "version": "0.13.0",
   "notes": [
-    "Úklid kódu: smazané nepoužívané a přebité styly a staré kreslicí funkce – hra vypadá i hraje stejně",
-    "Rozehraná hra se ukládá po každém tahu, ne při každém překreslení obrazovky",
-    "Automatický test: hra otevřená s ?test=200 sama odehraje 200 her počítačů a ukáže výsledek"
+    "Obtížnost soupeřů v nastavení hry ✏️: Lehký, Střední a Těžký",
+    "Každý soupeř má povahu: Franta 🔫 Střelec, Lojza 👑 Lovec vůdce, Božka 🛡️ Opatrná, Venca 🃏 Šprýmař, Jarmila 😌 Vyrovnaná",
+    "Rychlost soupeřů: Pomalu, Normálně, Rychle, Bleskově – a ťuknutím jejich tah přeskočíš",
+    "⚠️ na tvé kachně, když je zaměřená nebo vedle zaměřovače",
+    "Nastavení hry se pamatuje i bez rozehrané hry",
+    "Automatický test (?test=200) už nesmaže rozehranou hru ani nastavení a zkouší všechny obtížnosti"
   ]
 }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.12.4</title>
-<meta name="version" content="0.12.4">
+<title>Střelené kachny v0.13.0</title>
+<meta name="version" content="0.13.0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -645,12 +645,31 @@ html.noanim .card .psst{opacity:1}
 .hv b{font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.5px;font-size:19px}
 .hv .now{display:inline-block;font:13px Bangers,Impact,sans-serif;letter-spacing:.4px;background:#ffe14d;border:2px solid #111;border-radius:6px;padding:0 5px;margin-left:6px;transform:rotate(-3deg)}
 .hv ul{margin:2px 0 0;padding-left:18px;font-size:13.5px;line-height:1.35}
+
+/* ===== soupeři: obtížnost, povahy, rychlost, varování ===== */
+.hint{font-size:13px;margin:2px 0 4px;opacity:.85;min-height:18px}
+.box>h3:nth-of-type(n+4),.box>#diffRow,.box>#diffHint,.box>#spdRow,.box>#persList{grid-column:1/3}
+.box>h3:nth-of-type(n+4){margin-top:clamp(4px,1dvh,8px)!important}
+.box>#diffRow,.box>#spdRow{margin:0;flex-wrap:wrap}
+#cfgov .panel{max-height:94dvh;overflow:auto}
+.perslist{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
+.prow{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #111;border-radius:9px;box-shadow:2px 2px 0 #111;padding:4px 8px;font-size:13.5px;text-align:left}
+.prow .pd2{width:30px;flex:none}.prow .pd2 svg{width:100%;display:block}
+.prow b{font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:18px;letter-spacing:.5px}
+.prow .pi{font-size:18px}
+.pico{font-style:normal;font-size:13px;margin-left:2px}
+.warn{position:absolute;top:18%;right:3px;z-index:3;font-size:clamp(14px,4vw,22px);line-height:1;filter:drop-shadow(1px 1px 0 #111);pointer-events:none}
+.warn.hot{animation:wpulse .8s ease-in-out infinite}
+.warn:not(.hot){opacity:.75;font-size:clamp(11px,3vw,16px)}
+@keyframes wpulse{50%{transform:scale(1.25)}}
+html.noanim .warn.hot{animation:none}
+.oppbig .skiphint{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;font:600 12px Fredoka,sans-serif;background:#fff;border:2px solid #111;border-radius:8px;padding:1px 8px;box-shadow:2px 2px 0 #111}
 </style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.12.4</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.13.0</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
     <div class="spanel hide" id="soundPanel"></div></div>
@@ -676,7 +695,7 @@ html.noanim .card .psst{opacity:1}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.12.4</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.13.0</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -688,7 +707,7 @@ html.noanim .card .psst{opacity:1}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.12.4 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.13.0 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -702,6 +721,13 @@ html.noanim .card .psst{opacity:1}
    <div class="row" id="oppRow"></div>
    <h3>Barva tvých kachen</h3>
    <div class="row" id="colRow"></div>
+   <h3>Obtížnost</h3>
+   <div class="row" id="diffRow"></div>
+   <p class="hint" id="diffHint"></p>
+   <h3>Rychlost soupeřů</h3>
+   <div class="row" id="spdRow"></div>
+   <h3>Tví soupeři</h3>
+   <div class="perslist" id="persList"></div>
   </div>
   <div class="actions center"><button class="btn pri" id="bCfgClose">Hotovo</button></div>
  </div>
@@ -713,7 +739,7 @@ html.noanim .card .psst{opacity:1}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.12.4</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.13.0</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <h3 class="histh">📜 Historie verzí</h3>
@@ -748,7 +774,7 @@ html.noanim .card .psst{opacity:1}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.12.4</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.13.0</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -767,7 +793,7 @@ html.noanim .card .psst{opacity:1}
 </div>
 
 <script>
-const VERSION='0.12.4';
+const VERSION='0.13.0';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -797,7 +823,7 @@ const PROMPTS={
  march:['Potvrď tlačítkem Zahrát.'],dance:['Potvrď tlačítkem Zahrát.']
 };
 
-let S=null,cfg={opp:3,color:0,name:''},ui={card:null,sel:[],perm:null,pick:null,detail:null},fxTimer=null,lastDetail='';
+let S=null,cfg={opp:3,color:0,name:'',diff:'normal',speed:1},ui={card:null,sel:[],perm:null,pick:null,detail:null},fxTimer=null,lastDetail='';
 const $=id=>document.getElementById(id);
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const pn=q=>S.players[q].name, cn=q=>COLS[S.players[q].c].n, ch=q=>COLS[S.players[q].c].h;
@@ -1022,7 +1048,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.12.4: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.13.0: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1112,7 +1138,7 @@ function loadSaved(){try{const o=JSON.parse(lsGet(SKEY)||'null');return o&&o.S&&
 function stopGame(){prevAimSids=null;clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();lastPos=null;prevAim=null;clearTimeout(fxTimer);ambStop();resetUI();S=null;lastDetail='';$('detail').innerHTML=''}
 function showMenu(){musPlay('calm');$('over').classList.add('hide');$('quit').classList.add('hide');$('start').classList.remove('hide');renderMenu()}
 function goHome(){if(S&&!S.over)saveGame();stopGame();showMenu()}
-function resumeGame(){const o=loadSaved();if(!o)return;ac();stopGame();S=o.S;S.fx=null;if(o.cfg)cfg=o.cfg;musPlay(gameTrack());
+function resumeGame(){const o=loadSaved();if(!o)return;ac();stopGame();S=o.S;S.fx=null;if(o.cfg)cfg={...cfg,...o.cfg};musPlay(gameTrack());
  $('start').classList.add('hide');render();ambStart();if(!S.players[S.turn].human)botTimer=setTimeout(botPlay,1150)}
 function quitGame(){musStop();MUS.want=null;if(S&&!S.over)saveGame();stopGame();
  try{if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}
@@ -1257,7 +1283,7 @@ function bindExtraPanel(){const sp=$('soundPanel');
 function newGame(){prevAimSids=null;drawFrom=0;lastPos=null;prevAim=null;clearTimeout(oppTimer);oppHide();setTimeout(()=>musPlay(gameTrack(true)),50);
  const n=cfg.opp+1,players=[{name:cfg.name.trim()||'Ty',c:cfg.color,human:true}];
  const others=COLS.map((_,i)=>i).filter(i=>i!==cfg.color);
- for(let i=0;i<cfg.opp;i++)players.push({name:BOTS[i],c:others[i],human:false});
+ for(let i=0;i<cfg.opp;i++)players.push({name:BOTS[i],c:others[i],human:false,pers:BOT_PERS[i]});
  const deck=[];players.forEach((_,p)=>{for(let k=0;k<5;k++)deck.push({t:'d',c:p})});
  for(let k=0;k<5;k++)deck.push({t:'w'});shuffle(deck);
  const ad=[];Object.entries(CARDS).forEach(([k,v])=>{for(let i=0;i<v.c;i++)ad.push(k)});shuffle(ad);
@@ -1338,11 +1364,11 @@ let PERMS=null;
 function perms(){if(PERMS)return PERMS;PERMS=[];const go=(a,r)=>{if(!r.length){PERMS.push(a);return}r.forEach((x,i)=>go(a.concat(x),r.filter((_,j)=>j!==i)))};go([],[0,1,2,3,4,5]);return PERMS}
 
 function botPlay(){
- if(!S||S.over)return;const p=S.turn,hand=S.hands[p];let best=null,bv=-1e9;
- const consider=(hi,t,sel,perm)=>{const st=clone();apply(st,p,t,sel,perm);const v=evalState(st,p)+Math.random()*1.5;if(v>bv){bv=v;best={hi,t,sel,perm}}};
- hand.forEach((t,hi)=>{if(t==='rosambo')perms().forEach(pm=>consider(hi,t,[],pm));else moves(S,p,t).forEach(m=>consider(hi,t,m.sel,null))});
+ if(!S||S.over)return;const p=S.turn,hand=S.hands[p],best=aiChoose(p,cfg.diff||'normal',persOf(S.players[p]));
  if(!best)return discardCard(p,Math.random()*hand.length|0);
- if(FX.anim){oppShow(p,hand[best.hi]);oppTimer=setTimeout(()=>{if(S&&S.turn===p&&!S.over)play(p,best.hi,best.sel,best.perm)},950);return}
+ if(FX.anim){oppShow(p,hand[best.hi]);
+  botGo=()=>{botGo=null;clearTimeout(oppTimer);if(S&&S.turn===p&&!S.over)play(p,best.hi,best.sel,best.perm)};
+  oppTimer=setTimeout(botGo,950*spd());return}
  play(p,best.hi,best.sel,best.perm);
 }
 
@@ -1350,7 +1376,7 @@ function beginTurn(){
  if(S.over)return;const p=S.turn;
  S.row.forEach(s=>{if(s.cv===p)s.cv=null});
  render();
- if(!S.players[p].human)botTimer=setTimeout(botPlay,FX.anim?700:1150);
+ if(!S.players[p].human)botTimer=setTimeout(botPlay,(FX.anim?700:1150)*spd());
 }
 function play(p,hi,sel,perm){
  flyPrep(p,hi);
@@ -1448,7 +1474,7 @@ function flashStatus(m){flashMsg=m;render();setTimeout(()=>{flashMsg=null;if(S)r
 function render(){
  if(!S)return;
  $('players').innerHTML=S.players.map((pl,q)=>{const a=aliveCount(S,q);
-  return `<div class="chip ${q===S.turn&&!S.over?'turn':''} ${a===0?'out':''}"><span class="dot">${duckSVG(COLS[pl.c].h)}</span><span><b>${pl.name}</b> 🦆${a}${S.dead[q]?' · ✝'+S.dead[q]:''}</span></div>`}).join('');
+  return `<div class="chip ${q===S.turn&&!S.over?'turn':''} ${a===0?'out':''}"><span class="dot">${duckSVG(COLS[pl.c].h)}</span><span><b>${pl.name}</b>${persOf(pl)?`<i class="pico" title="${PERS[persOf(pl)].n}">${PERS[persOf(pl)].i}</i>`:''} 🦆${a}${S.dead[q]?' · ✝'+S.dead[q]:''}</span></div>`}).join('');
  $('piles').innerHTML=`<div class="pile">${backSVG('duck')}<span>kachny ${S.deck.length}</span></div><div class="pile">${backSVG('act')}<span>akce ${S.adeck.length}</span></div>`+
   (S.discard.length?`<div class="pile" id="pileLast" title="Náhled poslední karty">${miniCard(S.discard[S.discard.length-1])}<span>naposledy</span></div>`:'');
  const before=pondSnap();S.row.forEach(x=>{if(!x.sid)x.sid=++SID});
@@ -1462,6 +1488,7 @@ function render(){
   if(kills.includes(i)&&!(FX.anim&&S.fx&&S.fx.kid&&S.fx.kid.length))cls+=' boom';
   const isD=s.k.t==='d',scared=isD&&S.aim[i]&&s.cv==null;
   let inner=sceneSVG(isD?ch(s.k.c):null,{scared,hid:s.h!=null?ch(s.h):null,cover:s.cv!=null})+`<div class="lbl">${isD?pn(s.k.c):'voda'}</div>`;
+  if(isD&&s.cv==null&&S.players[s.k.c]&&S.players[s.k.c].human&&!S.over){if(S.aim[i])inner+='<div class="warn hot" title="Tvoje kachna je zaměřená!">⚠️</div>';else if(S.aim[i-1]||S.aim[i+1])inner+='<div class="warn" title="Vedle tvé kachny je zaměřovač">⚠️</div>'}
   if(s.cv!=null)inner+=`<div class="covtag" title="Kachní únik: ${pn(s.cv)}">únik</div>`;
   return `<div class="${cls}" data-i="${i}" data-sid="${s.sid}"><div class="aimcell">${skySVG(i,S.aim[i])}</div><div class="card">${inner}</div></div>`}).join('');
  document.querySelectorAll('.col').forEach(el=>el.onclick=()=>tapCol(+el.dataset.i));
@@ -1729,6 +1756,7 @@ function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if
 
 /* ===================== historie verzí ===================== */
 const CHANGELOG=[
+ ['0.13.0',['Obtížnost soupeřů v nastavení hry ✏️: Lehký, Střední a Těžký','Každý soupeř má povahu: Franta 🔫 Střelec, Lojza 👑 Lovec vůdce, Božka 🛡️ Opatrná, Venca 🃏 Šprýmař, Jarmila 😌 Vyrovnaná','Rychlost soupeřů: Pomalu, Normálně, Rychle, Bleskově – a ťuknutím jejich tah přeskočíš','⚠️ na tvé kachně, když je zaměřená nebo vedle zaměřovače','Nastavení hry se pamatuje i bez rozehrané hry','Automatický test (?test=200) už nesmaže rozehranou hru ani nastavení a zkouší všechny obtížnosti']],
  ['0.12.4',['Úklid kódu: smazané nepoužívané a přebité styly a staré kreslicí funkce – hra vypadá i hraje stejně','Rozehraná hra se ukládá po každém tahu, ne při každém překreslení obrazovky','Automatický test: hra otevřená s ?test=200 sama odehraje 200 her počítačů a ukáže výsledek']],
  ['0.12.3',['Opraven seznam verzí: po verzi 0.10 rovnou následuje 0.11.0']],
  ['0.12.2',['Zelená tráva zmizela i z obrázků na akčních kartách – místo ní je voda a světlejší obloha','V okně Aktualizace (tlačítko „Verze“ dole v menu) je historie všech verzí']],
@@ -1752,9 +1780,9 @@ renderHistory();
 
 /* ===================== automatický test (otevři hru s ?test=200) ===================== */
 function runSelfTest(n){
- const t0=performance.now(),errs=[],anim=FX.anim,mOn=SET.master.on,r0=render,s0=saveGame;FX.anim=false;SET.master.on=false;render=()=>{};saveGame=()=>{};let ok=0,turns=0;
+ const t0=performance.now(),errs=[],anim=FX.anim,mOn=SET.master.on,r0=render,s0=saveGame,keepSave=lsGet(SKEY),keepCfg=JSON.stringify(cfg),diffs=['easy','normal','hard'];FX.anim=false;SET.master.on=false;render=()=>{};saveGame=()=>{};let ok=0,turns=0;
  for(let g=0;g<n;g++){
-  try{cfg.opp=1+g%5;newGame();clearTimeout(botTimer);clearTimeout(oppTimer);S.players.forEach(p=>p.human=false);
+  try{cfg.opp=1+g%5;cfg.diff=diffs[g%3];newGame();clearTimeout(botTimer);clearTimeout(oppTimer);S.players.forEach(p=>p.human=false);
    let k=0;
    while(!S.over&&k<4000){clearTimeout(botTimer);botPlay();k++;turns++;
     if(S.row.length!==6)throw Error('řada nemá 6 karet');
@@ -1763,7 +1791,7 @@ function runSelfTest(n){
    if(!S.over)throw Error('hra neskončila');ok++;
   }catch(e){errs.push('hra '+(g+1)+': '+e.message)}
  }
- render=r0;saveGame=s0;clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();stopGame();lsDel(SKEY);FX.anim=anim;SET.master.on=mOn;showMenu();
+ render=r0;saveGame=s0;clearTimeout(botTimer);clearTimeout(oppTimer);oppHide();stopGame();if(keepSave)lsSet(SKEY,keepSave);else lsDel(SKEY);cfg=JSON.parse(keepCfg);FX.anim=anim;SET.master.on=mOn;showMenu();cfgChip();
  const sec=((performance.now()-t0)/1000).toFixed(1);
  const box=document.createElement('div');box.id='selftest';
  box.style.cssText='position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:999;background:#fff;border:3px solid #111;border-radius:12px;box-shadow:4px 4px 0 #111;padding:10px 14px;font:600 15px Fredoka,sans-serif;max-width:92vw';
@@ -1771,6 +1799,69 @@ function runSelfTest(n){
  box.onclick=()=>box.remove();document.body.appendChild(box);
  console.log(box.innerText);return {ok,n,errs,turns};
 }
+
+
+/* ===================== soupeři: obtížnost, povahy, rychlost ===================== */
+const PERS={strelec:{n:'Střelec',i:'🔫',d:'rád střílí a míří na cizí kachny'},lovec:{n:'Lovec vůdce',i:'👑',d:'jde po tom, kdo má nejvíc kachen'},
+ opatrna:{n:'Opatrná',i:'🛡️',d:'chrání a schovává svoje kachny'},sprymar:{n:'Šprýmař',i:'🃏',d:'rád míchá a přehazuje řadu'},klidna:{n:'Vyrovnaná',i:'😌',d:'hraje bez zvláštních zálib'}};
+const BOT_PERS=['strelec','lovec','opatrna','sprymar','klidna'];   // Franta, Lojza, Božka, Venca, Jarmila
+const DIFFS={easy:{n:'Lehký',d:'Soupeři často hrají náhodně – hodí se pro děti a na první hry.'},normal:{n:'Střední',d:'Soupeři vybírají rozumné tahy, ale občas zaváhají.'},hard:{n:'Těžký',d:'Soupeři hlídají svoje kachny, jdou po tom, kdo vede, a hlavně po tobě.'}};
+const SPEEDS=[[1.6,'Pomalu'],[1,'Normálně'],[.55,'Rychle'],[.25,'Bleskově']];
+let botGo=null;
+function persOf(pl){return pl&&!pl.human?(pl.pers||BOT_PERS[BOTS.indexOf(pl.name)]||'klidna'):null}
+function spd(){return +cfg.speed||1}
+/* ohodnocení stavu po tahu – základ je evalState, k tomu obtížnost a povaha */
+function aiScore(st,p,t,diff,pers){
+ let v=evalState(st,p);const n=S.players.length;
+ const killed=q=>st.dead[q]-S.dead[q];
+ if(diff==='hard'){
+  const pShot=1-Math.pow(.5,n-1);          // šance, že zaměřenou kachnu někdo trefí, než budu znovu na tahu
+  st.row.forEach((s,i)=>{if(s.k.t!=='d'||s.cv!=null)return;const own=s.k.c===p;
+   if(st.aim[i])v+=own?-22*pShot:3*pShot;else if(st.aim[i-1]||st.aim[i+1])v+=own?-3:0});
+  const al=S.players.map((_,q)=>aliveCount(st,q)),lead=Math.max(...al.filter((_,q)=>q!==p));
+  al.forEach((a,q)=>{if(q!==p&&a===lead)v-=4*a});
+  S.players.forEach((pl,q)=>{if(q===p||!(pl.human||pl.tgt))return;v-=6*al[q];            // jde hlavně po člověku
+   st.row.forEach((x,i)=>{if(st.aim[i]&&x.k.t==='d'&&x.k.c===q&&x.cv==null)v+=3})});
+ }
+ if(pers==='strelec'){let k=0;S.players.forEach((_,q)=>{if(q!==p)k+=killed(q)});v+=8*k;
+  if(t==='aim'||t==='dthreat')v+=5;if(t==='escape'||t==='shield')v-=4;
+  st.row.forEach((s,i)=>{if(st.aim[i]&&s.k.t==='d'&&s.k.c!==p&&s.cv==null)v+=2})}
+ else if(pers==='opatrna'){st.row.forEach((s,i)=>{if(s.h===p)v+=6;if(s.k.t==='d'&&s.k.c===p){if(s.cv!=null)v+=6;else if(st.aim[i])v-=10;else if(st.aim[i-1]||st.aim[i+1])v-=3}});
+  if(t==='aim'||t==='dthreat')v-=2}
+ else if(pers==='lovec'){let L=-1,m=-1;S.players.forEach((_,q)=>{const a=aliveCount(S,q);if(q!==p&&a>m){m=a;L=q}});
+  if(L>=0){v+=10*killed(L);st.row.forEach((s,i)=>{if(st.aim[i]&&s.k.t==='d'&&s.k.c===L&&s.cv==null)v+=4})}}
+ else if(pers==='sprymar'&&['rosambo','dance','march','back','fwd','turbo'].includes(t))v+=8;
+ return v;
+}
+function aiChoose(p,diff,pers){
+
+ const hand=S.hands[p],all=[];
+ const noise=(diff==='easy'?10:diff==='hard'?.4:1.5)+(pers==='sprymar'?2:0);
+ const consider=(hi,t,sel,perm)=>{const st=clone();apply(st,p,t,sel,perm);let v=aiScore(st,p,t,diff,pers);
+  all.push({hi,t,sel,perm,own:st.dead[p]-S.dead[p],v:v+Math.random()*noise})};
+ hand.forEach((t,hi)=>{if(t==='rosambo')perms().forEach(pm=>consider(hi,t,[],pm));else moves(S,p,t).forEach(m=>consider(hi,t,m.sel,null))});
+ if(!all.length)return null;
+ if(diff==='easy'&&Math.random()<.7){const safe=all.filter(m=>!m.own);const pool=safe.length?safe:all;return pool[Math.random()*pool.length|0]}
+ return all.reduce((a,b)=>b.v>a.v?b:a);
+}
+/* ťuknutí přeskočí čekání na tah soupeře */
+document.addEventListener('pointerdown',e=>{if(botGo&&e.target.closest&&e.target.closest('.oppbig,#board,.pond,.hand,#hand'))botGo()},true);
+{const _os=oppShow;oppShow=function(p,t){_os(p,t);const w=document.querySelector('.oppbig');if(w&&FX.anim){const h=document.createElement('div');h.className='skiphint';h.textContent='ťukni = přeskočit';w.appendChild(h)}}}
+/* nastavení: obtížnost, rychlost a seznam soupeřů */
+const CFGKEY='kachnyCfg';
+try{const c=JSON.parse(lsGet(CFGKEY)||'null');if(c)cfg={...cfg,...c}}catch(e){}
+function saveCfg(){lsSet(CFGKEY,JSON.stringify(cfg))}
+function renderSetup2(){
+ $('diffRow').innerHTML=Object.entries(DIFFS).map(([k,d])=>`<button class="opt ${cfg.diff===k?'on':''}" data-df="${k}">${d.n}</button>`).join('');
+ $('diffHint').textContent=(DIFFS[cfg.diff]||DIFFS.normal).d;
+ $('spdRow').innerHTML=SPEEDS.map(([f,n])=>`<button class="opt ${Math.abs(spd()-f)<.01?'on':''}" data-sp="${f}">${n}</button>`).join('');
+ const others=COLS.map((_,i)=>i).filter(i=>i!==cfg.color);
+ $('persList').innerHTML=BOTS.slice(0,cfg.opp).map((b,i)=>{const P=PERS[BOT_PERS[i]];return `<div class="prow"><span class="pd2">${duckSVG(COLS[others[i]].h)}</span><b>${b}</b><span class="pi">${P.i}</span><span><b style="font-size:15px">${P.n}</b> – ${P.d}</span></div>`}).join('');
+ document.querySelectorAll('[data-df]').forEach(b=>b.onclick=()=>{sfx('click');cfg.diff=b.dataset.df;saveCfg();renderSetup()});
+ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{sfx('click');cfg.speed=+b.dataset.sp;saveCfg();renderSetup()});
+}
+{const _rs2=renderSetup;renderSetup=function(){_rs2();renderSetup2()}}
+{const _cc=cfgChip;cfgChip=function(){_cc();saveCfg()}}
 
 sceneInit();sceneMode();cfgChip();sndIc();
 {const n=+new URLSearchParams(location.search).get('test');if(n>0)setTimeout(()=>runSelfTest(Math.min(n,2000)),300)}
