@@ -1,11 +1,7 @@
 {
-  "version": "0.13.0",
-  "notes": [
-    "Obtížnost soupeřů v nastavení hry ✏️: Lehký, Střední a Těžký",
-    "Každý soupeř má povahu: Franta 🔫 Střelec, Lojza 👑 Lovec vůdce, Božka 🛡️ Opatrná, Venca 🃏 Šprýmař, Jarmila 😌 Vyrovnaná",
-    "Rychlost soupeřů: Pomalu, Normálně, Rychle, Bleskově – a ťuknutím jejich tah přeskočíš",
-    "⚠️ na tvé kachně, když je zaměřená nebo vedle zaměřovače",
-    "Nastavení hry se pamatuje i bez rozehrané hry",
-    "Automatický test (?test=200) už nesmaže rozehranou hru ani nastavení a zkouší všechny obtížnosti"
-  ]
+ "version": "0.13.2",
+ "notes": [
+  "Karty na rybníce už nemají jmenovky ani zvýraznění vlastních kachen – svou barvu si musíš pamatovat",
+  "Jméno majitele kachny ukáže malá krémová bublina po klepnutí na kartu nebo při výběru cíle"
+ ]
 }
