@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.13.2</title>
-<meta name="version" content="0.13.2">
+<title>Střelené kachny v0.13.4</title>
+<meta name="version" content="0.13.4">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -675,6 +675,27 @@ html.noanim .warn.hot{animation:none}
 .card .lid{animation:blink 4.2s infinite}
 @keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
 html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
+.setp{max-width:540px;max-height:94dvh;display:flex;flex-direction:column;padding:12px 14px}
+.seth{display:flex;align-items:center;justify-content:space-between;gap:8px}.seth h2{margin:0!important}
+.seth .btn.sm{width:38px;height:38px;padding:0;font-size:18px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 6px}
+.tabs button{font-family:Bangers,Impact,sans-serif;font-size:16px;letter-spacing:.5px;border:2.5px solid #111;border-radius:9px;background:#fff;box-shadow:2px 2px 0 #111;padding:3px 2px;display:flex;flex-direction:column;align-items:center;line-height:1.05;cursor:pointer;color:#111}
+.tabs button i{font-style:normal;font-size:18px}
+.tabs button.on{background:#ffe14d;transform:translateY(-2px);box-shadow:3px 4px 0 #111}
+.tabb{overflow:auto;flex:1 1 auto;min-height:0;padding:2px 2px 6px}.tabb.hide,#spNat.hide{display:none}
+#sndov .actions{margin-top:6px}
+@media (orientation:landscape) and (max-height:500px){#sndov .panel>.actions{display:none}.tabs{margin:4px 0}}
+#sndov .spanel.inov{width:auto!important;max-height:none!important;overflow:visible;padding:0}
+.spmute{width:100%;font-size:19px;margin:2px 0 8px}.spmute.off{background:#ff3d7f;color:#fff;text-shadow:1px 1px 0 #111}
+.sp-opts.pre{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:4px}.sp-opts.pre .btn.sm{font-size:13px!important;padding:3px 2px!important}
+.spacc{display:block;width:100%;text-align:left;background:none;border:0;border-top:1.5px dashed rgba(0,0,0,.18);padding:8px 2px;font:700 14px system-ui,sans-serif;color:#111;cursor:pointer}
+.sp-grp{font-family:Bangers,Impact,sans-serif;font-size:16px;letter-spacing:.5px;color:#0f766e;margin:6px 0 0 4px}
+.g-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 2px;border-bottom:1.5px dashed rgba(0,0,0,.18);font-size:14.5px;font-weight:600}
+.g-row .btn.sm{width:auto;height:auto;padding:3px 12px;font-size:16px}
+.g-note{font-size:13px;color:#334155;margin:8px 2px;line-height:1.4}
+.tabb .sp-sec:first-child{margin-top:2px}
+#bSound{position:relative}#bSound.muted::after,#bSnd2.off .ti::after{content:'🔇';position:absolute;right:-6px;bottom:-6px;font-size:13px}
+#bSnd2 .ti{position:relative}
 .otip{position:fixed;z-index:80;transform:translateX(-50%);background:var(--cream);color:#111;border:2px solid #111;border-radius:10px;box-shadow:2px 2px 0 #111;padding:1px 9px;font:700 clamp(11px,2.8vw,14px)/1.35 system-ui,sans-serif;white-space:nowrap;pointer-events:none;animation:otIn .16s ease-out}
 .otip::after{content:'';position:absolute;left:50%;bottom:-7px;width:9px;height:9px;background:var(--cream);border-right:2px solid #111;border-bottom:2px solid #111;transform:translateX(-50%) rotate(45deg)}
 .otip.out{opacity:0;transition:opacity .25s}
@@ -687,10 +708,9 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.13.2</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.13.4</span></h1>
   <div style="display:flex;gap:6px">
-   <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení zvuku">🔊</button>
-    <div class="spanel hide" id="soundPanel"></div></div>
+   <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení (podrž = ztlumit zvuk)">⚙️</button></div>
    <button class="btn sm" id="bFull" title="Celá obrazovka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></button>
    <button class="btn sm" id="bLog" title="Záznam hry">📜</button>
    <button class="btn sm" id="bRules" title="Pravidla">📖</button>
@@ -713,19 +733,19 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.13.2</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.13.4</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
   <button class="mcfg" id="bCfg" type="button"></button>
   <div class="mtiles">
    <button class="mtile" id="bRules2" type="button"><span class="ti">📖</span><span class="tl">Pravidla</span></button>
-   <button class="mtile" id="bSnd2" type="button"><span class="ti" id="snd2Ic">🔊</span><span class="tl">Zvuk</span></button>
+   <button class="mtile" id="bSnd2" type="button"><span class="ti" id="snd2Ic">⚙️</span><span class="tl">Nastavení</span></button>
    <button class="mtile" id="togFS" type="button"><span class="ti fsic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></span><span class="tl" id="fsLbl">Na celou</span></button>
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.13.2 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.13.4 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -751,13 +771,17 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
  </div>
 </div>
 <div class="overlay hide" id="sndov">
- <div class="panel"><h2>🔊 Zvuk a hudba</h2><div id="sndHost"></div><div class="actions center"><button class="btn pri" id="bSndClose">Hotovo</button></div></div>
+ <div class="panel setp"><div class="seth"><h2>⚙️ Nastavení</h2><button class="btn sm" id="bSetX" title="Zavřít">✕</button></div>
+  <div class="tabs" id="setTabs"><button type="button" class="on" data-tab="z"><i>🔊</i>Zvuk</button><button type="button" data-tab="g"><i>🎨</i>Grafika</button><button type="button" data-tab="h"><i>🃏</i>Hra</button><button type="button" data-tab="o"><i>ℹ️</i>O hře</button></div>
+  <div class="tabb" id="tab-z"><div id="sndHost"><div class="spanel inov" id="soundPanel"></div></div></div>
+  <div class="tabb hide" id="tab-g"></div><div class="tabb hide" id="tab-h"></div><div class="tabb hide" id="tab-o"></div>
+  <div class="actions center"><button class="btn pri" id="bSndClose">Hotovo</button></div></div>
 </div>
 
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.13.2</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.13.4</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <h3 class="histh">📜 Historie verzí</h3>
@@ -792,7 +816,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.13.2</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.13.4</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -811,7 +835,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 </div>
 
 <script>
-const VERSION='0.13.2';
+const VERSION='0.13.4';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -878,24 +902,49 @@ ${hid}${duck}${front}${bush}
 <rect width="60" height="80" fill="url(#htk)"/><rect x="1.5" y="1.5" width="57" height="77" rx="6" fill="none" stroke="${I}" stroke-width="3"/></svg>`}
 
 /* ---------- ilustrace akčních karet (vlastní kresby) ---------- */
-const AY='#facc15',AB='#3b82f6',AG='#22c55e',AP='#ec4899',AO='#f97316';
+const AY='#facc15',AB='#3b82f6',AG='#22c55e',AP='#ec4899',AO='#f97316',AV='#a855f7',AR='#ef4444',AC2='#06b6d4';
+/* doplňky kreslené v souřadnicích kachny (hlava kolem 20,18, oko 21,13.5) */
+const ACC={
+ helmet:`<g stroke="#111" stroke-width="2.2" stroke-linejoin="round"><path d="M7 15 Q7 2 21 2 Q35 3 34 16 Z" fill="#dc2626"/><path d="M14 4 Q21 2 28 5 L27 15 L15 15Z" fill="#fff" stroke-width="1.4"/><path d="M8 15 H34" stroke-width="3"/></g>
+<g stroke="#111" stroke-width="2"><path d="M9 14 L34 13" stroke="#334155" stroke-width="3.4"/><circle cx="20.5" cy="14" r="5.8" fill="#7dd3fc"/><path d="M17.5 11.5 q2-2 4.5-1" stroke="#fff" stroke-width="1.4" fill="none"/></g>`,
+ scarf:`<path d="M26 27 Q40 25 52 17 Q47 25 57 26 Q44 32 28 32Z" fill="#fff" stroke="#111" stroke-width="2"/><path d="M38 28 l3 -3M45 26 l3 -3" stroke="#dc2626" stroke-width="2"/>`,
+ shades:`<g stroke="#111" stroke-width="1.8" stroke-linejoin="round"><path d="M27 12 L35 10" stroke-width="2.4"/><path d="M12 10 H29 Q29 18 22 18 Q14 18 12 10Z" fill="#111"/><path d="M15 12 l4 0" stroke="#fff" stroke-width="1.4"/></g>`,
+ cowboy:`<g stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M3 9 Q21 13 39 7 Q37 4 33 5 Q21 9 9 6 Q4 5 3 9Z" fill="#92400e"/><path d="M11 7 Q9 -9 16 -9 Q21 -5 26 -9 Q33 -9 31 6 Q21 9 11 7Z" fill="#b45309"/><path d="M11.5 3.5 Q21 6.5 31 2.5" stroke="#7c2d12" stroke-width="3.2" fill="none"/></g>`,
+ bandana:`<g stroke="#111" stroke-width="1.8" stroke-linejoin="round"><path d="M9 26 Q21 33 33 25 L26 38 Z" fill="#dc2626"/><g fill="#fff" stroke="none"><circle cx="20" cy="30" r="1.1"/><circle cx="26" cy="31" r="1.1"/><circle cx="25" cy="35" r="1"/></g></g>`,
+ star:`<path d="M38 33 l2.2 4.6 5 .7 -3.6 3.5 .9 5 -4.5-2.4 -4.5 2.4 .9-5 -3.6-3.5 5-.7z" fill="#fde047" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`,
+ sweat:`<path d="M34 3 q-4 6 0 8 q4-2 0-8z" fill="#7dd3fc" stroke="#111" stroke-width="1.4"/>`,
+ bow:`<g stroke="#111" stroke-width="1.6" stroke-linejoin="round" transform="rotate(20 27 6)"><path d="M27 6 L19 1 L19 11Z M27 6 L35 1 L35 11Z" fill="#facc15"/><circle cx="27" cy="6" r="2.6" fill="#facc15"/></g>`
+};
+function DA(x,y,sc,col,acc,flip,rot){const inner=duckGC(col)+(acc||[]).map(a=>ACC[a]).join('');
+ const t=flip?`translate(${x+68*sc},${y}) scale(${-sc},${sc})`:`translate(${x},${y}) scale(${sc})`;
+ return rot?`<g transform="rotate(${rot} ${x+30*sc} ${y+30*sc})"><g transform="${t}">${inner}</g></g>`:`<g transform="${t}">${inner}</g>`}
+function ring(cx,cy,rx,ry,half){const d=half?`M${cx-rx} ${cy}A${rx} ${ry} 0 0 0 ${cx+rx} ${cy}`:null;
+ const e=(st,w,ex='')=>half?`<path d="${d}" fill="none" stroke="${st}" stroke-width="${w}" ${ex}/>`:`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="${st}" stroke-width="${w}" ${ex}/>`;
+ return e(INK,10)+e('#fff',7)+e('#ef4444',7,'stroke-dasharray="9 9"')}
+function disco(x,y,r){let g='';for(let k=-2;k<=2;k++){g+=`<path d="M${x-r} ${y+k*r*.38} H${x+r}"/>`;g+=`<ellipse cx="${x}" cy="${y}" rx="${Math.abs(k)*r*.38}" ry="${r}" fill="none"/>`}
+ const beams=[['#f472b6',-60],['#22d3ee',-15],['#fde047',25],['#a78bfa',62]].map(([c,a])=>{const A=(a+90)*Math.PI/180,B=(a+98)*Math.PI/180,L=70;
+  return `<polygon points="${x},${y} ${(x+L*Math.cos(A)).toFixed(1)},${(y+L*Math.sin(A)).toFixed(1)} ${(x+L*Math.cos(B)).toFixed(1)},${(y+L*Math.sin(B)).toFixed(1)}" fill="${c}" opacity=".38"/>`}).join('');
+ return beams+`<path d="M${x} 0 V${y-r}" stroke="${INK}" stroke-width="1.6"/><circle cx="${x}" cy="${y}" r="${r}" fill="#cbd5e1" stroke="${INK}" stroke-width="2"/>
+<g stroke="#64748b" stroke-width=".8" clip-path="url(#dcl)">${g}</g><defs><clipPath id="dcl"><circle cx="${x}" cy="${y}" r="${r}"/></clipPath></defs>
+<circle cx="${x-r*.35}" cy="${y-r*.4}" r="${r*.22}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${INK}" stroke-width="2"/>
+<g fill="#fff" stroke="${INK}" stroke-width=".8"><path d="M${x+r+5} ${y-6} l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2-3 -3-1.2 3-1.2z"/><path d="M${x-r-6} ${y+3} l1 2.5 2.5 1 -2.5 1 -1 2.5 -1-2.5 -2.5-1 2.5-1z"/></g>`}
 const ART={
  aim:()=>D(30,22,.6,AB)+X(48,36,13),
  fire:()=>D(26,24,.6,AY)+boom(56,34,17)+`<g fill="#fff" stroke="#1f2937" stroke-width=".8"><ellipse cx="80" cy="18" rx="4" ry="1.6" transform="rotate(-30 80 18)"/><ellipse cx="86" cy="30" rx="4" ry="1.6" transform="rotate(20 86 30)"/><ellipse cx="74" cy="10" rx="3.5" ry="1.4" transform="rotate(50 74 10)"/></g>`,
  dthreat:()=>D(6,28,.48,AG)+D(52,28,.48,AP)+X(24,40,10)+X(70,40,10),
- dshot:()=>D(6,28,.48,AG)+D(52,28,.48,AP)+boom(24,38,13)+boom(70,38,13),
- miss:()=>X(22,44,11)+D(50,26,.52,AB)+boom(70,38,11)+txt(8,22,'?!',16,'#dc2626'),
+ dshot:()=>D(6,28,.48,AO)+D(52,28,.48,AV)+boom(24,38,13)+boom(70,38,13),
+ miss:()=>X(22,44,11)+DA(50,26,.52,AC2,['sweat'])+boom(70,38,11)+txt(8,22,'?!',16,'#dc2626'),
  right:()=>X(30,40,12)+arr(48,40,86,40),
  left:()=>X(70,40,12)+arr(52,40,14,40),
- bill:()=>`<g stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round"><ellipse cx="24" cy="24" rx="20" ry="5" fill="#92400e"/><path d="M13 23 Q12 8 18 8 Q24 12 30 8 Q36 8 35 23 Z" fill="#b45309"/><path d="M13.5 19 Q24 22 34.5 19" stroke="#7c2d12" stroke-width="2.5" fill="none"/></g>`+D(48,26,.55,AG)+boom(68,38,12)+txt(4,62,'BANG!',13,'#dc2626'),
- march:()=>D(6,32,.36,AY)+D(36,32,.36,AB)+D(66,32,.36,AG)+arr(88,16,14,16,'#1f2937'),
- back:()=>`<g transform="rotate(-12 45 45)">${D(24,28,.56,AY)}</g>`+txt(70,22,'z',10)+txt(78,15,'z',12)+txt(87,8,'Z',14)+curve(40,78,60,false),
- fwd:()=>D(30,26,.56,AB)+speed(70,32)+curve(64,20,14,true),
- turbo:()=>D(14,24,.56,AY)+`<path d="M50 38 Q70 28 94 40 Q70 52 50 44 Z" fill="#f97316" stroke="#1f2937" stroke-width="1.2"/><path d="M51 39.5 Q66 34 82 40.5 Q66 47 51 43 Z" fill="#fde047"/>`+speed(60,14),
- rosambo:()=>D(4,34,.34,AY)+D(36,34,.34,AB)+D(68,34,.34,AG)+curve(16,80,26,true)+curve(80,48,26,true,'#dc2626'),
- dance:()=>`<g transform="rotate(-10 50 40)">${D(30,22,.6,AP)}</g>`+txt(10,26,'♪',18,'#7c3aed')+txt(78,20,'♫',18,'#7c3aed')+txt(84,46,'♪',14,'#7c3aed'),
- shield:()=>D(50,18,.46,AB)+D(20,26,.62,AG)+txt(68,14,'psst',9),
- escape:()=>D(30,20,.6,AY)+`<g stroke="#14532d" stroke-width="1.2" fill="#22a052"><ellipse cx="34" cy="56" rx="22" ry="13"/><ellipse cx="56" cy="54" rx="20" ry="14"/><ellipse cx="46" cy="47" rx="16" ry="11"/></g><g stroke="#14532d" stroke-width="1.6" fill="none"><path d="M24 50q3-10 0-18M70 50q-2-12 3-20M58 46q2-9 7-14"/></g><g fill="#86efac"><ellipse cx="40" cy="52" rx="4" ry="2" transform="rotate(-20 40 52)"/><ellipse cx="60" cy="58" rx="4" ry="2" transform="rotate(25 60 58)"/></g>`
+ bill:()=>DA(8,24,.62,AG,['bandana','star','cowboy'])+boom(72,34,13)+txt(56,62,'BANG!',13,'#dc2626')+`<g fill="#fff" stroke="${INK}" stroke-width=".8"><ellipse cx="88" cy="16" rx="3.5" ry="1.4" transform="rotate(-30 88 16)"/><ellipse cx="92" cy="48" rx="3.5" ry="1.4" transform="rotate(30 92 48)"/></g>`,
+ march:()=>D(6,32,.36,AP)+D(36,32,.36,AV)+D(66,32,.36,AY)+arr(88,16,14,16,'#1f2937'),
+ back:()=>ring(42,57,25,7.5)+DA(18,24,.58,AY,['shades'],0,-14)+ring(42,57,25,7.5,1)+txt(70,22,'z',10)+txt(78,15,'z',12)+txt(87,8,'Z',14)+curve(72,94,44,false),
+ fwd:()=>DA(30,26,.56,AV,['sweat'])+speed(70,32)+curve(64,20,14,true),
+ turbo:()=>`<path d="M42 38 Q66 27 94 40 Q66 53 42 44 Z" fill="#f97316" stroke="#1f2937" stroke-width="1.2"/><path d="M44 39.5 Q62 33.5 82 40.5 Q62 47.5 44 43 Z" fill="#fde047"/>`+DA(12,24,.56,AB,['scarf','helmet'])+speed(64,12)+txt(58,65,'VRRM!',11,'#ffe14d'),
+ rosambo:()=>D(4,34,.34,AG)+D(36,34,.34,AO)+D(68,34,.34,AP)+curve(16,80,26,true)+curve(80,48,26,true,'#dc2626'),
+ dance:()=>disco(50,13,8.5)+DA(4,30,.44,AP,['bow'],0,-8)+DA(60,30,.44,AB,[],1,8)+txt(6,24,'♪',15,'#7c3aed')+txt(86,26,'♫',15,'#7c3aed')+txt(44,50,'♪',11,'#db2777'),
+ shield:()=>D(50,18,.46,AV)+D(20,26,.62,AG)+txt(68,14,'psst',9),
+ escape:()=>D(30,20,.6,AO)+`<g stroke="#14532d" stroke-width="1.2" fill="#22a052"><ellipse cx="34" cy="56" rx="22" ry="13"/><ellipse cx="56" cy="54" rx="20" ry="14"/><ellipse cx="46" cy="47" rx="16" ry="11"/></g><g stroke="#14532d" stroke-width="1.6" fill="none"><path d="M24 50q3-10 0-18M70 50q-2-12 3-20M58 46q2-9 7-14"/></g><g fill="#86efac"><ellipse cx="40" cy="52" rx="4" ry="2" transform="rotate(-20 40 52)"/><ellipse cx="60" cy="58" rx="4" ry="2" transform="rotate(25 60 58)"/></g>`
 };
 function artInner(t){return artBg()+(ART[t]?ART[t]():'')}
 function cardArt(t){return `<svg class="art" viewBox="0 0 100 70">${artInner(t)}</svg>`}
@@ -1037,7 +1086,7 @@ function cardSound(t,kills,coverHit){
  if(SHOOT.includes(t))musDuck();
  if(['fire','dshot','miss','bill'].includes(t)){
   sfx('shot');
-  if(kills)for(let k=0;k<kills;k++)sfxQuack(.28+k*.4,1.15);
+  if(kills){for(let k=0;k<kills;k++)sfxQuack(.28+k*.4,1.15);if(FX.vib!==false&&navigator.vibrate)try{navigator.vibrate(kills>1?[90,60,90]:120)}catch(e){}}
   else if(coverHit)setTimeout(()=>sfx('thud'),200);
   return}
  if(['aim','dthreat','right','left'].includes(t))return sfx('aim');
@@ -1070,7 +1119,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.13.2: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.13.4: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1119,22 +1168,65 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){ambStop();
 /* ---------- panel hlasitosti ---------- */
 const PREVIEW={music:()=>musWanted(),master:()=>sfxQuack(0,1),sfx:()=>sfx('shot'),water:()=>{ambLap();setTimeout(ambBubble,300)},
  ducks:()=>quackAt(0,1,.25,BUS.ducks),splash:()=>ambSplash(),bathe:()=>ambBathe(),birds:()=>ambBird(),buzz:()=>ambBuzz(),crickets:()=>ambCricket(),amb:()=>ambBird()};
-function buildSoundPanel(){
- $('soundPanel').innerHTML='<div class="sp-h">Zvuk a efekty</div>'+CH.map(c=>`<div class="sp-row ${c.p&&c.p!=='master'?'sub':''}" data-k="${c.k}">
+const NGRP=[['🌊 Voda',['water','splash','bathe']],['🐾 Zvířata',['ducks','birds','buzz','crickets']]];let natOpen=false;
+const PRE={ticho:['🔇 Ticho',()=>{SET.master.on=false}],hra:['🎮 Jen hra',()=>{SET.master.on=true;SET.sfx.on=true;SET.music.on=false;SET.amb.on=false}],
+ relax:['🌲 Relax',()=>{SET.master.on=true;SET.sfx.on=true;SET.music.on=true;SET.music.v=30;SET.amb.on=true;SET.amb.v=85}],
+ def:['↺ Výchozí',()=>CH.forEach(c=>SET[c.k]={on:true,v:c.v})]};
+const SHORT={master:'Celkově',sfx:'Herní zvuky',amb:'Příroda',water:'Vlnky',bathe:'Cákání'};
+function spRow(c,sub){return `<div class="sp-row ${sub?'sub':''}" data-k="${c.k}">
   <label class="sw2"><input type="checkbox" data-t="${c.k}" ${SET[c.k].on?'checked':''}><span></span></label>
-  <span class="sp-n">${c.ic} ${c.n}</span>
+  <span class="sp-n">${sub?'':c.ic+' '}${SHORT[c.k]||c.n}</span>
   <input type="range" min="0" max="100" step="1" value="${SET[c.k].v}" data-v="${c.k}">
-  <span class="sp-val" id="val-${c.k}">${SET[c.k].v}&nbsp;%</span></div>`).join('')+
-  extraPanelHTML()+'<div class="sp-foot"><button class="btn sm" id="spReset">Výchozí</button><button class="btn sm pri" id="spClose">Hotovo</button></div>';
+  <span class="sp-val" id="val-${c.k}">${SET[c.k].v}&nbsp;%</span></div>`}
+function buildSoundPanel(){
+ const C=k=>CH.find(c=>c.k===k);
+ $('soundPanel').innerHTML=`<button class="btn spmute" id="spMute"></button>
+  <div class="sp-opts pre">${Object.entries(PRE).map(([k,p])=>`<button class="btn sm" data-pre="${k}">${p[0]}</button>`).join('')}</div>`+
+  ['master','music','sfx','amb'].map(k=>spRow(C(k))).join('')+
+  `<button class="spacc" id="spAcc">${natOpen?'▾':'▸'} Podrobnosti přírody</button><div id="spNat" class="${natOpen?'':'hide'}">`+
+  NGRP.map(([n,ks])=>`<div class="sp-grp">${n}</div>`+ks.map(k=>spRow(C(k),1)).join('')).join('')+'</div>'+extraPanelHTML();
  $('soundPanel').querySelectorAll('[data-t]').forEach(el=>el.onchange=()=>{const k=el.dataset.t;SET[k].on=el.checked;soundChanged(k,true)});
  $('soundPanel').querySelectorAll('[data-v]').forEach(el=>{
   el.oninput=()=>{const k=el.dataset.v;SET[k].v=+el.value;if(SET[k].v>0)SET[k].on=true;soundChanged(k,false)};
   el.onchange=()=>{const k=el.dataset.v;ac();if(chOn(k)&&PREVIEW[k]&&BUS)try{PREVIEW[k]()}catch(e){}}});
- $('spReset').onclick=()=>{CH.forEach(c=>SET[c.k]={on:true,v:c.v});buildSoundPanel();soundChanged('master',true)};
- $('spClose').onclick=()=>$('soundPanel').classList.add('hide');
+ $('soundPanel').querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{ac();PRE[b.dataset.pre][1]();soundChanged('master',false);if(chOn('sfx'))sfx('click')});
+ $('spMute').onclick=()=>{SET.master.on=!SET.master.on;if(SET.master.on&&SET.master.v===0)SET.master.v=90;soundChanged('master',true)};
+ $('spAcc').onclick=()=>{natOpen=!natOpen;$('spNat').classList.toggle('hide',!natOpen);$('spAcc').textContent=(natOpen?'▾':'▸')+' Podrobnosti přírody';sfx('click')};
+ buildOtherTabs();
  bindExtraPanel();
  refreshSoundPanel();
 }
+function buildOtherTabs(){
+ $('tab-g').innerHTML=`<div class="sp-sec">✨ Efekty</div>
+ <div class="g-row"><span>Animace karet a tahů</span><label class="sw2"><input type="checkbox" id="fxAnim" ${FX.anim?'checked':''}><span></span></label></div>
+ <div class="g-row"><span>Kachny na rybníce se kolébají</span><label class="sw2"><input type="checkbox" id="fxPond" ${FX.pond?'checked':''}><span></span></label></div>
+ <div class="g-row"><span>Vibrace při zásahu</span><label class="sw2"><input type="checkbox" id="fxVib" ${FX.vib!==false?'checked':''}><span></span></label></div>
+ <div class="sp-sec">📱 Obrazovka</div>
+ <div class="g-row" id="gFSrow"><span>Celá obrazovka</span><label class="sw2"><input type="checkbox" id="gFS"><span></span></label></div>
+ <div class="g-row"><span>Otočení obrazovky</span><button class="btn sm" id="gOr" type="button"></button></div>`;
+ $('tab-h').innerHTML=`<div class="sp-sec">🐢 Rychlost soupeřů</div><div class="row" id="spdRow2"></div>
+ <p class="g-note">Počet soupeřů, obtížnost a barvu svých kachen nastavíš před novou hrou.</p>
+ <div class="actions center"><button class="btn" id="bNewCfg" type="button">✏️ Nastavení nové hry</button></div>`;
+ $('tab-o').innerHTML=`<div class="sp-sec">🦆 Střelené kachny</div>
+ <div class="g-row"><span>Verze</span><b id="abVer"></b></div>
+ <div class="actions center"><button class="btn" id="bAbUpd" type="button">📜 Novinky a aktualizace</button></div>
+ <p class="g-note">Počítačová verze karetní hry Střelené kachny (Albi), původně Sitting Ducks Gallery od Keitha Meyerse. Grafika, hudba a zvuky jsou vytvořené pro tuto hru.</p>`;
+ $('fxVib').onchange=e=>{FX.vib=e.target.checked;saveFX();if(FX.vib&&navigator.vibrate)try{navigator.vibrate(80)}catch(_){}};
+ $('gFS').onchange=()=>{try{$('togFS').onclick()}catch(e){}setTimeout(refreshTabs,400)};
+ $('gOr').onclick=()=>{sfx('click');try{$('bOrient').onclick()}catch(e){}refreshTabs()};
+ $('bNewCfg').onclick=()=>{setClose();sfx('click');renderSetup();$('cfgov').classList.remove('hide')};
+ $('bAbUpd').onclick=()=>{setClose();$('bUpd').onclick()};
+}
+function refreshTabs(){
+ try{const ok=fsOk&&!INSTALLED;$('gFSrow').style.display=ok?'':'none';$('gFS').checked=!!fsEl()}catch(e){}
+ try{const o=ORL[orient];$('gOr').textContent=o[0]+' '+(orient==='auto'?'Automaticky':o[1])}catch(e){}
+ try{$('spdRow2').innerHTML=SPEEDS.map(([f,n])=>`<button class="opt ${Math.abs(spd()-f)<.01?'on':''}" data-sp2="${f}">${n}</button>`).join('');
+  $('spdRow2').querySelectorAll('[data-sp2]').forEach(b=>b.onclick=()=>{sfx('click');cfg.speed=+b.dataset.sp2;saveCfg();refreshTabs()})}catch(e){}
+ try{$('abVer').textContent=VERSION}catch(e){}}
+function setTab(t){document.querySelectorAll('#setTabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+ ['z','g','h','o'].forEach(k=>$('tab-'+k).classList.toggle('hide',k!==t));refreshTabs()}
+function setOpen(t){ac();sfx('click');setTab(t||'z');$('sndov').classList.remove('hide')}
+function setClose(){$('sndov').classList.add('hide');sndIc();updateSoundBtn()}
 function refreshSoundPanel(){
  CH.forEach(c=>{const row=$('soundPanel').querySelector(`[data-k="${c.k}"]`);if(!row)return;
   row.querySelector('[data-t]').checked=SET[c.k].on;row.querySelector('[data-v]').value=SET[c.k].v;
@@ -1147,7 +1239,9 @@ function soundChanged(k,toggled){
  if(chOn('amb')){if(S)ambStart()}else ambStop();
  if(chOn('music'))musWanted();else musStop();
  if(toggled&&SET[k].on&&chOn(k)&&PREVIEW[k])setTimeout(()=>{try{PREVIEW[k]()}catch(e){}},80)}
-function updateSoundBtn(){const b=$('bSound');if(b)b.textContent=chOn('master')?(SET.master.v<40?'🔉':'🔊'):'🔇'}
+function updateSoundBtn(){const b=$('bSound');if(b)b.classList.toggle('muted',!chOn('master'));
+ const m=$('spMute');if(m){const on=chOn('master');m.textContent=on?'🔊 Ztlumit všechno':'🔇 Zvuk je vypnutý – zapnout';m.classList.toggle('off',!on)}
+ if(typeof sndIc==='function')try{sndIc()}catch(e){}}
 
 
 /* ---------- ukládání rozehrané hry ---------- */
@@ -1294,9 +1388,7 @@ document.addEventListener('pointerdown',function first(){document.removeEventLis
 /* --- panel: skladba a efekty --- */
 function extraPanelHTML(){const opts=[['mix','🔀 Střídat'],['polka','🎪 Polka'],['banjo','🪕 Banjo'],['sneak','🕵️ Honička'],['calm','🌿 Rybník']];
  return `<div class="sp-sec">🎵 Skladba ve hře</div><div class="sp-opts">${opts.map(([k,n])=>`<button class="btn sm ${FX.track===k?'on':''}" data-trk="${k}">${n}</button>`).join('')}</div>
- <div class="sp-sec">✨ Efekty</div>
- <div class="sp-row2"><label class="sw2"><input type="checkbox" id="fxAnim" ${FX.anim?'checked':''}><span></span></label>Animace karet a tahů</div>
- <div class="sp-row2"><label class="sw2"><input type="checkbox" id="fxPond" ${FX.pond?'checked':''}><span></span></label>Kachny na rybníce se kolébají</div>`}
+ `}
 function bindExtraPanel(){const sp=$('soundPanel');
  sp.querySelectorAll('[data-trk]').forEach(b=>b.onclick=()=>{FX.track=b.dataset.trk;saveFX();sp.querySelectorAll('[data-trk]').forEach(x=>x.classList.toggle('on',x===b));ac();musPlay(S&&!S.over?gameTrack():(FX.track==='mix'?'polka':FX.track))});
  $('fxAnim').onchange=e=>{FX.anim=e.target.checked;saveFX();applyFX();if(!FX.anim)oppHide()};
@@ -1472,7 +1564,7 @@ function detailHTML(){
 }
 $('detail').onclick=e=>{const b=e.target.closest('button[data-d]');if(b){if(!b.disabled)detailAct(b.dataset.d);return}
  if(e.target.classList.contains('sheet-bg')||e.target.classList.contains('sheet'))detailAct('close')};
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.detail!=null)detailAct('close')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.detail!=null)detailAct('close');if(e.key==='Escape'&&!$('sndov').classList.contains('hide'))setClose()});
 function tapCol(i){
  if(!myTurn()||ui.card==null){ownerTip(i);const s=S&&S.row[i];if(s&&s.k.t==='d'&&s.cv==null){ac();quackOnly(i)}return}
  ownerTip(i);
@@ -1561,9 +1653,13 @@ $('cardlist').innerHTML=Object.entries(CARDS).map(([k,c])=>`<div class="mini">${
 try{const o=loadSaved();if(o&&o.cfg)cfg={...cfg,...o.cfg}}catch(e){}
 $('iName').oninput=e=>{cfg.name=e.target.value;cfgChip()};
 $('bStart').onclick=()=>{ac();newGame();quackAt(.1);ambStart()};
-$('bSound').onclick=e=>{e.stopPropagation();ac();$('soundPanel').classList.toggle('hide')};
-$('soundPanel').onclick=e=>e.stopPropagation();
-document.addEventListener('click',()=>$('soundPanel').classList.add('hide'));
+{let lpT=null,lpDone=false;const b=$('bSound');
+ b.addEventListener('pointerdown',()=>{lpDone=false;clearTimeout(lpT);lpT=setTimeout(()=>{lpDone=true;ac();SET.master.on=!chOn('master');if(SET.master.on&&SET.master.v===0)SET.master.v=90;soundChanged('master',true);try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}},600)});
+ ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>clearTimeout(lpT)));
+ b.addEventListener('contextmenu',e=>e.preventDefault());
+ b.onclick=e=>{e.stopPropagation();if(lpDone){lpDone=false;return}setOpen('z')}}
+document.querySelectorAll('#setTabs button').forEach(b=>b.onclick=()=>{sfx('click');setTab(b.dataset.tab)});
+$('bSetX').onclick=setClose;
 buildSoundPanel();
 /* ---------- celá obrazovka ---------- */
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
@@ -1708,9 +1804,9 @@ $('bCfg').onclick=()=>{sfx('click');renderSetup();$('cfgov').classList.remove('h
 $('bCfgClose').onclick=()=>{sfx('click');$('cfgov').classList.add('hide');cfgChip()};
 $('cfgov').addEventListener('click',e=>{if(e.target.id==='cfgov'){$('cfgov').classList.add('hide');cfgChip()}});
 /* zvuk z menu: přesune stejný panel do okna a pak zpět do hlavičky */
-function sndIc(){const i=$('snd2Ic');if(i)i.textContent=chOn('master')?'🔊':'🔇';$('bSnd2').classList.toggle('off',!chOn('master'))}
-$('bSnd2').onclick=e=>{e.stopPropagation();ac();sfx('click');const sp=$('soundPanel');$('sndHost').appendChild(sp);sp.classList.remove('hide');sp.classList.add('inov');$('sndov').classList.remove('hide')};
-function sndBack(){const sp=$('soundPanel');sp.classList.remove('inov');sp.classList.add('hide');document.querySelector('.sndwrap').appendChild(sp);$('sndov').classList.add('hide');sndIc()}
+function sndIc(){$('bSnd2').classList.toggle('off',!chOn('master'))}
+$('bSnd2').onclick=e=>{e.stopPropagation();setOpen('z')};
+function sndBack(){setClose()}
 $('bSndClose').onclick=sndBack;$('sndHost').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#spClose'))setTimeout(sndBack,0)});$('sndov').addEventListener('click',e=>{if(e.target.id==='sndov')sndBack()});
 /* živá scéna za vším */
 function pondScene(wide){const dk=(c,x,y,sc,cls,dl)=>`<g class="pd ${cls}" style="animation-delay:${dl}s"><g transform="translate(${x},${y}) scale(${sc})"><g class="pdb">${duckGC(c)}</g></g></g>`;
@@ -1790,6 +1886,8 @@ function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if
 
 /* ===================== historie verzí ===================== */
 const CHANGELOG=[
+ ['0.13.4',['Nové kresby akčních karet: Turbokachna s helmou, brýlemi a šálou','Leháro: kachna se slunečními brýlemi na nafukovacím kruhu','Divokej Bill: kachna s kovbojským kloboukem, šátkem a šerifskou hvězdou','Kachní tanec: disko koule se světly a dvě tančící kachny','Pestřejší barvy kachen na akčních kartách']],
+ ['0.13.3',['Nové okno ⚙️ Nastavení se záložkami Zvuk, Grafika, Hra a O hře – ikona ozubeného kola nahradila reproduktor','Zvuky v kategoriích: celkově, hudba, herní zvuky a příroda; podrobnosti přírody (voda, zvířata) se rozbalí','Rychlé předvolby zvuku: Ticho, Jen hra, Relax a Výchozí a velké tlačítko pro ztlumení všeho','Dlouhý stisk ⚙️ ve hře zvuk rychle ztlumí nebo zapne','Nová volba: vibrace telefonu při zásahu kachny']],
  ['0.13.2',['Karty na rybníce už nemají jmenovky ani zvýraznění vlastních kachen – svou barvu si musíš pamatovat','Jméno majitele kachny ukáže malá krémová bublina po klepnutí na kartu nebo při výběru cíle']],
  ['0.13.1',['Životy hráčů jako 5 kreslených kachniček – střelené jsou šedé a přeškrtnuté','Jmenovky na kartách rybníka ve štítku v barvě hráče','Kachny na rybníce občas mrknou','Nová kachna při příjezdu do řady šplouchne a rozběhnou se kruhy na vodě','Před výstřelem cvakne nabití brokovnice','Hudba se při ráně na chvilku ztiší']],
  ['0.13.0',['Obtížnost soupeřů v nastavení hry ✏️: Lehký, Střední a Těžký','Každý soupeř má povahu: Franta 🔫 Střelec, Lojza 👑 Lovec vůdce, Božka 🛡️ Opatrná, Venca 🃏 Šprýmař, Jarmila 😌 Vyrovnaná','Rychlost soupeřů: Pomalu, Normálně, Rychle, Bleskově – a ťuknutím jejich tah přeskočíš','⚠️ na tvé kachně, když je zaměřená nebo vedle zaměřovače','Nastavení hry se pamatuje i bez rozehrané hry','Automatický test (?test=200) už nesmaže rozehranou hru ani nastavení a zkouší všechny obtížnosti']],

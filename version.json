@@ -1,7 +1,10 @@
 {
- "version": "0.13.2",
+ "version": "0.13.4",
  "notes": [
-  "Karty na rybníce už nemají jmenovky ani zvýraznění vlastních kachen – svou barvu si musíš pamatovat",
-  "Jméno majitele kachny ukáže malá krémová bublina po klepnutí na kartu nebo při výběru cíle"
+  "Nové kresby akčních karet: Turbokachna s helmou, brýlemi a šálou",
+  "Leháro: kachna se slunečními brýlemi na nafukovacím kruhu",
+  "Divokej Bill: kachna s kovbojským kloboukem, šátkem a šerifskou hvězdou",
+  "Kachní tanec: disko koule se světly a dvě tančící kachny",
+  "Pestřejší barvy kachen na akčních kartách"
  ]
 }
