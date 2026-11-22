@@ -1,10 +1,12 @@
 {
- "version": "0.13.4",
+ "version": "0.14.0",
  "notes": [
-  "Nové kresby akčních karet: Turbokachna s helmou, brýlemi a šálou",
-  "Leháro: kachna se slunečními brýlemi na nafukovacím kruhu",
-  "Divokej Bill: kachna s kovbojským kloboukem, šátkem a šerifskou hvězdou",
-  "Kachní tanec: disko koule se světly a dvě tančící kachny",
-  "Pestřejší barvy kachen na akčních kartách"
+  "Počty karet podle originálu: Zamířit 10, Divokej Bill 1, Kachní pochod 6, Leháro 3, Chvátám 3, Rošambo 2, Kachní únik 3 (celkem 52)",
+  "Tři rozšíření, každé zvlášť zapínatelné v nastavení hry ✏️",
+  "⛈️ Počasí: Mlha (zahalí pole 4–6), Bouřka (smete zaměřovače), Vítr (posune zaměřovače doleva)",
+  "🛡️ Kachní triky: Potápěčka (shodí zaměřovač z tvé kachny), Kachní helma (vydrží jeden zásah), Vajíčko (vrátí jednu střelenou kachnu)",
+  "🎯 Lovecká výbava: Brokovnice (prostřelí úkryt i helmu), Ostrostřelec (trefa 2 pole od zaměřovače), Lovecký pes (vyžene schované kachny)",
+  "Nové kresby pro všech 9 karet rozšíření, mlha nad rybníkem a helma na kachnách",
+  "Pravidla v menu ukazují i karty rozšíření"
  ]
 }

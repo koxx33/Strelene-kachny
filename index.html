@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.13.4</title>
-<meta name="version" content="0.13.4">
+<title>Střelené kachny v0.14.0</title>
+<meta name="version" content="0.14.0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -696,6 +696,14 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 .tabb .sp-sec:first-child{margin-top:2px}
 #bSound{position:relative}#bSound.muted::after,#bSnd2.off .ti::after{content:'🔇';position:absolute;right:-6px;bottom:-6px;font-size:13px}
 #bSnd2 .ti{position:relative}
+.col.fog .card::after,.col.fog .aimcell::after{content:'';position:absolute;inset:0;border-radius:8px;pointer-events:none;z-index:3;
+ background:radial-gradient(ellipse 60% 35% at 30% 30%,rgba(255,255,255,.85),transparent 70%),radial-gradient(ellipse 70% 40% at 70% 65%,rgba(255,255,255,.8),transparent 70%),rgba(235,240,245,.62);animation:fogDrift 6s ease-in-out infinite alternate}
+.col.fog .aimcell{position:relative}
+@keyframes fogDrift{from{background-position:0 0,0 0,0 0}to{background-position:12px 0,-10px 0,0 0}}
+html.noanim .col.fog .card::after{animation:none}
+.box>#expRow,.box>#expHint{grid-column:1/3}
+.exprow{display:flex;flex-direction:column;gap:6px;align-items:stretch}.exprow .opt{display:flex!important;flex-direction:column;align-items:flex-start;text-align:left;width:100%;height:auto!important;min-height:0;line-height:1.15;padding:5px 12px!important;font-size:19px}.exprow .opt small{font:500 12.5px system-ui,sans-serif;opacity:.85;letter-spacing:0}
+.cardlist-h{font-family:Bangers,Impact,sans-serif;font-size:20px;letter-spacing:.5px;margin:12px 0 4px}
 .otip{position:fixed;z-index:80;transform:translateX(-50%);background:var(--cream);color:#111;border:2px solid #111;border-radius:10px;box-shadow:2px 2px 0 #111;padding:1px 9px;font:700 clamp(11px,2.8vw,14px)/1.35 system-ui,sans-serif;white-space:nowrap;pointer-events:none;animation:otIn .16s ease-out}
 .otip::after{content:'';position:absolute;left:50%;bottom:-7px;width:9px;height:9px;background:var(--cream);border-right:2px solid #111;border-bottom:2px solid #111;transform:translateX(-50%) rotate(45deg)}
 .otip.out{opacity:0;transition:opacity .25s}
@@ -708,7 +716,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.13.4</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.14.0</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení (podrž = ztlumit zvuk)">⚙️</button></div>
    <button class="btn sm" id="bFull" title="Celá obrazovka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></button>
@@ -733,7 +741,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.13.4</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.14.0</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -745,7 +753,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.13.4 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.14.0 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -764,6 +772,9 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
    <p class="hint" id="diffHint"></p>
    <h3>Rychlost soupeřů</h3>
    <div class="row" id="spdRow"></div>
+   <h3>Rozšíření</h3>
+   <div class="row exprow" id="expRow"></div>
+   <p class="hint" id="expHint"></p>
    <h3>Tví soupeři</h3>
    <div class="perslist" id="persList"></div>
   </div>
@@ -781,7 +792,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.13.4</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.14.0</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <h3 class="histh">📜 Historie verzí</h3>
@@ -816,7 +827,7 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.13.4</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.14.0</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -835,37 +846,52 @@ html.noanim .card .lid,.card .pdk.scared .lid{animation:none}
 </div>
 
 <script>
-const VERSION='0.13.4';
+const VERSION='0.14.0';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
- aim:{n:'Zamířit!',i:'🎯',c:12,d:'Umísti zaměřovač nad libovolné nezaměřené pole (i nad vodu).'},
+ aim:{n:'Zamířit!',i:'🎯',c:10,d:'Umísti zaměřovač nad libovolné nezaměřené pole (i nad vodu).'},
  fire:{n:'Vystřelit!',i:'🔫',c:12,d:'Zastřel jednu zaměřenou kachnu – je jedno, kdo ji zaměřil.'},
  dthreat:{n:'Dvojitá hrozba',i:'🎯🎯',c:1,d:'Zaměř dvě sousední pole (když to nejde, aspoň jedno).'},
  dshot:{n:'Dvojitá trefa',i:'💥💥',c:1,d:'Zastřel dvě zaměřené kachny, které jsou hned vedle sebe.'},
  miss:{n:'Jejda, vedle!',i:'😬',c:2,d:'Zastřel kachnu těsně před nebo za zaměřeným polem.'},
  right:{n:'Střílej vpravo!',i:'➡️',c:2,d:'Posuň zaměřovač o pole doprava (na nezaměřené pole).'},
  left:{n:'Střílej vlevo!',i:'⬅️',c:2,d:'Posuň zaměřovač o pole doleva (na nezaměřené pole).'},
- bill:{n:'Divokej Bill',i:'🤠',c:2,d:'Zastřel libovolnou kachnu, i nezaměřenou. Skrytou ne.'},
- march:{n:'Kachní pochod',i:'🚶',c:7,d:'Všechny karty se posunou o pole doleva, první odplave do balíčku.'},
- back:{n:'Leháro',i:'😴',c:2,d:'Prohoď svou kachnu s kartou těsně za ní.'},
- fwd:{n:'Chvátám!',i:'🏃',c:2,d:'Prohoď svou kachnu s kartou těsně před ní.'},
+ bill:{n:'Divokej Bill',i:'🤠',c:1,d:'Zastřel libovolnou kachnu, i nezaměřenou. Skrytou ne.'},
+ march:{n:'Kachní pochod',i:'🚶',c:6,d:'Všechny karty se posunou o pole doleva, první odplave do balíčku.'},
+ back:{n:'Leháro',i:'😴',c:3,d:'Prohoď svou kachnu s kartou těsně za ní.'},
+ fwd:{n:'Chvátám!',i:'🏃',c:3,d:'Prohoď svou kachnu s kartou těsně před ní.'},
  turbo:{n:'Turbokachna',i:'🚀',c:1,d:'Přesuň svou kachnu na čelo řady.'},
- rosambo:{n:'Rošambo',i:'🔀',c:1,d:'Libovolně přeskládej všech 6 karet v řadě.'},
+ rosambo:{n:'Rošambo',i:'🔀',c:2,d:'Libovolně přeskládej všech 6 karet v řadě.'},
  dance:{n:'Kachní tanec',i:'💃',c:1,d:'Zamíchej celou řadu do balíčku a vylož 6 nových karet.'},
  shield:{n:'Živý štít',i:'🛡️',c:2,d:'Schovej svou kachnu pod sousední cizí kachnu.'},
- escape:{n:'Kachní únik',i:'🌿',c:2,d:'Zakryj kachnu na jedno kolo – nejde zastřelit.'}
+ escape:{n:'Kachní únik',i:'🌿',c:3,d:'Zakryj kachnu na jedno kolo – nejde zastřelit.'},
+ /* --- rozšíření ⛈️ Počasí --- */
+ mlha:{n:'Mlha',i:'🌫️',c:2,x:'wx',d:'Mlha zahalí pole 4–6 až do tvého dalšího tahu – tam se nedá mířit ani střílet.'},
+ bourka:{n:'Bouřka',i:'⛈️',c:1,x:'wx',d:'Blesk a liják – všechny zaměřovače spadnou do vody.'},
+ vitr:{n:'Vítr',i:'🌬️',c:2,x:'wx',d:'Vítr posune všechny zaměřovače o pole doleva, ten z prvního pole uletí.'},
+ /* --- rozšíření 🛡️ Kachní triky --- */
+ dive:{n:'Potápěčka',i:'🤿',c:2,x:'trick',d:'Tvoje zaměřená kachna se potopí a zaměřovač nad ní spadne do vody.'},
+ helma:{n:'Kachní helma',i:'🪖',c:2,x:'trick',d:'Nasaď své kachně helmu – první zásah ji jen shodí.'},
+ vejce:{n:'Vajíčko',i:'🥚',c:1,x:'trick',d:'Vylíhne se ti nová kachna – jedna střelená se vrátí do balíčku kachen.'},
+ /* --- rozšíření 🎯 Lovecká výbava --- */
+ brok:{n:'Brokovnice',i:'💥',c:2,x:'hunt',d:'Zastřel zaměřenou kachnu – broky projdou i úkrytem a helmou.'},
+ sniper:{n:'Ostrostřelec',i:'🔭',c:1,x:'hunt',d:'Zastřel kachnu ob jedno pole od zaměřovače (2 pole vedle).'},
+ pes:{n:'Lovecký pes',i:'🐕',c:2,x:'hunt',d:'Pes zruší všechny úkryty a schované kachny vyžene ven za jejich štít.'}
 };
+const EXPS={wx:{n:'Počasí',i:'⛈️',d:'Mlha, Bouřka, Vítr'},trick:{n:'Kachní triky',i:'🛡️',d:'Potápěčka, Kachní helma, Vajíčko'},hunt:{n:'Lovecká výbava',i:'🎯',d:'Brokovnice, Ostrostřelec, Lovecký pes'}};
+const INSTANT=['march','dance','mlha','bourka','vitr','vejce','pes'];
 const PROMPTS={
  aim:['Vyber pole, které zaměříš.'],fire:['Vyber zaměřenou kachnu, na kterou vystřelíš.'],
  dthreat:['Vyber první pole.','Vyber sousední pole.'],dshot:['Vyber první zaměřenou kachnu.','Vyber sousední zaměřenou kachnu.'],
  miss:['Vyber zaměřené pole.','Vyber kachnu hned vedle něj.'],right:['Vyber zaměřovač, který posuneš doprava.'],left:['Vyber zaměřovač, který posuneš doleva.'],
  bill:['Vyber kachnu, kterou Bill sejme.'],back:['Vyber svou kachnu.'],fwd:['Vyber svou kachnu.'],turbo:['Vyber svou kachnu.'],
  shield:['Vyber svou kachnu, která se schová.','Vyber sousední cizí kachnu – štít.'],escape:['Vyber kachnu, kterou zakryješ.'],
- march:['Potvrď tlačítkem Zahrát.'],dance:['Potvrď tlačítkem Zahrát.']
+ march:['Potvrď tlačítkem Zahrát.'],dance:['Potvrď tlačítkem Zahrát.'],
+ dive:['Vyber svou zaměřenou kachnu.'],helma:['Vyber svou kachnu, které nasadíš helmu.'],brok:['Vyber zaměřenou kachnu.'],sniper:['Vyber zaměřené pole.','Vyber kachnu o 2 pole vedle.']
 };
 
-let S=null,cfg={opp:3,color:0,name:'',diff:'normal',speed:1},ui={card:null,sel:[],perm:null,pick:null,detail:null},fxTimer=null,lastDetail='';
+let S=null,cfg={opp:3,color:0,name:'',diff:'normal',speed:1,exp:{}},ui={card:null,sel:[],perm:null,pick:null,detail:null},fxTimer=null,lastDetail='';
 const $=id=>document.getElementById(id);
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const pn=q=>S.players[q].name, cn=q=>COLS[S.players[q].c].n, ch=q=>COLS[S.players[q].c].h;
@@ -884,7 +910,7 @@ function duckSVG(col){return `<svg class="duck" viewBox="-4 0 68 56">${duckG(col
 function sceneSVG(col,o={}){ // komiksová karta rybníka
  const I='#111',cl=(x,y,k)=>`<g transform="translate(${x},${y}) scale(${k})" fill="#fff" stroke="${I}" stroke-width="${(1.3/k).toFixed(2)}"><path d="M-10 3 Q-12 -3 -6 -3 Q-4 -8 2 -6 Q7 -9 9 -3 Q14 -2 11 3 Z"/></g>`;
  const hid=o.hid!=null?`<g class="peek"><g transform="translate(31,40) scale(.46)">${duckGC(o.hid)}</g></g><g class="psst"><path d="M44 22 h14 v8 h-9 l-3 4 v-4 h-2z" fill="#fff" stroke="${I}" stroke-width="1.2"/><text x="51" y="28.4" text-anchor="middle" style="font:9px Bangers,Impact,sans-serif" fill="${I}">psst</text></g>`:'';
- const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(9,33) scale(.72)">${duckGC(col,o.scared?'scared':'blink')}</g></g>`
+ const duck=col?`<g class="pdk${o.scared?' scared':''}"><g transform="translate(9,33) scale(.72)">${duckGC(col,o.scared?'scared':'blink')}${o.helm?ACC.army:''}</g></g>`
   :`<g stroke="#c9f0ff" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M10 64 q6-3 12 0"/><path d="M34 70 q6-3 12 0"/></g>`;
  const front=`<path d="M0 65 q7.5-2.6 15 0 t15 0 t15 0 t15 0 V80 H0Z" fill="#4fb3d9" stroke="${I}" stroke-width="1.2"/><g stroke="#c9f0ff" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M7 72 q5-2 10 0M36 75 q5-2 10 0"/></g>`;
  const bush=o.cover?`<g class="bush"><g stroke="${I}" stroke-width="1.8" fill="#3fa34d"><ellipse cx="16" cy="70" rx="17" ry="12"/><ellipse cx="44" cy="70" rx="18" ry="13"/><ellipse cx="30" cy="62" rx="15" ry="11"/></g>
@@ -913,6 +939,7 @@ const ACC={
  bandana:`<g stroke="#111" stroke-width="1.8" stroke-linejoin="round"><path d="M9 26 Q21 33 33 25 L26 38 Z" fill="#dc2626"/><g fill="#fff" stroke="none"><circle cx="20" cy="30" r="1.1"/><circle cx="26" cy="31" r="1.1"/><circle cx="25" cy="35" r="1"/></g></g>`,
  star:`<path d="M38 33 l2.2 4.6 5 .7 -3.6 3.5 .9 5 -4.5-2.4 -4.5 2.4 .9-5 -3.6-3.5 5-.7z" fill="#fde047" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`,
  sweat:`<path d="M34 3 q-4 6 0 8 q4-2 0-8z" fill="#7dd3fc" stroke="#111" stroke-width="1.4"/>`,
+ army:`<g stroke="#111" stroke-width="2.2" stroke-linejoin="round"><path d="M6 15 Q6 1 21 1 Q36 2 35 16 Z" fill="#65a30d"/><path d="M3 16 H38" stroke-width="3.4"/><path d="M14 6 q3 -2 6 -1M24 8 q3 -1 5 1" stroke="#3f6212" stroke-width="1.6" fill="none"/></g>`,
  bow:`<g stroke="#111" stroke-width="1.6" stroke-linejoin="round" transform="rotate(20 27 6)"><path d="M27 6 L19 1 L19 11Z M27 6 L35 1 L35 11Z" fill="#facc15"/><circle cx="27" cy="6" r="2.6" fill="#facc15"/></g>`
 };
 function DA(x,y,sc,col,acc,flip,rot){const inner=duckGC(col)+(acc||[]).map(a=>ACC[a]).join('');
@@ -944,6 +971,19 @@ const ART={
  rosambo:()=>D(4,34,.34,AG)+D(36,34,.34,AO)+D(68,34,.34,AP)+curve(16,80,26,true)+curve(80,48,26,true,'#dc2626'),
  dance:()=>disco(50,13,8.5)+DA(4,30,.44,AP,['bow'],0,-8)+DA(60,30,.44,AB,[],1,8)+txt(6,24,'♪',15,'#7c3aed')+txt(86,26,'♫',15,'#7c3aed')+txt(44,50,'♪',11,'#db2777'),
  shield:()=>D(50,18,.46,AV)+D(20,26,.62,AG)+txt(68,14,'psst',9),
+ mlha:()=>D(8,26,.5,AB)+D(56,26,.5,AP)+`<g stroke="#111" stroke-width="1.6" fill="#f1f5f9" opacity=".93"><path d="M40 52 Q38 40 50 40 Q54 30 66 34 Q76 26 86 34 Q100 32 100 44 V58 H40Z"/><path d="M52 30 Q58 20 70 24 Q80 16 92 24 Q100 24 100 30 V36 H52Z" opacity=".8"/></g><g stroke="#94a3b8" stroke-width="2" fill="none" stroke-linecap="round"><path d="M48 50 h18M70 46 h20M58 56 h24M62 30 h14"/></g>`+txt(80,20,'?',16,'#fff'),
+ bourka:()=>`<g stroke="#111" stroke-width="1.8"><path d="M16 22 Q14 10 28 10 Q34 0 48 6 Q60 -2 70 8 Q86 6 86 20 Q86 26 78 26 H22 Q14 26 16 22Z" fill="#64748b"/></g><path d="M50 24 L42 40 L50 40 L44 56 L60 34 L52 34 L58 24Z" fill="#fde047" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/><g stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round"><path d="M24 30 l-3 7M32 32 l-3 7M70 30 l-3 7M78 32 l-3 7M86 30 l-3 7M18 40 l-3 7"/></g>`+X(74,56,7)+`<g stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M62 64 q4-6 8-1M80 63 q4-5 8 0"/></g>`,
+ vitr:()=>X(74,30,10)+arr(58,30,22,30,'#38bdf8')+`<g stroke="#111" stroke-width="3.8" fill="none" stroke-linecap="round"><path d="M10 56 h34 q8 0 8 -6 q0 -5 -5 -5M30 64 h44 q8 0 8 6"/></g><g stroke="#e0f2fe" stroke-width="2" fill="none" stroke-linecap="round"><path d="M10 56 h34 q8 0 8 -6 q0 -5 -5 -5M30 64 h44 q8 0 8 6"/></g>`+D(4,22,.36,AO)+txt(8,16,'fíí!',10,'#e0f2fe'),
+ dive:()=>DA(22,24,.62,AY,[],0,215)+`<rect y="50" width="100" height="20" fill="#4fb3d9" stroke="#111" stroke-width="1.2"/><g fill="#e0f2fe" stroke="#111" stroke-width=".9"><circle cx="34" cy="60" r="2.4"/><circle cx="40" cy="64" r="1.6"/><circle cx="52" cy="62" r="2"/><circle cx="46" cy="57" r="1.4"/></g>`+X(76,38,8)+`<g stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M66 56 q5-7 10-1q5-6 10 1"/></g>`+txt(6,22,'blub!',11,'#e0f2fe'),
+ helma:()=>DA(22,20,.66,AG,['army'])+`<g fill="#fde047" stroke="#111" stroke-width="1"><path d="M30 6 l2 5 5 -3 -2 5 5 2 -5 2 2 5 -5 -3 -2 5 -2 -5 -5 3 2 -5 -5 -2 5 -2 -2 -5 5 3z"/></g><g fill="#cbd5e1" stroke="#111" stroke-width="1"><ellipse cx="70" cy="12" rx="4" ry="2.4" transform="rotate(-25 70 12)"/></g><path d="M44 14 Q58 4 66 12" stroke="#111" stroke-width="1.4" fill="none" stroke-dasharray="3 3"/>`+txt(58,34,'PING!',13,'#ffe14d'),
+ vejce:()=>`<g stroke="#111" stroke-width="1.6"><ellipse cx="50" cy="58" rx="30" ry="9" fill="#a16207"/><path d="M24 56 q6 -4 12 0M40 60 q6-4 12 0M60 56 q6-4 12 0" stroke="#713f12" fill="none"/></g>
+<g stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M32 52 Q30 26 50 22 Q70 26 68 52 Z" fill="#fef3c7"/></g>
+<g transform="translate(37,10) scale(.5)"><circle cx="26" cy="20" r="14" fill="${AY}" stroke="#111" stroke-width="3"/><path d="M12 20 Q2 18 0 24 Q8 27 13 24Z" fill="#fb923c" stroke="#111" stroke-width="2.4"/><circle cx="24" cy="17" r="3" fill="#111"/><circle cx="23" cy="16" r="1" fill="#fff"/><path d="M24 6 q2 -6 6 -2" stroke="#111" stroke-width="2.4" fill="none"/></g>
+<path d="M32 40 l6 -5 5 5 6 -6 5 6 6 -5 5 5 3 -2 V52 H32Z" fill="#fef3c7" stroke="#111" stroke-width="2" stroke-linejoin="round"/>`+txt(72,26,'píp!',12,'#fff')+txt(10,30,'♥',14,'#ef4444'),
+ brok:()=>D(34,20,.56,AB)+`<g stroke="#14532d" stroke-width="1.2" fill="#22a052"><ellipse cx="34" cy="58" rx="18" ry="9"/><ellipse cx="66" cy="58" rx="18" ry="9"/></g>`+boom(52,34,14)+`<g fill="#111">${[[20,20],[84,22],[26,46],[80,48],[14,34],[90,36],[50,10]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.6"/>`).join('')}</g><g fill="#86efac" stroke="#14532d" stroke-width=".8"><ellipse cx="18" cy="14" rx="4" ry="2" transform="rotate(-30 18 14)"/><ellipse cx="88" cy="14" rx="4" ry="2" transform="rotate(30 88 14)"/><ellipse cx="10" cy="44" rx="4" ry="2" transform="rotate(10 10 44)"/></g>`,
+ sniper:()=>X(18,42,9)+`<path d="M30 42 Q50 20 70 34" stroke="#111" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>`+D(62,22,.48,AP)+boom(78,32,10)+txt(42,22,'2',16,'#ffe14d')+`<g transform="translate(4,8)"><rect width="24" height="8" rx="4" fill="#334155" stroke="#111" stroke-width="1.4"/><circle cx="21" cy="4" r="3" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/></g>`,
+ pes:()=>`<g stroke="#14532d" stroke-width="1.2" fill="#22a052"><ellipse cx="72" cy="56" rx="22" ry="12"/><ellipse cx="62" cy="48" rx="14" ry="9"/></g>`+D(60,16,.42,AV)+txt(88,18,'!',16,'#dc2626')+`<g stroke="#111" stroke-width="2" stroke-linejoin="round">
+<path d="M6 70 Q4 46 20 42 Q36 40 38 70Z" fill="#b45309"/><ellipse cx="24" cy="34" rx="14" ry="12" fill="#d97706"/><path d="M12 28 Q4 30 6 46 Q14 44 16 34Z" fill="#78350f"/><ellipse cx="38" cy="38" rx="7" ry="5" fill="#fcd34d"/><circle cx="44" cy="36" r="2.6" fill="#111"/><circle cx="26" cy="30" r="2.4" fill="#111" stroke="none"/><path d="M38 42 q2 6 6 4" fill="#f472b6"/></g>`+txt(30,18,'HAF!',12,'#ffe14d'),
  escape:()=>D(30,20,.6,AO)+`<g stroke="#14532d" stroke-width="1.2" fill="#22a052"><ellipse cx="34" cy="56" rx="22" ry="13"/><ellipse cx="56" cy="54" rx="20" ry="14"/><ellipse cx="46" cy="47" rx="16" ry="11"/></g><g stroke="#14532d" stroke-width="1.6" fill="none"><path d="M24 50q3-10 0-18M70 50q-2-12 3-20M58 46q2-9 7-14"/></g><g fill="#86efac"><ellipse cx="40" cy="52" rx="4" ry="2" transform="rotate(-20 40 52)"/><ellipse cx="60" cy="58" rx="4" ry="2" transform="rotate(25 60 58)"/></g>`
 };
 function artInner(t){return artBg()+(ART[t]?ART[t]():'')}
@@ -1003,12 +1043,12 @@ const txt=(x,y,t,sz=12,c='#ffe14d')=>`<text x="${x}" y="${y}" style="font-family
 
 function D(x,y,sc,col,flip){return flip?`<g transform="translate(${x+68*sc},${y}) scale(${-sc},${sc})">${duckGC(col)}</g>`:`<g transform="translate(${x},${y}) scale(${sc})">${duckGC(col)}</g>`}
 /* ---------- komiksová akční karta 63×88 ---------- */
-const KIND={aim:'aim',dthreat:'aim',right:'aim',left:'aim',fire:'shot',dshot:'shot',miss:'shot',bill:'shot',march:'move',back:'move',fwd:'move',turbo:'move',rosambo:'move',dance:'move',shield:'prot',escape:'prot'};
-const KINDS={aim:{n:'Míření',i:'🎯'},shot:{n:'Střelba',i:'🔫'},move:{n:'Pohyb',i:'🌊'},prot:{n:'Ochrana',i:'🛡️'}};
+const KIND={aim:'aim',dthreat:'aim',right:'aim',left:'aim',fire:'shot',dshot:'shot',miss:'shot',bill:'shot',march:'move',back:'move',fwd:'move',turbo:'move',rosambo:'move',dance:'move',shield:'prot',escape:'prot',mlha:'wx',bourka:'wx',vitr:'wx',dive:'prot',helma:'prot',vejce:'prot',brok:'shot',sniper:'shot',pes:'move'};
+const KINDS={aim:{n:'Míření',i:'🎯'},shot:{n:'Střelba',i:'🔫'},move:{n:'Pohyb',i:'🌊'},prot:{n:'Ochrana',i:'🛡️'},wx:{n:'Počasí',i:'⛅'}};
 function cardFace(t,cls='',attr=''){const c=CARDS[t],K=KINDS[KIND[t]],long=!c.n.includes(' ')&&c.n.length>12;
  return `<div class="cb ${cls}" data-t="${t}"${attr}><div class="rc"><div class="rtop"><span class="rkind">${K.i}</span><div class="rname"${long?' style="font-size:22px"':''}>${c.n}</div></div>`+
  `<div class="rart"><svg viewBox="0 0 100 70" preserveAspectRatio="xMidYMid slice">${artInner(t)}</svg></div>`+
- `<div class="rbody">${c.d}</div><div class="ren">${K.n} · Střelené kachny</div></div></div>`}
+ `<div class="rbody">${c.d}</div><div class="ren">${K.n} · ${c.x?EXPS[c.x].n:'Střelené kachny'}</div></div></div>`}
 function fitHand(){const h=document.getElementById('hand');if(!h||!h.offsetParent)return;const cs=h.querySelectorAll('.cb');if(!cs.length)return;
  const H=h.clientHeight-18,CW=h.clientWidth-8,W=(CW-8*(cs.length-1))/3;
  if(innerHeight>innerWidth){ // na výšku: vějíř, karty se překryjí a mohou být větší
@@ -1064,7 +1104,7 @@ function quackAt(at=0,pitch=1,vol=1,dest=null){
   o.type='sawtooth';o.frequency.setValueAtTime(520*pitch,t);o.frequency.exponentialRampToValueAtTime(330*pitch,t+.13);
   f.type='bandpass';f.frequency.value=1150;f.Q.value=3;f2.type='bandpass';f2.frequency.value=2400;f2.Q.value=5;
   env(g,t,.012,.13,(k?.28:.34)*vol);o.connect(f).connect(g);o.connect(f2).connect(g);g.connect(dest||BUS.sfx);o.start(t);o.stop(t+.2)})}
-const SHOOT=['fire','dshot','miss','bill'];
+const SHOOT=['fire','dshot','miss','bill','brok','sniper'];
 const SFX={
  plop:()=>{noise(.4,.25,0,700,'bandpass',1.4,2200);tone(300,.12,'sine',.1,.03,650)},
  pump:()=>{noise(.05,.5,0,1300,'bandpass',3);tone(180,.04,'square',.12);noise(.06,.55,.16,2200,'bandpass',3);tone(240,.04,'square',.12,.16)},
@@ -1084,7 +1124,7 @@ function sfx(n){if(chOn('sfx')&&SFX[n])try{SFX[n]()}catch(e){}}
 function sfxQuack(at,p){if(chOn('sfx'))quackAt(at,p)}
 function cardSound(t,kills,coverHit){
  if(SHOOT.includes(t))musDuck();
- if(['fire','dshot','miss','bill'].includes(t)){
+ if(SHOOT.includes(t)){
   sfx('shot');
   if(kills){for(let k=0;k<kills;k++)sfxQuack(.28+k*.4,1.15);if(FX.vib!==false&&navigator.vibrate)try{navigator.vibrate(kills>1?[90,60,90]:120)}catch(e){}}
   else if(coverHit)setTimeout(()=>sfx('thud'),200);
@@ -1093,6 +1133,12 @@ function cardSound(t,kills,coverHit){
  if(['march','back','fwd','turbo'].includes(t))return sfx('splash');
  if(t==='rosambo'||t==='dance'){sfx('shuffle');sfxQuack(.35,.9);return}
  if(t==='shield'||t==='escape')return sfx('rustle');
+ if(t==='helma')return sfx('thud');
+ if(t==='mlha'||t==='vitr')return sfx('swish');
+ if(t==='bourka'){sfx('thud');setTimeout(()=>sfx('splash'),180);return}
+ if(t==='dive')return sfx('splash');
+ if(t==='vejce'){sfxQuack(.1,1.5);setTimeout(()=>sfxQuack(0,1.6),260);return}
+ if(t==='pes'){sfx('rustle');sfxQuack(.3,1.2);return}
 }
 
 /* ---------- zvuky přírody na pozadí (rybník, kachny, hmyz, ptáci) ---------- */
@@ -1119,7 +1165,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.13.4: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.14.0: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1401,8 +1447,8 @@ function newGame(){prevAimSids=null;drawFrom=0;lastPos=null;prevAim=null;clearTi
  for(let i=0;i<cfg.opp;i++)players.push({name:BOTS[i],c:others[i],human:false,pers:BOT_PERS[i]});
  const deck=[];players.forEach((_,p)=>{for(let k=0;k<5;k++)deck.push({t:'d',c:p})});
  for(let k=0;k<5;k++)deck.push({t:'w'});shuffle(deck);
- const ad=[];Object.entries(CARDS).forEach(([k,v])=>{for(let i=0;i<v.c;i++)ad.push(k)});shuffle(ad);
- S={players,deck,adeck:ad,discard:[],row:[],aim:[0,0,0,0,0,0].map(()=>false),dead:players.map(()=>0),hands:players.map(()=>[]),log:[],over:false,fx:null};
+ const ex=cfg.exp||{},ad=[];Object.entries(CARDS).forEach(([k,v])=>{if(v.x&&!ex[v.x])return;for(let i=0;i<v.c;i++)ad.push(k)});shuffle(ad);
+ S={players,deck,adeck:ad,discard:[],wx:null,exp:{...ex},row:[],aim:[0,0,0,0,0,0].map(()=>false),dead:players.map(()=>0),hands:players.map(()=>[]),log:[],over:false,fx:null};
  for(let i=0;i<6;i++)S.row.push({k:S.deck.shift(),h:null,cv:null});
  S.hands.forEach(h=>{for(let i=0;i<3;i++)h.push(S.adeck.pop())});
  const first=S.row.find(s=>s.k.t==='d');S.turn=first?first.k.c:0;
@@ -1412,18 +1458,26 @@ function newGame(){prevAimSids=null;drawFrom=0;lastPos=null;prevAim=null;clearTi
 function aliveCount(st,q){let a=0;st.row.forEach(s=>{if(s.k.t==='d'&&s.k.c===q)a++;if(s.h===q)a++});st.deck.forEach(k=>{if(k.t==='d'&&k.c===q)a++});return a}
 
 function moves(st,p,t){
- const R=st.row,A=st.aim,o=[];
- const duck=i=>i>=0&&i<6&&R[i]&&R[i].k.t==='d',free=i=>duck(i)&&R[i].cv==null,mine=i=>duck(i)&&R[i].k.c===p;
+ const R=st.row,o=[],fog=st.wx&&st.wx.t==='fog',ok=i=>!(fog&&i>=3),A=st.aim.map((x,i)=>x&&ok(i));
+ const duck=i=>i>=0&&i<6&&R[i]&&R[i].k.t==='d'&&ok(i),free=i=>duck(i)&&R[i].cv==null,mine=i=>duck(i)&&R[i].k.c===p;
+ const AA=st.aim; // skutečné zaměřovače (i v mlze) – kvůli obsazenosti polí
  switch(t){
-  case'aim':for(let i=0;i<6;i++)if(!A[i])o.push({sel:[i]});break;
-  case'fire':for(let i=0;i<6;i++)if(A[i]&&duck(i))o.push({sel:[i]});break;
-  case'dthreat':for(let i=0;i<5;i++)if(!A[i]&&!A[i+1])o.push({sel:[i,i+1]},{sel:[i+1,i]});
-   if(!o.length)for(let i=0;i<6;i++)if(!A[i])o.push({sel:[i]});break;
+  case'aim':for(let i=0;i<6;i++)if(!AA[i]&&ok(i))o.push({sel:[i]});break;
+  case'fire':case'brok':for(let i=0;i<6;i++)if(A[i]&&duck(i))o.push({sel:[i]});break;
+  case'dthreat':for(let i=0;i<5;i++)if(!AA[i]&&!AA[i+1]&&ok(i)&&ok(i+1))o.push({sel:[i,i+1]},{sel:[i+1,i]});
+   if(!o.length)for(let i=0;i<6;i++)if(!AA[i]&&ok(i))o.push({sel:[i]});break;
   case'dshot':for(let i=0;i<5;i++)if(A[i]&&A[i+1]&&free(i)&&free(i+1))o.push({sel:[i,i+1]},{sel:[i+1,i]});break;
   case'miss':for(let a=0;a<6;a++)if(A[a])for(const q of[a-1,a+1])if(free(q))o.push({sel:[a,q]});break;
-  case'right':for(let i=0;i<5;i++)if(A[i]&&!A[i+1])o.push({sel:[i]});break;
-  case'left':for(let i=1;i<6;i++)if(A[i]&&!A[i-1])o.push({sel:[i]});break;
+  case'sniper':for(let a=0;a<6;a++)if(A[a])for(const q of[a-2,a+2])if(free(q))o.push({sel:[a,q]});break;
+  case'right':for(let i=0;i<5;i++)if(A[i]&&!AA[i+1]&&ok(i+1))o.push({sel:[i]});break;
+  case'left':for(let i=1;i<6;i++)if(A[i]&&!AA[i-1])o.push({sel:[i]});break;
   case'bill':for(let i=0;i<6;i++)if(free(i))o.push({sel:[i]});break;
+  case'mlha':if(!fog)o.push({sel:[]});break;
+  case'bourka':case'vitr':if(AA.some(x=>x))o.push({sel:[]});break;
+  case'dive':for(let i=0;i<6;i++)if(AA[i]&&R[i]&&((R[i].k.t==='d'&&R[i].k.c===p)||R[i].h===p))o.push({sel:[i]});break;
+  case'helma':for(let i=0;i<6;i++)if(mine(i)&&!R[i].ar)o.push({sel:[i]});break;
+  case'vejce':if(st.dead[p]>0)o.push({sel:[]});break;
+  case'pes':if(R.some(x=>x.cv!=null||x.h!=null))o.push({sel:[]});break;
   case'march':case'dance':case'rosambo':o.push({sel:[]});break;
   case'back':for(let i=0;i<5;i++)if(mine(i))o.push({sel:[i]});break;
   case'fwd':case'turbo':for(let i=1;i<6;i++)if(mine(i))o.push({sel:[i]});break;
@@ -1438,7 +1492,9 @@ function apply(st,p,t,sel,perm){
  const A=st.aim;
  const draw=()=>({k:st.deck.length?st.deck.shift():{t:'w'},h:null,cv:null});
  const toDeck=s=>{st.deck.push(s.k);if(s.h!=null)st.deck.push({t:'d',c:s.h})};
- const kill=i=>{const s=st.row[i];st.dead[s.k.c]++;st.fx.kill.push(i);(st.fx.kid=st.fx.kid||[]).push(s.sid);st.msgs.push(`💥 ${cn(s.k.c)} kachna (${pn(s.k.c)}) je střelená!`);
+ const kill=(i,pierce)=>{const s=st.row[i];
+  if(s.ar&&!pierce){s.ar=false;st.fx.kill.push(i);st.msgs.push(`🪖 Helma zachránila kachnu (${pn(s.k.c)}) – spadla jen helma.`);return}
+  st.dead[s.k.c]++;st.fx.kill.push(i);(st.fx.kid=st.fx.kid||[]).push(s.sid);st.msgs.push(`💥 ${cn(s.k.c)} kachna (${pn(s.k.c)}) je střelená!`);
   if(s.h!=null){st.row[i]={k:{t:'d',c:s.h},h:null,cv:null};st.msgs.push(`Pod ní se odkryla ${cn(s.h).toLowerCase()} kachna.`)}
   else{st.row.splice(i,1);st.row.push(draw())}};
  const [a,b]=sel||[];
@@ -1459,6 +1515,16 @@ function apply(st,p,t,sel,perm){
   case'dance':st.row.forEach(toDeck);shuffle(st.deck);st.row=[];for(let i=0;i<6;i++)st.row.push(draw());break;
   case'shield':st.fx.into={from:st.row[a].sid,to:st.row[b].sid};st.row[b].h=p;st.row.splice(a,1);st.row.push(draw());break;
   case'escape':st.row[a].cv=p;break;
+  case'brok':{const s=st.row[a];if(s.cv!=null)st.msgs.push('Broky prolétly úkrytem!');s.cv=null;kill(a,true);A[a]=false;break}
+  case'sniper':kill(b);A[a]=false;break;
+  case'mlha':st.wx={t:'fog',p};st.msgs.push('Nad poli 4–6 se válí mlha.');break;
+  case'bourka':for(let i=0;i<6;i++)A[i]=false;st.msgs.push('Všechny zaměřovače spadly do vody.');break;
+  case'vitr':{const f=A[0];for(let i=0;i<5;i++)A[i]=A[i+1];A[5]=false;if(f)st.msgs.push('Zaměřovač z prvního pole uletěl.');break}
+  case'dive':A[a]=false;st.msgs.push('Kachna se potopila, zaměřovač spadl do vody.');break;
+  case'helma':st.row[a].ar=true;break;
+  case'vejce':st.dead[p]--;st.deck.splice(Math.random()*(st.deck.length+1)|0,0,{t:'d',c:p});st.msgs.push('🐣 Vylíhla se nová kachna a přidala se do balíčku.');break;
+  case'pes':{for(let i=st.row.length-1;i>=0;i--){const s=st.row[i];s.cv=null;if(s.h!=null){st.row.splice(i+1,0,{k:{t:'d',c:s.h},h:null,cv:null});st.msgs.push(`🐕 Pes vyhnal ${cn(s.h).toLowerCase()} kachnu.`);s.h=null}}
+   while(st.row.length>6){const s=st.row.pop();st.deck.unshift(s.k)}break}
  }
 }
 
@@ -1468,13 +1534,15 @@ function evalState(st,p){
  st.row.forEach((s,i)=>{
   if(s.h===p)v+=3;
   if(s.k.t!=='d')return;const c=s.k.c;
+  if(s.ar)v+=c===p?5:-1.5;
+  if(st.wx&&st.wx.t==='fog'&&i>=3&&st.wx.p===p&&c===p&&st.aim[i])v+=6;
   if(s.cv!=null){if(c===p)v+=3;return}
   if(st.aim[i])v+=c===p?-8:2;
   else if(st.aim[i-1]||st.aim[i+1])v+=c===p?-2:.5;
  });
  return v;
 }
-function clone(){return{row:JSON.parse(JSON.stringify(S.row)),aim:S.aim.slice(),deck:shuffle(JSON.parse(JSON.stringify(S.deck))),dead:S.dead.slice()}}
+function clone(){return{row:JSON.parse(JSON.stringify(S.row)),aim:S.aim.slice(),deck:shuffle(JSON.parse(JSON.stringify(S.deck))),dead:S.dead.slice(),wx:S.wx?{...S.wx}:null}}
 let PERMS=null;
 function perms(){if(PERMS)return PERMS;PERMS=[];const go=(a,r)=>{if(!r.length){PERMS.push(a);return}r.forEach((x,i)=>go(a.concat(x),r.filter((_,j)=>j!==i)))};go([],[0,1,2,3,4,5]);return PERMS}
 
@@ -1490,6 +1558,7 @@ function botPlay(){
 function beginTurn(){
  if(S.over)return;const p=S.turn;
  S.row.forEach(s=>{if(s.cv===p)s.cv=null});
+ if(S.wx&&S.wx.p===p){S.wx=null;S.log.unshift('🌤️ Mlha se zvedla.')}
  render();
  if(!S.players[p].human)botTimer=setTimeout(botPlay,(FX.anim?700:1150)*spd());
 }
@@ -1497,7 +1566,7 @@ function play(p,hi,sel,perm){
  flyPrep(p,hi);
  const t=S.hands[p].splice(hi,1)[0];S.discard.push(t);
  apply(S,p,t,sel,perm);
- cardSound(t,S.msgs.filter(m=>m.startsWith('💥')).length,S.msgs.some(m=>m.startsWith('Rána do úkrytu')));
+ cardSound(t,S.msgs.filter(m=>m.startsWith('💥')).length,S.msgs.some(m=>m.startsWith('Rána do úkrytu')||m.startsWith('🪖')));
  S.log.unshift(`${pn(p)}: ${CARDS[t].i} ${CARDS[t].n}${S.msgs.length?' – '+S.msgs.join(' '):''}`);
  finishTurn(p);
  flyGo();
@@ -1537,7 +1606,7 @@ function choosePlay(i){
  const t=S.hands[0][i];
  if(!moves(S,0,t).length){render();sfx('error');flashStatus('Tuhle kartu teď nejde smysluplně zahrát.');return}
  resetUI();
- if(t==='march'||t==='dance'){play(0,i,[],null);return}
+ if(INSTANT.includes(t)){play(0,i,[],null);return}
  ui.card=i;sfx('click');if(SHOOT.includes(t))setTimeout(()=>sfx('pump'),120);
  if(t==='rosambo')ui.perm=[0,1,2,3,4,5];
  render();
@@ -1558,7 +1627,7 @@ function detailHTML(){
  if(!my)st=S.over?'Hra skončila':`Na tahu je ${pn(S.turn)} – kartu si jen prohlížíš`;
  else if(!ap){st='Nic nejde zahrát – tuhle kartu můžeš odhodit';btns=`<button class="btn pri" data-d="discard">🗑 Odhodit a líznout</button>`}
  else if(ui.card===i){st='Karta je vybraná – vyber cíl na rybníce';btns=`<button class="btn" data-d="unsel">Zrušit výběr</button>`}
- else if(ok){st=t==='march'||t==='dance'?'Zahraje se hned':t==='rosambo'?'Pak přeskládáš řadu':'Pak vybereš cíl na rybníce';btns=`<button class="btn pri" data-d="play">▶ Zahrát</button>`}
+ else if(ok){st=INSTANT.includes(t)?'Zahraje se hned':t==='rosambo'?'Pak přeskládáš řadu':'Pak vybereš cíl na rybníce';btns=`<button class="btn pri" data-d="play">▶ Zahrát</button>`}
  else{st='Teď ji nelze smysluplně zahrát';btns=`<button class="btn pri" disabled>▶ Zahrát</button>`}
  return `<div class="sheet-bg"><div class="sheet">${cardFace(t,'big')}<div class="dside"><div class="dstate">${st}</div><div class="dctrl">${btns}<button class="btn" data-d="close">Zavřít</button></div></div></div></div>`;
 }
@@ -1581,7 +1650,7 @@ function tapCol(i){
 function confirmPlay(){
  if(!myTurn()||ui.card==null)return;const t=S.hands[0][ui.card];
  if(t==='rosambo'){play(0,ui.card,[],ui.perm.slice());return}
- if(t==='march'||t==='dance')play(0,ui.card,[],null);
+ if(INSTANT.includes(t))play(0,ui.card,[],null);
 }
 let flashMsg=null;
 function flashStatus(m){flashMsg=m;render();setTimeout(()=>{flashMsg=null;if(S)render()},1600)}
@@ -1603,7 +1672,8 @@ function render(){
   else{if(targets.has(i))cls+=' target';if(ui.sel.includes(i))cls+=' picked'}
   if(kills.includes(i)&&!(FX.anim&&S.fx&&S.fx.kid&&S.fx.kid.length))cls+=' boom';
   const isD=s.k.t==='d',scared=isD&&S.aim[i]&&s.cv==null;
-  let inner=sceneSVG(isD?ch(s.k.c):null,{scared,hid:s.h!=null?ch(s.h):null,cover:s.cv!=null});
+  let inner=sceneSVG(isD?ch(s.k.c):null,{scared,hid:s.h!=null?ch(s.h):null,cover:s.cv!=null,helm:!!s.ar});
+  if(S.wx&&S.wx.t==='fog'&&i>=3&&!ui.perm)cls+=' fog';
   if(s.cv!=null)inner+=`<div class="covtag" title="Kachní únik">únik</div>`;
   return `<div class="${cls}" data-i="${i}" data-sid="${s.sid}"><div class="aimcell">${skySVG(i,S.aim[i])}</div><div class="card">${inner}</div></div>`}).join('');
  document.querySelectorAll('.col').forEach(el=>el.onclick=()=>tapCol(+el.dataset.i));
@@ -1630,7 +1700,7 @@ function render(){
  // tlačítka
  let act='';
  if(my&&ui.card!=null){const t=S.hands[0][ui.card];
-  if(['march','dance','rosambo'].includes(t))act+=`<button class="btn ok" id="bPlay">Zahrát</button>`;
+  if(INSTANT.includes(t)||t==='rosambo')act+=`<button class="btn ok" id="bPlay">Zahrát</button>`;
   act+=`<button class="btn" id="bCancel">Zrušit</button>`;}
  $('actions').innerHTML=act;
  if($('bPlay'))$('bPlay').onclick=confirmPlay;
@@ -1649,7 +1719,10 @@ function renderSetup(){
  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{cfg.opp=+b.dataset.o;renderSetup()});
  document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{cfg.color=+b.dataset.c;renderSetup()});
 }
-$('cardlist').innerHTML=Object.entries(CARDS).map(([k,c])=>`<div class="mini">${cardArt(k)}<span><b>${c.n}</b> (${c.c}×) – ${c.d}</span></div>`).join('');
+{const li=([k,c])=>`<div class="mini">${cardArt(k)}<span><b>${c.n}</b> (${c.c}×) – ${c.d}</span></div>`,E=Object.entries(CARDS);
+ $('cardlist').innerHTML=`<div class="cardlist-h">🦆 Základní hra (52 karet)</div>`+E.filter(([,c])=>!c.x).map(li).join('')+
+ Object.entries(EXPS).map(([x,e])=>`<div class="cardlist-h">${e.i} Rozšíření ${e.n}</div>`+E.filter(([,c])=>c.x===x).map(li).join('')).join('')+
+ `<p class="hint">Rozšíření zapneš v nastavení hry ✏️ – každé zvlášť.</p>`}
 try{const o=loadSaved();if(o&&o.cfg)cfg={...cfg,...o.cfg}}catch(e){}
 $('iName').oninput=e=>{cfg.name=e.target.value;cfgChip()};
 $('bStart').onclick=()=>{ac();newGame();quackAt(.1);ambStart()};
@@ -1798,7 +1871,7 @@ renderSetup();renderMenu();
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 
 /* ===================== úvod, menu a živý rybník ===================== */
-function cfgChip(){const c=COLS[cfg.color]||COLS[0];$('bCfg').innerHTML=`<span>👤 <b>${(cfg.name||'Ty').replace(/</g,'&lt;')}</b></span><span>🎯 <b>${cfg.opp}</b> ${cfg.opp<5?'soupeři':'soupeřů'}</span><span class="cdk">${duckSVG(c.h)}</span><span class="ed">✏️</span>`}
+function cfgChip(){const c=COLS[cfg.color]||COLS[0];$('bCfg').innerHTML=`<span>👤 <b>${(cfg.name||'Ty').replace(/</g,'&lt;')}</b></span><span>🎯 <b>${cfg.opp}</b> ${cfg.opp<5?'soupeři':'soupeřů'}</span><span class="cdk">${duckSVG(c.h)}</span>${Object.keys(EXPS).filter(k=>(cfg.exp||{})[k]).map(k=>`<span>${EXPS[k].i}</span>`).join('')}<span class="ed">✏️</span>`}
 {const _rs=renderSetup;renderSetup=function(){_rs();cfgChip()}}
 $('bCfg').onclick=()=>{sfx('click');renderSetup();$('cfgov').classList.remove('hide')};
 $('bCfgClose').onclick=()=>{sfx('click');$('cfgov').classList.add('hide');cfgChip()};
@@ -1886,6 +1959,7 @@ function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if
 
 /* ===================== historie verzí ===================== */
 const CHANGELOG=[
+ ['0.14.0',['Počty karet podle originálu: Zamířit 10, Divokej Bill 1, Kachní pochod 6, Leháro 3, Chvátám 3, Rošambo 2, Kachní únik 3 (celkem 52)','Tři rozšíření, každé zvlášť zapínatelné v nastavení hry ✏️','⛈️ Počasí: Mlha (zahalí pole 4–6), Bouřka (smete zaměřovače), Vítr (posune zaměřovače doleva)','🛡️ Kachní triky: Potápěčka (shodí zaměřovač z tvé kachny), Kachní helma (vydrží jeden zásah), Vajíčko (vrátí jednu střelenou kachnu)','🎯 Lovecká výbava: Brokovnice (prostřelí úkryt i helmu), Ostrostřelec (trefa 2 pole od zaměřovače), Lovecký pes (vyžene schované kachny)','Nové kresby pro všech 9 karet rozšíření, mlha nad rybníkem a helma na kachnách','Pravidla v menu ukazují i karty rozšíření']],
  ['0.13.4',['Nové kresby akčních karet: Turbokachna s helmou, brýlemi a šálou','Leháro: kachna se slunečními brýlemi na nafukovacím kruhu','Divokej Bill: kachna s kovbojským kloboukem, šátkem a šerifskou hvězdou','Kachní tanec: disko koule se světly a dvě tančící kachny','Pestřejší barvy kachen na akčních kartách']],
  ['0.13.3',['Nové okno ⚙️ Nastavení se záložkami Zvuk, Grafika, Hra a O hře – ikona ozubeného kola nahradila reproduktor','Zvuky v kategoriích: celkově, hudba, herní zvuky a příroda; podrobnosti přírody (voda, zvířata) se rozbalí','Rychlé předvolby zvuku: Ticho, Jen hra, Relax a Výchozí a velké tlačítko pro ztlumení všeho','Dlouhý stisk ⚙️ ve hře zvuk rychle ztlumí nebo zapne','Nová volba: vibrace telefonu při zásahu kachny']],
  ['0.13.2',['Karty na rybníce už nemají jmenovky ani zvýraznění vlastních kachen – svou barvu si musíš pamatovat','Jméno majitele kachny ukáže malá krémová bublina po klepnutí na kartu nebo při výběru cíle']],
@@ -1916,7 +1990,7 @@ renderHistory();
 function runSelfTest(n){
  const t0=performance.now(),errs=[],anim=FX.anim,mOn=SET.master.on,r0=render,s0=saveGame,keepSave=lsGet(SKEY),keepCfg=JSON.stringify(cfg),diffs=['easy','normal','hard'];FX.anim=false;SET.master.on=false;render=()=>{};saveGame=()=>{};let ok=0,turns=0;
  for(let g=0;g<n;g++){
-  try{cfg.opp=1+g%5;cfg.diff=diffs[g%3];newGame();clearTimeout(botTimer);clearTimeout(oppTimer);S.players.forEach(p=>p.human=false);
+  try{cfg.opp=1+g%5;cfg.diff=diffs[g%3];cfg.exp=g%2?{wx:1,trick:1,hunt:1}:(g%4===2?{hunt:1}:{});newGame();clearTimeout(botTimer);clearTimeout(oppTimer);S.players.forEach(p=>p.human=false);
    let k=0;
    while(!S.over&&k<4000){clearTimeout(botTimer);botPlay();k++;turns++;
     if(S.row.length!==6)throw Error('řada nemá 6 karet');
@@ -1961,10 +2035,10 @@ function aiScore(st,p,t,diff,pers){
   if(t==='aim'||t==='dthreat')v+=5;if(t==='escape'||t==='shield')v-=4;
   st.row.forEach((s,i)=>{if(st.aim[i]&&s.k.t==='d'&&s.k.c!==p&&s.cv==null)v+=2})}
  else if(pers==='opatrna'){st.row.forEach((s,i)=>{if(s.h===p)v+=6;if(s.k.t==='d'&&s.k.c===p){if(s.cv!=null)v+=6;else if(st.aim[i])v-=10;else if(st.aim[i-1]||st.aim[i+1])v-=3}});
-  if(t==='aim'||t==='dthreat')v-=2}
+  if(t==='aim'||t==='dthreat')v-=2;if(t==='helma'||t==='dive'||t==='mlha')v+=4}
  else if(pers==='lovec'){let L=-1,m=-1;S.players.forEach((_,q)=>{const a=aliveCount(S,q);if(q!==p&&a>m){m=a;L=q}});
   if(L>=0){v+=10*killed(L);st.row.forEach((s,i)=>{if(st.aim[i]&&s.k.t==='d'&&s.k.c===L&&s.cv==null)v+=4})}}
- else if(pers==='sprymar'&&['rosambo','dance','march','back','fwd','turbo'].includes(t))v+=8;
+ else if(pers==='sprymar'&&['rosambo','dance','march','back','fwd','turbo','vitr','bourka','pes'].includes(t))v+=8;
  return v;
 }
 function aiChoose(p,diff,pers){
@@ -1991,6 +2065,9 @@ function renderSetup2(){
  $('spdRow').innerHTML=SPEEDS.map(([f,n])=>`<button class="opt ${Math.abs(spd()-f)<.01?'on':''}" data-sp="${f}">${n}</button>`).join('');
  const others=COLS.map((_,i)=>i).filter(i=>i!==cfg.color);
  $('persList').innerHTML=BOTS.slice(0,cfg.opp).map((b,i)=>{const P=PERS[BOT_PERS[i]];return `<div class="prow"><span class="pd2">${duckSVG(COLS[others[i]].h)}</span><b>${b}</b><span class="pi">${P.i}</span><span><b style="font-size:15px">${P.n}</b> – ${P.d}</span></div>`}).join('');
+ cfg.exp=cfg.exp||{};$('expRow').innerHTML=Object.entries(EXPS).map(([k,e])=>`<button class="opt ${cfg.exp[k]?'on':''}" data-ex="${k}">${e.i} ${e.n}<small>${e.d}</small></button>`).join('');
+ const en=Object.keys(EXPS).filter(k=>cfg.exp[k]);$('expHint').textContent=en.length?`Zapnuto: ${en.map(k=>EXPS[k].n).join(', ')} – přidá ${en.reduce((a,k)=>a+Object.values(CARDS).filter(c=>c.x===k).reduce((s,c)=>s+c.c,0),0)} karet do balíčku akcí. Platí od nové hry.`:'Hraje se jen se základními kartami (52 akčních karet).';
+ document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{sfx('click');cfg.exp={...cfg.exp,[b.dataset.ex]:!cfg.exp[b.dataset.ex]};saveCfg();renderSetup()});
  document.querySelectorAll('[data-df]').forEach(b=>b.onclick=()=>{sfx('click');cfg.diff=b.dataset.df;saveCfg();renderSetup()});
  document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{sfx('click');cfg.speed=+b.dataset.sp;saveCfg();renderSetup()});
 }
