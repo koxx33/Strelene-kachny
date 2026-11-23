@@ -1,12 +1,10 @@
 {
- "version": "0.14.0",
+ "version": "0.14.1",
  "notes": [
-  "Počty karet podle originálu: Zamířit 10, Divokej Bill 1, Kachní pochod 6, Leháro 3, Chvátám 3, Rošambo 2, Kachní únik 3 (celkem 52)",
-  "Tři rozšíření, každé zvlášť zapínatelné v nastavení hry ✏️",
-  "⛈️ Počasí: Mlha (zahalí pole 4–6), Bouřka (smete zaměřovače), Vítr (posune zaměřovače doleva)",
-  "🛡️ Kachní triky: Potápěčka (shodí zaměřovač z tvé kachny), Kachní helma (vydrží jeden zásah), Vajíčko (vrátí jednu střelenou kachnu)",
-  "🎯 Lovecká výbava: Brokovnice (prostřelí úkryt i helmu), Ostrostřelec (trefa 2 pole od zaměřovače), Lovecký pes (vyžene schované kachny)",
-  "Nové kresby pro všech 9 karet rozšíření, mlha nad rybníkem a helma na kachnách",
-  "Pravidla v menu ukazují i karty rozšíření"
+  "Zásah: kachna se otočí břichem nahoru a rozletí se peříčka v její barvě",
+  "Každá barva kachny má svůj hlas – hluboký, vysoký, chraplavý i rychlý",
+  "Rána do úkrytu: hvizd kulky, žbluňk do vody a nápis VEDLE!",
+  "Zásah do helmy: kovové PING! a helma odletí",
+  "Jejda, vedle! a Ostrostřelec mají před ranou hvizd kulky"
  ]
 }

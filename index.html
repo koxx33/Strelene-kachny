@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Střelené kachny v0.14.0</title>
-<meta name="version" content="0.14.0">
+<title>Střelené kachny v0.14.1</title>
+<meta name="version" content="0.14.1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -704,6 +704,9 @@ html.noanim .col.fog .card::after{animation:none}
 .box>#expRow,.box>#expHint{grid-column:1/3}
 .exprow{display:flex;flex-direction:column;gap:6px;align-items:stretch}.exprow .opt{display:flex!important;flex-direction:column;align-items:flex-start;text-align:left;width:100%;height:auto!important;min-height:0;line-height:1.15;padding:5px 12px!important;font-size:19px}.exprow .opt small{font:500 12.5px system-ui,sans-serif;opacity:.85;letter-spacing:0}
 .cardlist-h{font-family:Bangers,Impact,sans-serif;font-size:20px;letter-spacing:.5px;margin:12px 0 4px}
+.feather{position:fixed;width:clamp(12px,3.6vw,22px);z-index:70;pointer-events:none;left:0;top:0}.feather svg{display:block;width:100%;height:auto}
+.feather.helmfly{width:clamp(22px,6vw,36px)}
+.poptxt{position:fixed;z-index:72;pointer-events:none;font:clamp(16px,4.6vw,26px) Bangers,Impact,sans-serif;letter-spacing:1px;color:#ffe14d;-webkit-text-stroke:1.6px #111;paint-order:stroke;text-shadow:2px 2px 0 #111;white-space:nowrap}
 .otip{position:fixed;z-index:80;transform:translateX(-50%);background:var(--cream);color:#111;border:2px solid #111;border-radius:10px;box-shadow:2px 2px 0 #111;padding:1px 9px;font:700 clamp(11px,2.8vw,14px)/1.35 system-ui,sans-serif;white-space:nowrap;pointer-events:none;animation:otIn .16s ease-out}
 .otip::after{content:'';position:absolute;left:50%;bottom:-7px;width:9px;height:9px;background:var(--cream);border-right:2px solid #111;border-bottom:2px solid #111;transform:translateX(-50%) rotate(45deg)}
 .otip.out{opacity:0;transition:opacity .25s}
@@ -716,7 +719,7 @@ html.noanim .col.fog .card::after{animation:none}
 <body>
 <div class="wrap">
  <header>
-  <h1 class="gtitle">Střelené kachny<span class="ver">v0.14.0</span></h1>
+  <h1 class="gtitle">Střelené kachny<span class="ver">v0.14.1</span></h1>
   <div style="display:flex;gap:6px">
    <div class="sndwrap"><button class="btn sm" id="bSound" title="Nastavení (podrž = ztlumit zvuk)">⚙️</button></div>
    <button class="btn sm" id="bFull" title="Celá obrazovka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg></button>
@@ -741,7 +744,7 @@ html.noanim .col.fog .card::after{animation:none}
 
 <div class="overlay menu" id="start">
  <div class="mwrap">
-  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.14.0</span></div></div>
+  <div class="hero"><span id="heroDuck"></span><h1 class="htitle">STŘELENÉ<br>KACHNY</h1><div class="hsub">KARETNÍ HRA · <span>v0.14.1</span></div></div>
   <div id="updWrap"></div>
   <div id="contWrap"></div>
   <button class="btn big ok" id="bStart">🦆 Nová hra – do rybníka!</button>
@@ -753,7 +756,7 @@ html.noanim .col.fog .card::after{animation:none}
    <button class="mtile" id="bOrient" type="button"></button>
    <button class="mtile dk" id="bQuit" type="button"><span class="ti">🚪</span><span class="tl">Konec</span></button>
   </div>
-  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.14.0 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
+  <p class="foot"><button class="vbtn" id="bUpd" type="button">⬇️ Verze 0.14.1 · novinky</button> · rozehraná hra se uloží tlačítkem 🏠 i automaticky.</p>
  </div>
 </div>
 
@@ -792,7 +795,7 @@ html.noanim .col.fog .card::after{animation:none}
 <div class="overlay hide" id="updov">
  <div class="panel" style="text-align:center">
   <h2>⬇️ Aktualizace</h2>
-  <p>Nainstalovaná verze: <b id="updCur">0.14.0</b></p>
+  <p>Nainstalovaná verze: <b id="updCur">0.14.1</b></p>
   <label class="tog" style="margin:8px 0"><input type="checkbox" id="cUpd"> Kontrolovat nové verze</label>
   <p id="updMsg" style="min-height:22px;font-weight:600"></p>
   <h3 class="histh">📜 Historie verzí</h3>
@@ -827,7 +830,7 @@ html.noanim .col.fog .card::after{animation:none}
   <div class="cardlist" id="cardlist"></div>
   <h3>Konec hry</h3>
   <p>Hra končí, jakmile zbudou kachny jen jedinému hráči – ten vítězí.</p>
-  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.14.0</p>
+  <p style="color:#64748b;font-size:12.5px">Podle pravidel Albi (autor Keith Meyers) a popisu na Zatrolených hrách. Přesný počet jednotlivých druhů akčních karet pravidla neuvádějí, rozložení 52 karet je proto odhad. Zjednodušení: zásah karty Vystřelit do Kachního úniku zničí úkryt, kachna přežije.<br>Verze hry: 0.14.1</p>
   <div class="rfoot" id="rFoot"><button class="btn" id="rPrev">◀ Zpět</button><div class="dots" id="rDots"></div><button class="btn pri" id="rNext">Dál ▶</button></div>
   <div class="actions center"><button class="btn pri" id="bCloseRules">Zavřít</button></div>
  </div>
@@ -846,7 +849,7 @@ html.noanim .col.fog .card::after{animation:none}
 </div>
 
 <script>
-const VERSION='0.14.0';
+const VERSION='0.14.1';
 const COLS=[{h:'#facc15',n:'Žlutá'},{h:'#3b82f6',n:'Modrá'},{h:'#22c55e',n:'Zelená'},{h:'#ec4899',n:'Růžová'},{h:'#f97316',n:'Oranžová'},{h:'#a855f7',n:'Fialová'}];
 const BOTS=['Franta','Lojza','Božka','Venca','Jarmila'];
 const CARDS={
@@ -1106,6 +1109,10 @@ function quackAt(at=0,pitch=1,vol=1,dest=null){
   env(g,t,.012,.13,(k?.28:.34)*vol);o.connect(f).connect(g);o.connect(f2).connect(g);g.connect(dest||BUS.sfx);o.start(t);o.stop(t+.2)})}
 const SHOOT=['fire','dshot','miss','bill','brok','sniper'];
 const SFX={
+ whistle:()=>{tone(2600,.32,'sine',.07,0,700);tone(2650,.32,'sine',.04,0,720)},
+ ping:()=>{tone(1900,.55,'triangle',.16,0);tone(2870,.45,'sine',.09,0);tone(3800,.25,'sine',.05,0);tone(1500,.3,'sine',.05,.06,3200)},
+ feath:()=>{for(let i=0;i<7;i++)noise(.05,.12,.05+i*.07,5000+i*300,'bandpass',3)},
+ bellyplop:()=>{noise(.45,.32,0,600,'bandpass',1.3,1600);tone(220,.18,'sine',.14,.02,520)},
  plop:()=>{noise(.4,.25,0,700,'bandpass',1.4,2200);tone(300,.12,'sine',.1,.03,650)},
  pump:()=>{noise(.05,.5,0,1300,'bandpass',3);tone(180,.04,'square',.12);noise(.06,.55,.16,2200,'bandpass',3);tone(240,.04,'square',.12,.16)},
  click:()=>tone(1400,.035,'triangle',.12),
@@ -1125,9 +1132,13 @@ function sfxQuack(at,p){if(chOn('sfx'))quackAt(at,p)}
 function cardSound(t,kills,coverHit){
  if(SHOOT.includes(t))musDuck();
  if(SHOOT.includes(t)){
-  sfx('shot');
-  if(kills){for(let k=0;k<kills;k++)sfxQuack(.28+k*.4,1.15);if(FX.vib!==false&&navigator.vibrate)try{navigator.vibrate(kills>1?[90,60,90]:120)}catch(e){}}
-  else if(coverHit)setTimeout(()=>sfx('thud'),200);
+  const fx=S&&S.fx||{},kc=fx.kc||[];
+  if(t==='miss'||t==='sniper')sfx('whistle');
+  setTimeout(()=>sfx('shot'),t==='miss'||t==='sniper'?160:0);
+  if(kills){if(chOn('sfx'))kc.forEach((q,k)=>quackV(.28+k*.4,q,1,null,1.15));setTimeout(()=>sfx('feath'),260);setTimeout(()=>sfx('bellyplop'),900);
+   if(FX.vib!==false&&navigator.vibrate)try{navigator.vibrate(kills>1?[90,60,90]:120)}catch(e){}}
+  if(fx.helm&&fx.helm.length)setTimeout(()=>sfx('ping'),120);
+  if(fx.cov&&fx.cov.length){setTimeout(()=>sfx('whistle'),90);setTimeout(()=>sfx('plop'),420)}
   return}
  if(['aim','dthreat','right','left'].includes(t))return sfx('aim');
  if(['march','back','fwd','turbo'].includes(t))return sfx('splash');
@@ -1165,7 +1176,7 @@ function ambStop(){
 function ambLoop(k,fn,min,max){const id=setTimeout(()=>{AMB.timers=AMB.timers.filter(x=>x!==id);if(!AMB.nodes)return;
  if(chOn(k))try{fn()}catch(e){}ambLoop(k,fn,min,max)},rr(min,max));AMB.timers.push(id)}
 function panTo(c,x,k){if(!c.createStereoPanner)return BUS[k];const p=c.createStereoPanner();p.pan.value=x;p.connect(BUS[k]);return p}
-function ambDuck(){ // v0.14.0: občas kvákne kachna přímo na rybníce (otevře zobák)
+function ambDuck(){ // v0.14.1: občas kvákne kachna přímo na rybníce (otevře zobák)
  if(S&&!S.over&&Math.random()<.55){const ix=pondDucks();if(ix.length){duckSay(ix[Math.random()*ix.length|0],Math.random()<.25?'KVÁK KVÁK!':'KVÁK!','ducks');return}}
  const c=AC,d=panTo(c,rr(-.8,.8),'ducks'),n=Math.random()<.4?rr(2,4)|0:1,pitch=rr(.8,1.2),vol=rr(.12,.25);
  for(let i=0;i<n;i++)quackAt(i*rr(.32,.45),pitch*rr(.95,1.05),vol,d)}
@@ -1345,6 +1356,23 @@ function pondSnap(){const b=$('board');if(!FX.anim||!S||!vis(b))return null;cons
 function ghostOf(o){const g=document.createElement('div');g.className='ghost';
  g.innerHTML=o.h;g.firstElementChild.style.cssText+=';width:100%;height:100%';g.style.cssText+=`;left:${o.r.left}px;top:${o.r.top}px;width:${o.r.width}px;height:${o.r.height}px`;
  document.body.appendChild(g);return g}
+/* peříčka, odlétající helma a nápis nad kartou */
+function feathers(r,col,n=10){const cx=r.left+r.width/2,cy=r.top+r.height*.55;
+ for(let k=0;k<n;k++){const f=document.createElement('div');f.className='feather';
+  f.innerHTML=`<svg viewBox="0 0 22 9"><path d="M1 4.5 Q9 -1 21 4.5 Q9 10 1 4.5Z" fill="${k%3?col:'#fff'}" stroke="#111" stroke-width="1.3"/><path d="M2 4.5 H18" stroke="#111" stroke-width=".9"/></svg>`;
+  f.style.left=cx+'px';f.style.top=cy+'px';document.body.appendChild(f);
+  const a=(k/n)*Math.PI*2+Math.random()*.6,d=r.width*(.45+Math.random()*.55),dx=Math.cos(a)*d,up=Math.sin(a)*d*.6-r.height*.25,r1=(Math.random()*360|0),dur=1300+Math.random()*700;
+  f.animate([{transform:'translate(-50%,-50%) scale(.4) rotate(0deg)',opacity:1},{transform:`translate(calc(-50% + ${dx}px),calc(-50% + ${up}px)) scale(1) rotate(${r1}deg)`,opacity:1,offset:.3},
+   {transform:`translate(calc(-50% + ${dx*1.15+12}px),calc(-50% + ${up+r.height*.35}px)) rotate(${r1+60}deg)`,opacity:.9,offset:.65},{transform:`translate(calc(-50% + ${dx*1.25-10}px),calc(-50% + ${up+r.height*.7}px)) rotate(${r1-30}deg)`,opacity:0}],
+   {duration:dur,easing:'cubic-bezier(.2,.7,.4,1)',fill:'forwards'}).finished.then(()=>f.remove())}}
+function helmetFly(col){const c=col.querySelector('.card');if(!c)return;const r=c.getBoundingClientRect(),h=document.createElement('div');h.className='feather helmfly';
+ h.innerHTML=`<svg viewBox="0 0 40 20"><path d="M4 17 Q4 2 20 2 Q36 3 36 17 Z" fill="#65a30d" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 17 H39" stroke="#111" stroke-width="3.4"/></svg>`;
+ h.style.left=(r.left+r.width*.35)+'px';h.style.top=(r.top+r.height*.5)+'px';document.body.appendChild(h);
+ h.animate([{transform:'translate(-50%,-50%) rotate(0)'},{transform:`translate(calc(-50% + ${r.width*.6}px),calc(-50% - ${r.height*.55}px)) rotate(200deg)`,offset:.45},{transform:`translate(calc(-50% + ${r.width*.9}px),calc(-50% + ${r.height*.2}px)) rotate(400deg)`,opacity:0}],{duration:1100,easing:'ease-out',fill:'forwards'}).finished.then(()=>h.remove());
+ setTimeout(()=>popText(col,'PING!'),220)}
+function popText(col,txt){const c=col.querySelector('.card');if(!c)return;const r=c.getBoundingClientRect(),t=document.createElement('div');t.className='poptxt';t.textContent=txt;
+ t.style.left=(r.left+r.width/2)+'px';t.style.top=(r.top-r.height*.08)+'px';document.body.appendChild(t);
+ t.animate([{transform:'translate(-50%,-50%) scale(.3) rotate(-12deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.15) rotate(-6deg)',opacity:1,offset:.25},{transform:'translate(-50%,-90%) scale(1) rotate(-6deg)',opacity:1,offset:.75},{transform:'translate(-50%,-120%) scale(.9) rotate(-6deg)',opacity:0}],{duration:1100,easing:'ease-out',fill:'forwards'}).finished.then(()=>t.remove())}
 function pondAnimate(before){
  S.row.forEach(x=>{if(x.sid>SID)SID=x.sid});
  const aimNow=S.aim.slice(),hadPrev=lastPos;lastPos=true;const pa=prevAim;prevAim=aimNow;
@@ -1359,10 +1387,16 @@ function pondAnimate(before){
    const b=document.createElement('div');b.innerHTML=bangSVG();b.style.cssText='position:absolute;left:50%;top:50%;width:'+Math.round(o.r.width*1.5)+'px;transform:translate(-50%,-50%);z-index:3';g.appendChild(b);
    const bd=$('board');if(bd)bd.animate([{transform:'none'},{transform:'translate(-3px,1px)'},{transform:'translate(3px,-1px)'},{transform:'translate(-2px,0)'},{transform:'none'}],{duration:260});
    b.animate([{transform:'translate(-50%,-50%) scale(.3)',opacity:1},{transform:'translate(-50%,-50%) scale(1.4)',opacity:1,offset:.45},{transform:'translate(-50%,-50%) scale(1.6)',opacity:0}],{duration:700,fill:'forwards'});
-   g.animate([{transform:'none',opacity:1},{transform:'translateX(-4px) rotate(-4deg)',offset:.15},{transform:'translateX(4px) rotate(4deg)',offset:.3},{transform:'none',opacity:1,offset:.45},{transform:'translateY(-45%) rotate(-25deg) scale(.6)',opacity:0}],{duration:900,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())}
+   const ki=fx.kid.map(String).indexOf(sid),kq=fx.kc?fx.kc[ki]:null;
+   if(kq!=null)setTimeout(()=>feathers(o.r,ch(kq)),180);
+   const dk=g.querySelector('.pdk');if(dk){dk.style.transformBox='fill-box';dk.style.transformOrigin='50% 55%';
+    dk.animate([{transform:'none'},{transform:'none',offset:.22},{transform:'translateY(-14px) rotate(100deg)',offset:.45},{transform:'translateY(5px) rotate(180deg)',offset:.62},{transform:'translateY(3px) rotate(176deg)',offset:.8},{transform:'translateY(6px) rotate(182deg)'}],{duration:1400,easing:'ease-out',fill:'forwards'})}
+   g.animate([{transform:'none',opacity:1},{transform:'translateX(-4px) rotate(-4deg)',offset:.08},{transform:'translateX(4px) rotate(4deg)',offset:.16},{transform:'none',opacity:1,offset:.25},{transform:'none',opacity:1,offset:.72},{transform:'translateY(22%) scale(.9)',opacity:0}],{duration:1500,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())}
   else if(fx.into&&String(fx.into.from)===sid){const t=$('board').querySelector(`[data-sid="${fx.into.to}"] .card`);const n=t?t.getBoundingClientRect():o.r;
    g.animate([{transform:'none',opacity:1},{transform:`translate(${n.left-o.r.left}px,${n.top-o.r.top}px) scale(.5)`,opacity:0}],{duration:550,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())}
   else g.animate([{transform:'none',opacity:1},{transform:'translateX(-110%)',opacity:0}],{duration:450,easing:'ease-in',fill:'forwards'}).finished.then(()=>g.remove())});
+ (fx.helm||[]).forEach(i=>{if(cols[i])helmetFly(cols[i])});
+ (fx.cov||[]).forEach(i=>{if(cols[i]){splashAt(cols[i],250);popText(cols[i],'VEDLE!')}});
  cols.forEach((el,i)=>{if(aimNow[i]&&!(pa&&pa[i])){const x=el.querySelector('.aimcell .xh');if(x)x.animate([{transform:'scale(2.4) rotate(-90deg)',opacity:0},{transform:'none',opacity:1}],{duration:420,easing:'cubic-bezier(.3,1.4,.5,1)'})}})}
 
 /* --- líznutí karet do ruky --- */
@@ -1493,14 +1527,14 @@ function apply(st,p,t,sel,perm){
  const draw=()=>({k:st.deck.length?st.deck.shift():{t:'w'},h:null,cv:null});
  const toDeck=s=>{st.deck.push(s.k);if(s.h!=null)st.deck.push({t:'d',c:s.h})};
  const kill=(i,pierce)=>{const s=st.row[i];
-  if(s.ar&&!pierce){s.ar=false;st.fx.kill.push(i);st.msgs.push(`🪖 Helma zachránila kachnu (${pn(s.k.c)}) – spadla jen helma.`);return}
-  st.dead[s.k.c]++;st.fx.kill.push(i);(st.fx.kid=st.fx.kid||[]).push(s.sid);st.msgs.push(`💥 ${cn(s.k.c)} kachna (${pn(s.k.c)}) je střelená!`);
+  if(s.ar&&!pierce){s.ar=false;st.fx.kill.push(i);(st.fx.helm=st.fx.helm||[]).push(i);st.msgs.push(`🪖 Helma zachránila kachnu (${pn(s.k.c)}) – spadla jen helma.`);return}
+  st.dead[s.k.c]++;(st.fx.kc=st.fx.kc||[]).push(s.k.c);st.fx.kill.push(i);(st.fx.kid=st.fx.kid||[]).push(s.sid);st.msgs.push(`💥 ${cn(s.k.c)} kachna (${pn(s.k.c)}) je střelená!`);
   if(s.h!=null){st.row[i]={k:{t:'d',c:s.h},h:null,cv:null};st.msgs.push(`Pod ní se odkryla ${cn(s.h).toLowerCase()} kachna.`)}
   else{st.row.splice(i,1);st.row.push(draw())}};
  const [a,b]=sel||[];
  switch(t){
   case'aim':A[a]=true;break;
-  case'fire':if(st.row[a].cv!=null){st.row[a].cv=null;st.fx.kill.push(a);st.msgs.push('Rána do úkrytu – kachna přežila.')}else kill(a);A[a]=false;break;
+  case'fire':if(st.row[a].cv!=null){st.row[a].cv=null;st.fx.kill.push(a);(st.fx.cov=st.fx.cov||[]).push(a);st.msgs.push('Rána do úkrytu – kachna přežila.')}else kill(a);A[a]=false;break;
   case'dthreat':sel.forEach(i=>A[i]=true);break;
   case'dshot':{const lo=Math.min(a,b),hi=Math.max(a,b);kill(hi);kill(lo);A[lo]=A[hi]=false;break}
   case'miss':kill(b);A[a]=false;break;
@@ -1927,11 +1961,17 @@ function bangSVG(){const w=Math.random()<.2?'BUM!':'PRÁSK!';let p=[];for(let i=
 <text x="40" y="46" text-anchor="middle" transform="rotate(-8 40 40)" style="font:${w.length>4?17:20}px Bangers,Impact,sans-serif" fill="#ff3d7f" stroke="#111" stroke-width="1.8" paint-order="stroke">${w}</text></svg>`}
 /* hlas kachny podle hráče, aby se daly poznat i po zvuku */
 const VOICE=[1,.86,1.14,.93,1.07,.8];
+/* hlas podle barvy kachny: žlutá běžná, modrá hluboká, zelená chraplavá, růžová vysoká, oranžová rychlá, fialová hluboká chraplavá */
+const VCOL=[{p:1},{p:.8},{p:.98,r:1},{p:1.28},{p:1.1,f:1},{p:.74,r:1}];
+function vOf(q){const pl=S&&S.players&&S.players[q];return VCOL[(pl?pl.c:q)%VCOL.length]}
+function quackV(at,q,vol=1,dest=null,mul=1){const v=vOf(q);
+ if(v.f){quackAt(at,v.p*mul,vol*.8,dest);quackAt(at+.21,v.p*mul*1.06,vol*.7,dest)}else quackAt(at,v.p*mul,vol,dest);
+ if(v.r)[0,.17].forEach(d=>noise(.13,.22*vol,at+d,700+260*v.p,'bandpass',2.2,null,dest||BUS.sfx))}
 function pondDucks(){const out=[];if(!S||!vis($('board')))return out;S.row.forEach((s,i)=>{if(s.k.t==='d'&&s.cv==null)out.push(i)});return out}
 function colEl(i){return $('board')&&$('board').querySelector(`.col[data-i="${i}"]`)}
 function duckAnim(i,cls,word,ms){const el=colEl(i);if(!el||!FX.anim&&cls!=='q')return;const t=el.querySelector('.bt');if(t){t.textContent=word;if(word.length>6){t.setAttribute('textLength','40');t.setAttribute('lengthAdjust','spacingAndGlyphs')}else t.removeAttribute('textLength')}
  el.classList.remove('q','ch','uf');void el.offsetWidth;el.classList.add(cls);if(cls==='uf')el.classList.add('q');clearTimeout(el._qt);el._qt=setTimeout(()=>el.classList.remove('q','ch','uf'),ms)}
-function quackOnly(i){const s=S&&S.row[i];if(!s||s.k.t!=='d'||!chOn('sfx'))return;const c=ac();if(!c)return;quackAt(0,VOICE[s.k.c%VOICE.length],.8,panTo(c,(i/5)*1.4-.7,'sfx'))}
+function quackOnly(i){const s=S&&S.row[i];if(!s||s.k.t!=='d'||!chOn('sfx'))return;const c=ac();if(!c)return;quackV(0,s.k.c,.8,panTo(c,(i/5)*1.4-.7,'sfx'))}
 /* jméno majitele kachny v bublině – jen po klepnutí */
 let otipT=null;
 function ownerTip(i){
@@ -1943,8 +1983,8 @@ function ownerTip(i){
  otipT=setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),250)},1600)}
 addEventListener('resize',()=>{const o=document.querySelector('.otip');if(o)o.remove()});
 function duckSay(i,word,chan){const s=S&&S.row[i];if(!s||s.k.t!=='d')return;const ch_=chan||'sfx';if(!chOn(ch_))return;const c=ac();if(!c)return;
- const p=VOICE[s.k.c%VOICE.length],dest=panTo(c,(i/5)*1.4-.7,ch_),n=/KVÁK KVÁK|UF/.test(word)?2:1,v=ch_==='ducks'?.35:.8;
- for(let k=0;k<n;k++)quackAt(k*.36,p*(k?1.04:1),v,dest);duckAnim(i,word.startsWith('UF')?'uf':'q',word,n*360+120)}
+ const dest=panTo(c,(i/5)*1.4-.7,ch_),n=/KVÁK KVÁK|UF/.test(word)?2:1,v=ch_==='ducks'?.35:.8;
+ for(let k=0;k<n;k++)quackV(k*.36,s.k.c,v,dest,k?1.04:1);duckAnim(i,word.startsWith('UF')?'uf':'q',word,n*360+120)}
 function clackAt(at,v,dest){noise(.025,v,at,2600+Math.random()*700,'bandpass',4,null,dest);tone(1400,.02,'triangle',v*.25,at,null,dest)}
 function chatter(i){const s=S&&S.row[i];if(!s||!chOn('sfx'))return;const c=ac();if(!c)return;const d=panTo(c,(i/5)*1.4-.7,'sfx'),n=6+(Math.random()*5|0);
  for(let k=0;k<n;k++)clackAt(k*.085,.35,d);duckAnim(i,'ch','CVAK CVAK',n*85+150)}
@@ -1959,6 +1999,7 @@ function reliefCheck(){if(!S)return;const now=new Set();S.row.forEach((s,i)=>{if
 
 /* ===================== historie verzí ===================== */
 const CHANGELOG=[
+ ['0.14.1',['Zásah: kachna se otočí břichem nahoru a rozletí se peříčka v její barvě','Každá barva kachny má svůj hlas – hluboký, vysoký, chraplavý i rychlý','Rána do úkrytu: hvizd kulky, žbluňk do vody a nápis VEDLE!','Zásah do helmy: kovové PING! a helma odletí','Jejda, vedle! a Ostrostřelec mají před ranou hvizd kulky']],
  ['0.14.0',['Počty karet podle originálu: Zamířit 10, Divokej Bill 1, Kachní pochod 6, Leháro 3, Chvátám 3, Rošambo 2, Kachní únik 3 (celkem 52)','Tři rozšíření, každé zvlášť zapínatelné v nastavení hry ✏️','⛈️ Počasí: Mlha (zahalí pole 4–6), Bouřka (smete zaměřovače), Vítr (posune zaměřovače doleva)','🛡️ Kachní triky: Potápěčka (shodí zaměřovač z tvé kachny), Kachní helma (vydrží jeden zásah), Vajíčko (vrátí jednu střelenou kachnu)','🎯 Lovecká výbava: Brokovnice (prostřelí úkryt i helmu), Ostrostřelec (trefa 2 pole od zaměřovače), Lovecký pes (vyžene schované kachny)','Nové kresby pro všech 9 karet rozšíření, mlha nad rybníkem a helma na kachnách','Pravidla v menu ukazují i karty rozšíření']],
  ['0.13.4',['Nové kresby akčních karet: Turbokachna s helmou, brýlemi a šálou','Leháro: kachna se slunečními brýlemi na nafukovacím kruhu','Divokej Bill: kachna s kovbojským kloboukem, šátkem a šerifskou hvězdou','Kachní tanec: disko koule se světly a dvě tančící kachny','Pestřejší barvy kachen na akčních kartách']],
  ['0.13.3',['Nové okno ⚙️ Nastavení se záložkami Zvuk, Grafika, Hra a O hře – ikona ozubeného kola nahradila reproduktor','Zvuky v kategoriích: celkově, hudba, herní zvuky a příroda; podrobnosti přírody (voda, zvířata) se rozbalí','Rychlé předvolby zvuku: Ticho, Jen hra, Relax a Výchozí a velké tlačítko pro ztlumení všeho','Dlouhý stisk ⚙️ ve hře zvuk rychle ztlumí nebo zapne','Nová volba: vibrace telefonu při zásahu kachny']],
